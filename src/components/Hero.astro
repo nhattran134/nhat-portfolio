@@ -2,7 +2,7 @@
   <canvas class="hero-bg" id="hero-bg" aria-hidden="true"></canvas>
   <div class="container hero-grid">
     <div class="hero-content">
-      <p class="hero-greeting reveal"><span class="prompt">$</span> whoami<br><span class="prompt-output">nhat_tran</span></p>
+      <p class="hero-greeting reveal"><span class="prompt">$</span> whoami<br><span class="prompt-output">nathan<span class="prompt-bracket">[</span>tr<span class="prompt-bracket">]</span>an</span></p>
       <h1 class="reveal stagger-1"><span class="title-gradient">Senior Platform Engineer</span><br /><span class="title-gradient">& Release Manager</span></h1>
       <p class="hero-subtitle reveal stagger-2">Building CI/CD pipelines, cloud infrastructure, and release processes that&nbsp;scale.</p>
       <div class="hero-cta reveal stagger-3">
@@ -72,7 +72,13 @@
   .prompt-output {
     color: var(--text-heading);
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .prompt-bracket {
+    color: var(--accent);
+    font-weight: 400;
   }
 
   .hero h1 {
