@@ -561,7 +561,7 @@
     (function loop() {
       cx += (tx - cx) * 0.15;
       cy += (ty - cy) * 0.15;
-      cursorDot.style.transform = 'translate(' + (cx - 4) + 'px,' + (cy - 4) + 'px)';
+      cursorDot.style.transform = 'translate(' + (cx - 7) + 'px,' + (cy - 7) + 'px)';
       requestAnimationFrame(loop);
     })();
   }

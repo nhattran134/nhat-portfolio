@@ -411,19 +411,19 @@ ul {
    ======================================== */
 .cursor-dot {
   position: fixed;
-  width: 8px;
-  height: 8px;
+  width: 14px;
+  height: 14px;
   background: var(--accent);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
   transition: transform 0.15s ease-out, opacity 0.3s;
-  box-shadow: 0 0 12px rgba(20, 184, 166, 0.5), 0 0 24px rgba(20, 184, 166, 0.2);
+  box-shadow: 0 0 16px 4px rgba(20, 184, 166, 0.6), 0 0 40px 8px rgba(20, 184, 166, 0.25);
 }
 
 .cursor-dot.visible {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 @media (pointer: coarse) {
