@@ -386,10 +386,10 @@
         ctx.setLineDash([]);
 
         // Stage label
-        ctx.font = '500 10px Inter, sans-serif';
+        ctx.font = '500 11px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillStyle = stages[s].color + '0.15)';
-        ctx.fillText(stages[s].label, sx, branches[0].y - 28);
+        ctx.fillStyle = stages[s].color + '0.25)';
+        ctx.fillText(stages[s].label, sx, branches[0].y + 20);
 
         // Dots where stage crosses each branch
         for (var bi = 0; bi < branches.length; bi++) {
