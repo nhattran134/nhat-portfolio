@@ -100,7 +100,11 @@
   window.addEventListener('scroll', function () {
     if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
-    if (dotGrid) dotGrid.style.transform = 'translateY(' + (window.scrollY * -0.08) + 'px)';
+    if (dotGrid) {
+      var heroBottom = document.getElementById('hero') ? document.getElementById('hero').offsetHeight : 0;
+      var offset = Math.max(0, window.scrollY - heroBottom);
+      dotGrid.style.transform = 'translateY(' + (offset * -0.08) + 'px)';
+    }
   }, { passive: true });
   if (backToTop) {
     backToTop.addEventListener('click', function () {
