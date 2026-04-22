@@ -357,14 +357,17 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw branch lines
+      // Draw branch lines — converge toward terminal on right
+      var convergeY = canvas.height * 0.5;
       for (var i = 0; i < branches.length; i++) {
         var b = branches[i];
         ctx.beginPath();
         ctx.moveTo(0, b.y);
-        ctx.lineTo(canvas.width, b.y);
-        ctx.strokeStyle = b.color.replace(')', ',0.08)').replace('rgb', 'rgba').replace('#', '');
-        // Use hex with alpha
+        ctx.bezierCurveTo(
+          canvas.width * 0.4, b.y,
+          canvas.width * 0.6, b.y + (convergeY - b.y) * 0.4,
+          canvas.width, b.y + (convergeY - b.y) * 0.6
+        );
         ctx.globalAlpha = 0.05;
         ctx.strokeStyle = b.color;
         ctx.lineWidth = 1;
@@ -398,13 +401,16 @@
         // Move
         c.x += c.speed;
 
+        // Drift toward converge point on right side
+        var convergeProgress = Math.max(0, c.x / canvas.width);
+        var targetY = c.branchY + (canvas.height * 0.5 - c.branchY) * 0.6 * convergeProgress * convergeProgress;
+
         // Merge curve
         if (c.merge && c.x > canvas.width * 0.4 && c.x < canvas.width * 0.7) {
           var progress = (c.x - canvas.width * 0.4) / (canvas.width * 0.3);
           c.y = c.branchY + (c.mergeTarget - c.branchY) * Math.sin(progress * Math.PI * 0.5);
         } else if (!c.merge) {
-          // Drift back to branch line
-          c.y += (c.branchY - c.y) * 0.05;
+          c.y += (targetY - c.y) * 0.05;
         }
 
         // Draw connection line to previous commit on same branch
