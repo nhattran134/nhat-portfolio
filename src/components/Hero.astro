@@ -3,7 +3,7 @@
   <div class="container hero-grid">
     <div class="hero-content">
       <p class="hero-greeting reveal"><span class="prompt">$</span> whoami<br><span class="prompt-output">nathan<span class="prompt-bracket">[</span>tr<span class="prompt-bracket">]</span>an</span></p>
-      <h1 class="reveal stagger-1"><span class="title-gradient">Senior Platform Engineer</span><br /><span class="title-gradient">& Release Manager</span></h1>
+      <h1 class="reveal stagger-1">Senior <span class="title-accent">Platform Engineer</span><br />& <span class="title-accent">Release Manager</span></h1>
       <p class="hero-subtitle reveal stagger-2">Building CI/CD pipelines, cloud infrastructure, and release processes that&nbsp;scale.</p>
       <div class="hero-cta reveal stagger-3">
         <a href="#contact" class="btn btn-primary" data-magnetic>Get in Touch</a>
@@ -85,11 +85,8 @@
     margin-bottom: 20px;
   }
 
-  .title-gradient {
-    background: linear-gradient(135deg, #14b8a6, #8b5cf6, #3b82f6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .title-accent {
+    color: var(--accent);
   }
 
   .hero-subtitle {
