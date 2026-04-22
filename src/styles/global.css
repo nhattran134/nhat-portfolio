@@ -104,6 +104,15 @@ ul {
   padding: 100px 0;
 }
 
+.section + .section::before {
+  content: '';
+  display: block;
+  max-width: 600px;
+  height: 1px;
+  margin: 0 auto 100px;
+  background: linear-gradient(to right, transparent, rgba(20,184,166,0.15), transparent);
+}
+
 /* ========================================
    Section Headers
    ======================================== */
@@ -395,4 +404,39 @@ ul {
 .prose pre code {
   background: none;
   padding: 0;
+}
+
+/* ========================================
+   Custom Cursor
+   ======================================== */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+  transition: transform 0.15s ease-out;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot { display: none; }
+}
+
+/* ========================================
+   Reduced Motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

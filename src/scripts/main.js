@@ -527,4 +527,36 @@
     }
     draw();
   }
+  // 13. Scroll-spy active nav link
+  var sections = document.querySelectorAll('.section[id]');
+  var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  if (sections.length && navAnchors.length) {
+    window.addEventListener('scroll', function () {
+      var vh = window.innerHeight;
+      var activeId = '';
+      sections.forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        if (r.top < vh * 0.4 && r.bottom > 0) activeId = s.id;
+      });
+      navAnchors.forEach(function (a) {
+        a.classList.toggle('nav-active', a.getAttribute('href') === '#' + activeId);
+      });
+    }, { passive: true });
+  }
+
+  // 14. Custom cursor dot
+  var cursorDot = document.getElementById('cursor-dot');
+  if (cursorDot && window.matchMedia('(pointer: fine)').matches) {
+    var cx = -100, cy = -100, tx = -100, ty = -100;
+    document.addEventListener('mousemove', function (e) {
+      tx = e.clientX;
+      ty = e.clientY;
+    });
+    (function loop() {
+      cx += (tx - cx) * 0.15;
+      cy += (ty - cy) * 0.15;
+      cursorDot.style.transform = 'translate(' + (cx - 4) + 'px,' + (cy - 4) + 'px)';
+      requestAnimationFrame(loop);
+    })();
+  }
 })();
