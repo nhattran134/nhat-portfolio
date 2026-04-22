@@ -29,3 +29,25 @@ const posts = (await getCollection('blog'))
     </div>
   </section>
 </Base>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .blog-card time {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .blog-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>
