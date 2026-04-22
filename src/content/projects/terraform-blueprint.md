@@ -12,7 +12,7 @@ A reusable Terraform pipeline blueprint with validate, plan, scan, and apply sta
 ## Technical Highlights
 
 - Multiple reusable workflows with composable actions
-- OIDC authentication — no stored credentials
+- OIDC authentication - no stored credentials
 - Integrated security scanning for compliance and misconfigurations
 - Environment protection rules with approval gates
 - Semantic versioning for consumers to pin to stable releases

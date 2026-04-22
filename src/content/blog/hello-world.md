@@ -9,7 +9,7 @@ When you have dozens of deployable projects in a single repository, traditional 
 
 ## The Challenge
 
-Large monorepos with many independently deployable services need independent versioning, security scanning, and multi-environment deployments — without drowning in workflow files.
+Large monorepos with many independently deployable services need independent versioning, security scanning, and multi-environment deployments - without drowning in workflow files.
 
 ## The Approach
 
