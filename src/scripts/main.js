@@ -292,6 +292,7 @@
     var speed = 0.5;
     var spawnTimer = 0;
     var nextBranchId = 0;
+    var gridOffset = 0;
     var stages = [
       { label: 'Build', x: 0.2, color: 'rgba(59,130,246,' },
       { label: 'Test', x: 0.4, color: 'rgba(139,92,246,' },
@@ -307,7 +308,7 @@
       if (branches.length === 0) {
         var gridSize = 24;
         var heroTop = document.getElementById('hero').offsetTop;
-        var gridOffset = heroTop % gridSize;
+        gridOffset = heroTop % gridSize;
         var totalRows = Math.floor(canvas.height / gridSize);
         var spacing = Math.max(2, Math.floor((totalRows - 2) / 9));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
@@ -322,7 +323,7 @@
       } else {
         var gridSize = 24;
         var heroTop = document.getElementById('hero').offsetTop;
-        var gridOffset = heroTop % gridSize;
+        gridOffset = heroTop % gridSize;
         var totalRows = Math.floor(canvas.height / gridSize);
         var spacing = Math.max(2, Math.floor((totalRows - 2) / 9));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
@@ -407,7 +408,7 @@
         ctx.fillStyle = stages[s].color + '0.25)';
         ctx.fillText(stages[s].label, sx, branches[0].y + 20);
 
-        // Dots where stage crosses each branch
+        // Dots where stage crosses each branch — snap to grid
         for (var bi = 0; bi < branches.length; bi++) {
           var passing = false;
           for (var ci = 0; ci < commits.length; ci++) {
@@ -416,8 +417,9 @@
               break;
             }
           }
+          var dotY = Math.round(branches[bi].y / 24) * 24 + gridOffset;
           ctx.beginPath();
-          ctx.arc(sx, branches[bi].y, passing ? 4 : 2.5, 0, Math.PI * 2);
+          ctx.arc(sx, dotY, passing ? 4 : 2.5, 0, Math.PI * 2);
           ctx.fillStyle = passing ? stages[s].color + '0.5)' : 'rgba(255, 255, 255, 0.06)';
           ctx.fill();
         }
