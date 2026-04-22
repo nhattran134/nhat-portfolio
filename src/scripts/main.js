@@ -401,16 +401,18 @@
         // Move
         c.x += c.speed;
 
-        // Slight drift toward converge point on right
-        var convergeProgress = Math.max(0, c.x / canvas.width);
-        var targetY = c.branchY + (canvas.height * 0.5 - c.branchY) * 0.2 * convergeProgress * convergeProgress;
+        // Follow branch curve — same bezier as the branch line
+        var t = Math.min(c.x / canvas.width, 1);
+        var branchEndY = c.branchY + (canvas.height * 0.5 - c.branchY) * 0.2;
+        // Approximate bezier: mostly flat, slight curve at end
+        var onCurveY = c.branchY + (branchEndY - c.branchY) * t * t;
 
         // Merge curve
         if (c.merge && c.x > canvas.width * 0.4 && c.x < canvas.width * 0.7) {
           var progress = (c.x - canvas.width * 0.4) / (canvas.width * 0.3);
-          c.y = c.branchY + (c.mergeTarget - c.branchY) * Math.sin(progress * Math.PI * 0.5);
-        } else if (!c.merge) {
-          c.y += (targetY - c.y) * 0.05;
+          c.y = onCurveY + (c.mergeTarget - c.branchY) * Math.sin(progress * Math.PI * 0.5) * 0.5;
+        } else {
+          c.y += (onCurveY - c.y) * 0.1;
         }
 
         // Draw connection line to previous commit on same branch
