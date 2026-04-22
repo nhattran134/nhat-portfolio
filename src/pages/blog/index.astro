@@ -7,7 +7,7 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
-<Base title="Blog | Nhat Tran Minh">
+<Base title="Blog | Nhat Tran Minh" description="Articles on CI/CD pipelines, cloud infrastructure, DevOps practices, and platform engineering.">
   <section class="section">
     <div class="container">
       <p class="section-label">Blog</p>

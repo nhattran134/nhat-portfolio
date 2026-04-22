@@ -14,7 +14,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<Base title={`${entry.data.title} | Nhat Tran Minh`}>
+<Base title={`${entry.data.title} | Nhat Tran Minh`} description={entry.data.description}>
   <article class="section">
     <div class="container prose">
       <a href="/#projects" class="back-link">← Back to Projects</a>
