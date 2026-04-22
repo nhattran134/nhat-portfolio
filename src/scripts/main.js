@@ -301,21 +301,21 @@
       canvas.height = hero.offsetHeight;
       // Init branches spread evenly across full height
       if (branches.length === 0) {
-        var padding = canvas.height * 0.12;
-        var gap = (canvas.height - padding * 2) / 3;
+        var padding = canvas.height * 0.08;
+        var gap = (canvas.height - padding * 2) / 5;
         for (var i = 0; i < 4; i++) {
           branches.push({
             id: nextBranchId++,
-            y: padding + i * gap,
+            y: padding + i * gap + gap * 0.5,
             color: branchColors[i],
             active: true
           });
         }
       } else {
-        var padding = canvas.height * 0.12;
-        var gap = (canvas.height - padding * 2) / 3;
+        var padding = canvas.height * 0.08;
+        var gap = (canvas.height - padding * 2) / 5;
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = padding + i * gap;
+          branches[i].y = padding + i * gap + gap * 0.5;
         }
       }
     }
