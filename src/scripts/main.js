@@ -289,10 +289,10 @@
     var spawnTimer = 0;
     var nextBranchId = 0;
     var stages = [
-      { label: 'Build', x: 0.2 },
-      { label: 'Test', x: 0.4 },
-      { label: 'Scan', x: 0.6 },
-      { label: 'Deploy', x: 0.8 },
+      { label: 'Build', x: 0.2, color: 'rgba(59,130,246,' },
+      { label: 'Test', x: 0.4, color: 'rgba(139,92,246,' },
+      { label: 'Scan', x: 0.6, color: 'rgba(245,158,11,' },
+      { label: 'Deploy', x: 0.8, color: 'rgba(20,184,166,' },
     ];
 
     function resize() {
@@ -384,7 +384,7 @@
         ctx.setLineDash([4, 4]);
         ctx.moveTo(sx, branches[0].y - 20);
         ctx.lineTo(sx, branches[branches.length - 1].y + 20);
-        ctx.strokeStyle = 'rgba(20, 184, 166, 0.06)';
+        ctx.strokeStyle = stages[s].color + '0.06)';
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.setLineDash([]);
@@ -392,12 +392,11 @@
         // Stage label
         ctx.font = '500 10px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillStyle = 'rgba(20, 184, 166, 0.15)';
+        ctx.fillStyle = stages[s].color + '0.15)';
         ctx.fillText(stages[s].label, sx, branches[0].y - 28);
 
         // Dots where stage crosses each branch
         for (var bi = 0; bi < branches.length; bi++) {
-          // Check if a commit is near this gate
           var passing = false;
           for (var ci = 0; ci < commits.length; ci++) {
             if (commits[ci].branchId === branches[bi].id && Math.abs(commits[ci].x - sx) < 8) {
@@ -407,7 +406,7 @@
           }
           ctx.beginPath();
           ctx.arc(sx, branches[bi].y, passing ? 4 : 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = passing ? 'rgba(20, 184, 166, 0.5)' : 'rgba(255, 255, 255, 0.06)';
+          ctx.fillStyle = passing ? stages[s].color + '0.5)' : 'rgba(255, 255, 255, 0.06)';
           ctx.fill();
         }
       }
