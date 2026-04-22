@@ -301,17 +301,23 @@
       canvas.height = hero.offsetHeight;
       // Init branches spread evenly across full height
       if (branches.length === 0) {
+        var gridSize = 24;
+        var totalSlots = Math.floor(canvas.height / gridSize);
+        var step = Math.floor(totalSlots / 10);
         for (var i = 0; i < 9; i++) {
           branches.push({
             id: nextBranchId++,
-            y: (canvas.height / 10) * (i + 1),
+            y: (step * (i + 1)) * gridSize,
             color: branchColors[i],
             active: true
           });
         }
       } else {
+        var gridSize = 24;
+        var totalSlots = Math.floor(canvas.height / gridSize);
+        var step = Math.floor(totalSlots / 10);
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = (canvas.height / 10) * (i + 1);
+          branches[i].y = (step * (i + 1)) * gridSize;
         }
       }
     }
@@ -374,7 +380,7 @@
 
       // Draw pipeline stage gates
       for (var s = 0; s < stages.length; s++) {
-        var sx = stages[s].x * canvas.width;
+        var sx = Math.round(stages[s].x * canvas.width / 24) * 24;
         // Vertical dashed line through all branches
         ctx.beginPath();
         ctx.setLineDash([4, 4]);
