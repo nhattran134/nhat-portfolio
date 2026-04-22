@@ -308,14 +308,15 @@
       if (branches.length === 0) {
         var gridSize = 24;
         var heroTop = document.getElementById('hero').offsetTop;
-        gridOffset = heroTop % gridSize;
-        var totalRows = Math.floor(canvas.height / gridSize);
-        var spacing = Math.max(2, Math.floor((totalRows - 2) / 9));
+        // First grid-aligned Y inside the canvas
+        var firstDot = (gridSize - (heroTop % gridSize)) % gridSize;
+        var totalRows = Math.floor((canvas.height - firstDot) / gridSize);
+        var spacing = Math.max(2, Math.floor(totalRows / 10));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < 9; i++) {
           branches.push({
             id: nextBranchId++,
-            y: (startRow + i * spacing) * gridSize + gridOffset,
+            y: firstDot + (startRow + i * spacing) * gridSize,
             color: branchColors[i],
             active: true
           });
@@ -323,12 +324,12 @@
       } else {
         var gridSize = 24;
         var heroTop = document.getElementById('hero').offsetTop;
-        gridOffset = heroTop % gridSize;
-        var totalRows = Math.floor(canvas.height / gridSize);
-        var spacing = Math.max(2, Math.floor((totalRows - 2) / 9));
+        var firstDot = (gridSize - (heroTop % gridSize)) % gridSize;
+        var totalRows = Math.floor((canvas.height - firstDot) / gridSize);
+        var spacing = Math.max(2, Math.floor(totalRows / 10));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = (startRow + i * spacing) * gridSize + gridOffset;
+          branches[i].y = firstDot + (startRow + i * spacing) * gridSize;
         }
       }
     }
@@ -417,7 +418,7 @@
               break;
             }
           }
-          var dotY = Math.round(branches[bi].y / 24) * 24 + gridOffset;
+          var dotY = branches[bi].y;
           ctx.beginPath();
           ctx.arc(sx, dotY, passing ? 4 : 2.5, 0, Math.PI * 2);
           ctx.fillStyle = passing ? stages[s].color + '0.5)' : 'rgba(255, 255, 255, 0.06)';
