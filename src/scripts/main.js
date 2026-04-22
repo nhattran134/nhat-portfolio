@@ -284,7 +284,7 @@
     var mouse = { x: -9999, y: -9999 };
     var commits = [];
     var branches = [];
-    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)', 'rgba(20,184,166,0.4)', 'rgba(139,92,246,0.35)', 'rgba(59,130,246,0.35)'];
+    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)', 'rgba(20,184,166,0.4)', 'rgba(139,92,246,0.35)', 'rgba(59,130,246,0.35)', 'rgba(99,102,241,0.3)', 'rgba(20,184,166,0.3)'];
     var speed = 0.5;
     var spawnTimer = 0;
     var nextBranchId = 0;
@@ -301,17 +301,17 @@
       canvas.height = hero.offsetHeight;
       // Init branches spread evenly across full height
       if (branches.length === 0) {
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < 9; i++) {
           branches.push({
             id: nextBranchId++,
-            y: (canvas.height / 8) * (i + 1),
+            y: (canvas.height / 10) * (i + 1),
             color: branchColors[i],
             active: true
           });
         }
       } else {
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = (canvas.height / 8) * (i + 1);
+          branches[i].y = (canvas.height / 10) * (i + 1);
         }
       }
     }
