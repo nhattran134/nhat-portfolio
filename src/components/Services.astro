@@ -49,6 +49,23 @@ const services = [
     margin-bottom: 12px;
   }
 
+  .services-grid :global(.card) {
+    border-top: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .services-grid :global(.card:nth-child(3n+1)):hover {
+    border-top-color: var(--accent);
+  }
+
+  .services-grid :global(.card:nth-child(3n+2)):hover {
+    border-top-color: #8b5cf6;
+  }
+
+  .services-grid :global(.card:nth-child(3n+3)):hover {
+    border-top-color: #3b82f6;
+  }
+
   @media (max-width: 900px) {
     .services-grid {
       grid-template-columns: 1fr;

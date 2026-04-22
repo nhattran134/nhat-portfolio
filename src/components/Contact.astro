@@ -116,6 +116,7 @@
   .form-group textarea:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
   }
 
   .form-group select {
@@ -128,6 +129,10 @@
 
   .form-group textarea {
     resize: vertical;
+  }
+
+  .contact-form button[type="submit"]:hover {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
   }
 
   @media (max-width: 900px) {

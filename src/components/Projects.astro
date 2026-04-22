@@ -39,6 +39,16 @@ const projects = (await getCollection('projects')).sort(
     flex-direction: column;
     gap: 12px;
     text-decoration: none;
+    border-left: 3px solid transparent;
+    border-image: linear-gradient(to bottom, #14b8a6, #8b5cf6) 1;
+  }
+
+  .project-card h4 {
+    transition: color 0.2s;
+  }
+
+  .project-card:hover h4 {
+    color: var(--accent);
   }
 
   .project-card p {
