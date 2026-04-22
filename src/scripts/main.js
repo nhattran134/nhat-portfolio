@@ -357,16 +357,16 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw branch lines — converge toward terminal on right
+      // Draw branch lines — slight converge toward right
       var convergeY = canvas.height * 0.5;
       for (var i = 0; i < branches.length; i++) {
         var b = branches[i];
         ctx.beginPath();
         ctx.moveTo(0, b.y);
         ctx.bezierCurveTo(
-          canvas.width * 0.4, b.y,
-          canvas.width * 0.6, b.y + (convergeY - b.y) * 0.4,
-          canvas.width, b.y + (convergeY - b.y) * 0.6
+          canvas.width * 0.5, b.y,
+          canvas.width * 0.8, b.y + (convergeY - b.y) * 0.15,
+          canvas.width, b.y + (convergeY - b.y) * 0.2
         );
         ctx.globalAlpha = 0.05;
         ctx.strokeStyle = b.color;
@@ -401,9 +401,9 @@
         // Move
         c.x += c.speed;
 
-        // Drift toward converge point on right side
+        // Slight drift toward converge point on right
         var convergeProgress = Math.max(0, c.x / canvas.width);
-        var targetY = c.branchY + (canvas.height * 0.5 - c.branchY) * 0.6 * convergeProgress * convergeProgress;
+        var targetY = c.branchY + (canvas.height * 0.5 - c.branchY) * 0.2 * convergeProgress * convergeProgress;
 
         // Merge curve
         if (c.merge && c.x > canvas.width * 0.4 && c.x < canvas.width * 0.7) {
