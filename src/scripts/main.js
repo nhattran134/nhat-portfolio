@@ -305,23 +305,17 @@
       canvas.height = hero.offsetHeight;
       // Init branches spread evenly across full height
       if (branches.length === 0) {
-        var totalRows = Math.floor(canvas.height / 24);
-        var spacing = Math.max(2, Math.floor(totalRows / 10));
-        var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < 9; i++) {
           branches.push({
             id: nextBranchId++,
-            y: (startRow + i * spacing) * 24,
+            y: (canvas.height / 10) * (i + 1),
             color: branchColors[i],
             active: true
           });
         }
       } else {
-        var totalRows = Math.floor(canvas.height / 24);
-        var spacing = Math.max(2, Math.floor(totalRows / 10));
-        var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = (startRow + i * spacing) * 24;
+          branches[i].y = (canvas.height / 10) * (i + 1);
         }
       }
     }
@@ -368,16 +362,6 @@
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw dot grid
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
-      for (var gy = 0; gy < canvas.height; gy += 24) {
-        for (var gx = 0; gx < canvas.width; gx += 24) {
-          ctx.beginPath();
-          ctx.arc(gx, gy, 1.5, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
 
       // Draw branch lines
       for (var i = 0; i < branches.length; i++) {
