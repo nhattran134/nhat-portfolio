@@ -6,7 +6,18 @@ const stats = [
   { value: '3', label: 'Cloud Platforms', count: 3 },
 ];
 
-const tags = ['DevOps', 'CI/CD', 'AWS', 'Azure', 'GCP', 'Terraform', 'Kubernetes', 'GitHub Actions', 'GitOps', 'Release Management'];
+const tags = [
+  { name: 'DevOps', color: '#14b8a6' },
+  { name: 'CI/CD', color: '#14b8a6' },
+  { name: 'AWS', color: '#f59e0b' },
+  { name: 'Azure', color: '#3b82f6' },
+  { name: 'GCP', color: '#4285f4' },
+  { name: 'Terraform', color: '#8b5cf6' },
+  { name: 'Kubernetes', color: '#326ce5' },
+  { name: 'GitHub Actions', color: '#2088ff' },
+  { name: 'GitOps', color: '#14b8a6' },
+  { name: 'Release Management', color: '#8b5cf6' },
+];
 ---
 
 <section id="about" class="section">
@@ -28,7 +39,7 @@ const tags = ['DevOps', 'CI/CD', 'AWS', 'Azure', 'GCP', 'Terraform', 'Kubernetes
     </div>
     <div class="tag-row reveal stagger-4">
       {tags.map((tag) => (
-        <span class="tag">{tag}</span>
+        <span class="tag" style={`--tag-color: ${tag.color}`}>{tag.name}</span>
       ))}
     </div>
   </div>
@@ -66,9 +77,12 @@ const tags = ['DevOps', 'CI/CD', 'AWS', 'Azure', 'GCP', 'Terraform', 'Kubernetes
     display: block;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--text-heading);
     line-height: 1.2;
     margin-bottom: 4px;
+    background: linear-gradient(135deg, #14b8a6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .stat-card p {

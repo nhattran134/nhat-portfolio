@@ -199,14 +199,15 @@ ul {
   padding: 6px 14px;
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--accent);
-  border: 1px solid var(--border);
+  color: var(--tag-color, var(--accent));
+  border: 1px solid color-mix(in srgb, var(--tag-color, var(--accent)) 25%, transparent);
   border-radius: var(--radius-pill);
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .tag:hover {
-  border-color: var(--accent);
+  border-color: var(--tag-color, var(--accent));
+  background: color-mix(in srgb, var(--tag-color, var(--accent)) 8%, transparent);
 }
 
 /* ========================================
