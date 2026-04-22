@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0f"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <text x="100" y="240" font-family="Inter,sans-serif" font-size="72" font-weight="700" fill="#ffffff">nathan<tspan fill="#14b8a6">[</tspan>tr<tspan fill="#14b8a6">]</tspan>an</text>
+  <text x="100" y="340" font-family="Inter,sans-serif" font-size="36" fill="#14b8a6">Senior Platform Engineer</text>
+  <text x="100" y="390" font-family="Inter,sans-serif" font-size="36" fill="#14b8a6">&amp; Release Manager</text>
+  <text x="100" y="470" font-family="Inter,sans-serif" font-size="22" fill="#a1a1aa">CI/CD Pipelines · Cloud Infrastructure · Release Management</text>
+  <text x="100" y="510" font-family="Inter,sans-serif" font-size="18" fill="#6b7280">nathantr.com</text>
+</svg>
