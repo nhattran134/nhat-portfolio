@@ -284,7 +284,7 @@
     var mouse = { x: -9999, y: -9999 };
     var commits = [];
     var branches = [];
-    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)', 'rgba(20,184,166,0.4)'];
+    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)', 'rgba(20,184,166,0.4)', 'rgba(139,92,246,0.35)', 'rgba(59,130,246,0.35)'];
     var speed = 0.5;
     var spawnTimer = 0;
     var nextBranchId = 0;
@@ -302,8 +302,8 @@
       // Init branches spread evenly across full height
       if (branches.length === 0) {
         var padding = canvas.height * 0.08;
-        var gap = (canvas.height - padding * 2) / 6;
-        for (var i = 0; i < 5; i++) {
+        var gap = (canvas.height - padding * 2) / 8;
+        for (var i = 0; i < 7; i++) {
           branches.push({
             id: nextBranchId++,
             y: padding + i * gap + gap * 0.5,
@@ -313,7 +313,7 @@
         }
       } else {
         var padding = canvas.height * 0.08;
-        var gap = (canvas.height - padding * 2) / 6;
+        var gap = (canvas.height - padding * 2) / 8;
         for (var i = 0; i < branches.length; i++) {
           branches[i].y = padding + i * gap + gap * 0.5;
         }
