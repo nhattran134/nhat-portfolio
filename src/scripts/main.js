@@ -284,7 +284,7 @@
     var mouse = { x: -9999, y: -9999 };
     var commits = [];
     var branches = [];
-    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)'];
+    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)', 'rgba(20,184,166,0.4)'];
     var speed = 0.5;
     var spawnTimer = 0;
     var nextBranchId = 0;
@@ -302,8 +302,8 @@
       // Init branches spread evenly across full height
       if (branches.length === 0) {
         var padding = canvas.height * 0.08;
-        var gap = (canvas.height - padding * 2) / 5;
-        for (var i = 0; i < 4; i++) {
+        var gap = (canvas.height - padding * 2) / 6;
+        for (var i = 0; i < 5; i++) {
           branches.push({
             id: nextBranchId++,
             y: padding + i * gap + gap * 0.5,
@@ -313,7 +313,7 @@
         }
       } else {
         var padding = canvas.height * 0.08;
-        var gap = (canvas.height - padding * 2) / 5;
+        var gap = (canvas.height - padding * 2) / 6;
         for (var i = 0; i < branches.length; i++) {
           branches[i].y = padding + i * gap + gap * 0.5;
         }
@@ -561,7 +561,7 @@
     (function loop() {
       cx += (tx - cx) * 0.15;
       cy += (ty - cy) * 0.15;
-      cursorDot.style.transform = 'translate(' + (cx - 7) + 'px,' + (cy - 7) + 'px)';
+      cursorDot.style.transform = 'translate(' + (cx - 8) + 'px,' + (cy - 8) + 'px)';
       requestAnimationFrame(loop);
     })();
   }
