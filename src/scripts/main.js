@@ -548,9 +548,15 @@
   var cursorDot = document.getElementById('cursor-dot');
   if (cursorDot && window.matchMedia('(pointer: fine)').matches) {
     var cx = -100, cy = -100, tx = -100, ty = -100;
+    var heroEl = document.getElementById('hero');
     document.addEventListener('mousemove', function (e) {
       tx = e.clientX;
       ty = e.clientY;
+      if (heroEl) {
+        var rect = heroEl.getBoundingClientRect();
+        var inside = e.clientY >= rect.top && e.clientY <= rect.bottom;
+        cursorDot.classList.toggle('visible', inside);
+      }
     });
     (function loop() {
       cx += (tx - cx) * 0.15;
