@@ -50,20 +50,32 @@ const services = [
   }
 
   .services-grid :global(.card) {
-    border-top: 2px solid transparent;
-    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
   }
 
-  .services-grid :global(.card:nth-child(3n+1)):hover {
-    border-top-color: var(--accent);
+  .services-grid :global(.card)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
-  .services-grid :global(.card:nth-child(3n+2)):hover {
-    border-top-color: #8b5cf6;
+  .services-grid :global(.card:nth-child(3n+2))::after {
+    background: #8b5cf6;
   }
 
-  .services-grid :global(.card:nth-child(3n+3)):hover {
-    border-top-color: #3b82f6;
+  .services-grid :global(.card:nth-child(3n+3))::after {
+    background: #3b82f6;
+  }
+
+  .services-grid :global(.card):hover::after {
+    opacity: 1;
   }
 
   @media (max-width: 900px) {
