@@ -277,20 +277,33 @@
     setTimeout(typeLine, 800);
   }
 
-  // 12. Particle network
-  var canvas = document.getElementById('hero-particles');
+  // 12. Git branch flow background
+  var canvas = document.getElementById('hero-bg');
   if (canvas) {
     var ctx = canvas.getContext('2d');
-    var particles = [];
-    var count = 60;
-    var maxDist = 160;
     var mouse = { x: -9999, y: -9999 };
-    var mouseRadius = 200;
+    var commits = [];
+    var branches = [];
+    var branchColors = ['#14b8a6', '#8b5cf6', '#3b82f6', '#f59e0b', '#ef4444'];
+    var speed = 0.6;
+    var spawnTimer = 0;
+    var nextBranchId = 0;
 
     function resize() {
       var hero = document.getElementById('hero');
       canvas.width = hero.offsetWidth;
       canvas.height = hero.offsetHeight;
+      // Init branches if empty
+      if (branches.length === 0) {
+        for (var i = 0; i < 4; i++) {
+          branches.push({
+            id: nextBranchId++,
+            y: canvas.height * 0.2 + i * (canvas.height * 0.18),
+            color: branchColors[i % branchColors.length],
+            active: true
+          });
+        }
+      }
     }
     resize();
     window.addEventListener('resize', resize);
@@ -306,75 +319,166 @@
       mouse.y = -9999;
     });
 
-    for (var i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        baseVx: (Math.random() - 0.5) * 0.5,
-        baseVy: (Math.random() - 0.5) * 0.5,
-        r: Math.random() * 2.5 + 1,
-      });
+    function spawnCommit() {
+      var activeBranches = branches.filter(function(b) { return b.active; });
+      if (activeBranches.length === 0) return;
+      var branch = activeBranches[Math.floor(Math.random() * activeBranches.length)];
+      var c = {
+        x: -10,
+        y: branch.y + (Math.random() - 0.5) * 4,
+        branchId: branch.id,
+        branchY: branch.y,
+        color: branch.color,
+        r: 3 + Math.random() * 2,
+        speed: speed + Math.random() * 0.3,
+        glow: 0,
+        merge: false,
+        mergeTarget: -1
+      };
+      // Random chance to branch or merge
+      if (Math.random() < 0.08 && activeBranches.length > 1) {
+        var other = activeBranches[Math.floor(Math.random() * activeBranches.length)];
+        if (other.id !== branch.id) {
+          c.merge = true;
+          c.mergeTarget = other.y;
+        }
+      }
+      commits.push(c);
     }
 
-    function drawParticles() {
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw lines from cursor to nearby particles
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        var dmx = p.x - mouse.x;
-        var dmy = p.y - mouse.y;
-        var dm = Math.sqrt(dmx * dmx + dmy * dmy);
-        if (dm < mouseRadius) {
-          ctx.beginPath();
-          ctx.moveTo(mouse.x, mouse.y);
-          ctx.lineTo(p.x, p.y);
-          ctx.strokeStyle = 'rgba(20, 184, 166, ' + (0.4 * (1 - dm / mouseRadius)) + ')';
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
+      // Draw branch lines
+      for (var i = 0; i < branches.length; i++) {
+        var b = branches[i];
+        ctx.beginPath();
+        ctx.moveTo(0, b.y);
+        ctx.lineTo(canvas.width, b.y);
+        ctx.strokeStyle = b.color.replace(')', ',0.08)').replace('rgb', 'rgba').replace('#', '');
+        // Use hex with alpha
+        ctx.globalAlpha = 0.08;
+        ctx.strokeStyle = b.color;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
 
-          // Attract toward cursor
-          var force = (1 - dm / mouseRadius) * 0.3;
-          p.vx -= (dmx / dm) * force;
-          p.vy -= (dmy / dm) * force;
+      // Spawn commits
+      spawnTimer++;
+      if (spawnTimer > 12) {
+        spawnCommit();
+        spawnTimer = 0;
+      }
+
+      // Update and draw commits
+      for (var i = commits.length - 1; i >= 0; i--) {
+        var c = commits[i];
+
+        // Mouse attraction
+        var dx = c.x - mouse.x;
+        var dy = c.y - mouse.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          c.glow = Math.max(c.glow, (1 - dist / 150) * 0.8);
+          // Slight attraction
+          c.y += (mouse.y - c.y) * 0.01;
+        } else {
+          c.glow *= 0.95;
+        }
+
+        // Move
+        c.x += c.speed;
+
+        // Merge curve
+        if (c.merge && c.x > canvas.width * 0.4 && c.x < canvas.width * 0.7) {
+          var progress = (c.x - canvas.width * 0.4) / (canvas.width * 0.3);
+          c.y = c.branchY + (c.mergeTarget - c.branchY) * Math.sin(progress * Math.PI * 0.5);
+        } else if (!c.merge) {
+          // Drift back to branch line
+          c.y += (c.branchY - c.y) * 0.05;
+        }
+
+        // Draw connection line to previous commit on same branch
+        for (var j = i - 1; j >= Math.max(0, i - 8); j--) {
+          var prev = commits[j];
+          if (prev.branchId === c.branchId && c.x - prev.x < 80 && c.x - prev.x > 0) {
+            ctx.beginPath();
+            ctx.moveTo(prev.x, prev.y);
+            ctx.lineTo(c.x, c.y);
+            ctx.strokeStyle = c.color;
+            ctx.globalAlpha = 0.15 + c.glow * 0.3;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+            break;
+          }
+        }
+
+        // Draw merge line
+        if (c.merge && c.x > canvas.width * 0.35 && c.x < canvas.width * 0.75) {
+          ctx.beginPath();
+          ctx.moveTo(c.x, c.branchY);
+          ctx.quadraticCurveTo(c.x, c.y, c.x, c.y);
+          ctx.strokeStyle = c.color;
+          ctx.globalAlpha = 0.2;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+
+        // Draw commit dot
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fillStyle = c.color;
+        ctx.globalAlpha = 0.4 + c.glow * 0.5;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Glow
+        if (c.glow > 0.1) {
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r + 6, 0, Math.PI * 2);
+          ctx.fillStyle = c.color;
+          ctx.globalAlpha = c.glow * 0.15;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+
+        // Remove off-screen
+        if (c.x > canvas.width + 20) {
+          commits.splice(i, 1);
         }
       }
 
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-
-        // Blend back toward base velocity to keep drifting
-        p.vx += (p.baseVx - p.vx) * 0.02;
-        p.vy += (p.baseVy - p.vy) * 0.02;
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
+      // Draw cursor node if in canvas
+      if (mouse.x > 0 && mouse.y > 0) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(20, 184, 166, 0.6)';
+        ctx.arc(mouse.x, mouse.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#14b8a6';
+        ctx.globalAlpha = 0.3;
         ctx.fill();
+        ctx.globalAlpha = 1;
 
-        for (var j = i + 1; j < particles.length; j++) {
-          var q = particles[j];
-          var dx = p.x - q.x;
-          var dy = p.y - q.y;
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < maxDist) {
+        // Lines to nearby commits
+        for (var i = 0; i < commits.length; i++) {
+          var c = commits[i];
+          var d = Math.sqrt((c.x - mouse.x) * (c.x - mouse.x) + (c.y - mouse.y) * (c.y - mouse.y));
+          if (d < 120) {
             ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = 'rgba(139, 92, 246, ' + (0.3 * (1 - dist / maxDist)) + ')';
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(c.x, c.y);
+            ctx.strokeStyle = '#14b8a6';
+            ctx.globalAlpha = 0.15 * (1 - d / 120);
             ctx.lineWidth = 0.8;
             ctx.stroke();
+            ctx.globalAlpha = 1;
           }
         }
       }
-      requestAnimationFrame(drawParticles);
+
+      requestAnimationFrame(draw);
     }
-    drawParticles();
+    draw();
   }
 })();
