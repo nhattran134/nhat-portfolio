@@ -96,9 +96,11 @@
   // 7. Back-to-top + 8. Nav scroll effect
   var backToTop = document.querySelector('.back-to-top');
   var nav = document.querySelector('nav, .nav');
+  var dotGrid = document.getElementById('dot-grid');
   window.addEventListener('scroll', function () {
     if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+    if (dotGrid) dotGrid.style.transform = 'translateY(' + (window.scrollY * -0.08) + 'px)';
   }, { passive: true });
   if (backToTop) {
     backToTop.addEventListener('click', function () {
