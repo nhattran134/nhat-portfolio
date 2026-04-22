@@ -292,7 +292,6 @@
     var speed = 0.5;
     var spawnTimer = 0;
     var nextBranchId = 0;
-    var gridOffset = 0;
     var stages = [
       { label: 'Build', x: 0.2, color: 'rgba(59,130,246,' },
       { label: 'Test', x: 0.4, color: 'rgba(139,92,246,' },
@@ -306,30 +305,23 @@
       canvas.height = hero.offsetHeight;
       // Init branches spread evenly across full height
       if (branches.length === 0) {
-        var gridSize = 24;
-        var heroTop = document.getElementById('hero').offsetTop;
-        // First grid-aligned Y inside the canvas
-        var firstDot = (gridSize - (heroTop % gridSize)) % gridSize;
-        var totalRows = Math.floor((canvas.height - firstDot) / gridSize);
+        var totalRows = Math.floor(canvas.height / 24);
         var spacing = Math.max(2, Math.floor(totalRows / 10));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < 9; i++) {
           branches.push({
             id: nextBranchId++,
-            y: firstDot + (startRow + i * spacing) * gridSize,
+            y: (startRow + i * spacing) * 24,
             color: branchColors[i],
             active: true
           });
         }
       } else {
-        var gridSize = 24;
-        var heroTop = document.getElementById('hero').offsetTop;
-        var firstDot = (gridSize - (heroTop % gridSize)) % gridSize;
-        var totalRows = Math.floor((canvas.height - firstDot) / gridSize);
+        var totalRows = Math.floor(canvas.height / 24);
         var spacing = Math.max(2, Math.floor(totalRows / 10));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = firstDot + (startRow + i * spacing) * gridSize;
+          branches[i].y = (startRow + i * spacing) * 24;
         }
       }
     }
@@ -376,6 +368,16 @@
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw dot grid
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+      for (var gy = 0; gy < canvas.height; gy += 24) {
+        for (var gx = 0; gx < canvas.width; gx += 24) {
+          ctx.beginPath();
+          ctx.arc(gx, gy, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
 
       // Draw branch lines
       for (var i = 0; i < branches.length; i++) {
