@@ -269,8 +269,6 @@
           if (vimPos2) vimPos2.textContent = lines.length + ',1';
           return;
         }
-        lineIdx++;
-        charIdx = 0;
         setTimeout(typeLine, lineDelay);
       }
     }
