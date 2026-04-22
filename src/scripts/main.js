@@ -357,17 +357,12 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw branch lines — slight converge toward right
-      var convergeY = canvas.height * 0.5;
+      // Draw branch lines
       for (var i = 0; i < branches.length; i++) {
         var b = branches[i];
         ctx.beginPath();
         ctx.moveTo(0, b.y);
-        ctx.bezierCurveTo(
-          canvas.width * 0.5, b.y,
-          canvas.width * 0.8, b.y + (convergeY - b.y) * 0.15,
-          canvas.width, b.y + (convergeY - b.y) * 0.2
-        );
+        ctx.lineTo(canvas.width, b.y);
         ctx.globalAlpha = 0.05;
         ctx.strokeStyle = b.color;
         ctx.lineWidth = 1;
@@ -401,18 +396,12 @@
         // Move
         c.x += c.speed;
 
-        // Follow branch curve — same bezier as the branch line
-        var t = Math.min(c.x / canvas.width, 1);
-        var branchEndY = c.branchY + (canvas.height * 0.5 - c.branchY) * 0.2;
-        // Approximate bezier: mostly flat, slight curve at end
-        var onCurveY = c.branchY + (branchEndY - c.branchY) * t * t;
-
-        // Merge curve
+        // Stay on branch line
         if (c.merge && c.x > canvas.width * 0.4 && c.x < canvas.width * 0.7) {
           var progress = (c.x - canvas.width * 0.4) / (canvas.width * 0.3);
-          c.y = onCurveY + (c.mergeTarget - c.branchY) * Math.sin(progress * Math.PI * 0.5) * 0.5;
+          c.y = c.branchY + (c.mergeTarget - c.branchY) * Math.sin(progress * Math.PI * 0.5);
         } else {
-          c.y += (onCurveY - c.y) * 0.1;
+          c.y += (c.branchY - c.y) * 0.1;
         }
 
         // Draw connection line to previous commit on same branch
