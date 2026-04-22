@@ -302,24 +302,28 @@
       // Init branches spread evenly across full height
       if (branches.length === 0) {
         var gridSize = 24;
+        var heroTop = document.getElementById('hero').offsetTop;
+        var gridOffset = heroTop % gridSize;
         var totalRows = Math.floor(canvas.height / gridSize);
         var spacing = Math.max(2, Math.floor((totalRows - 2) / 9));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < 9; i++) {
           branches.push({
             id: nextBranchId++,
-            y: (startRow + i * spacing) * gridSize,
+            y: (startRow + i * spacing) * gridSize + gridOffset,
             color: branchColors[i],
             active: true
           });
         }
       } else {
         var gridSize = 24;
+        var heroTop = document.getElementById('hero').offsetTop;
+        var gridOffset = heroTop % gridSize;
         var totalRows = Math.floor(canvas.height / gridSize);
         var spacing = Math.max(2, Math.floor((totalRows - 2) / 9));
         var startRow = Math.floor((totalRows - spacing * 8) / 2);
         for (var i = 0; i < branches.length; i++) {
-          branches[i].y = (startRow + i * spacing) * gridSize;
+          branches[i].y = (startRow + i * spacing) * gridSize + gridOffset;
         }
       }
     }
