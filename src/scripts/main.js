@@ -284,8 +284,8 @@
     var mouse = { x: -9999, y: -9999 };
     var commits = [];
     var branches = [];
-    var branchColors = ['#14b8a6', '#8b5cf6', '#3b82f6', '#f59e0b', '#ef4444'];
-    var speed = 0.6;
+    var branchColors = ['rgba(20,184,166,0.6)', 'rgba(139,92,246,0.5)', 'rgba(59,130,246,0.5)', 'rgba(99,102,241,0.4)'];
+    var speed = 0.5;
     var spawnTimer = 0;
     var nextBranchId = 0;
 
@@ -293,15 +293,23 @@
       var hero = document.getElementById('hero');
       canvas.width = hero.offsetWidth;
       canvas.height = hero.offsetHeight;
-      // Init branches if empty
+      // Init branches spread evenly across full height
       if (branches.length === 0) {
+        var padding = canvas.height * 0.12;
+        var gap = (canvas.height - padding * 2) / 3;
         for (var i = 0; i < 4; i++) {
           branches.push({
             id: nextBranchId++,
-            y: canvas.height * 0.2 + i * (canvas.height * 0.18),
-            color: branchColors[i % branchColors.length],
+            y: padding + i * gap,
+            color: branchColors[i],
             active: true
           });
+        }
+      } else {
+        var padding = canvas.height * 0.12;
+        var gap = (canvas.height - padding * 2) / 3;
+        for (var i = 0; i < branches.length; i++) {
+          branches[i].y = padding + i * gap;
         }
       }
     }
@@ -329,7 +337,7 @@
         branchId: branch.id,
         branchY: branch.y,
         color: branch.color,
-        r: 3 + Math.random() * 2,
+        r: 2 + Math.random() * 1.5,
         speed: speed + Math.random() * 0.3,
         glow: 0,
         merge: false,
@@ -357,7 +365,7 @@
         ctx.lineTo(canvas.width, b.y);
         ctx.strokeStyle = b.color.replace(')', ',0.08)').replace('rgb', 'rgba').replace('#', '');
         // Use hex with alpha
-        ctx.globalAlpha = 0.08;
+        ctx.globalAlpha = 0.05;
         ctx.strokeStyle = b.color;
         ctx.lineWidth = 1;
         ctx.stroke();
@@ -431,7 +439,7 @@
         ctx.beginPath();
         ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
         ctx.fillStyle = c.color;
-        ctx.globalAlpha = 0.4 + c.glow * 0.5;
+        ctx.globalAlpha = 0.3 + c.glow * 0.4;
         ctx.fill();
         ctx.globalAlpha = 1;
 
