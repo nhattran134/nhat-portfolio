@@ -297,7 +297,7 @@
       { label: 'Build', x: 0.2, color: 'rgba(59,130,246,' },
       { label: 'Test', x: 0.4, color: 'rgba(139,92,246,' },
       { label: 'Scan', x: 0.6, color: 'rgba(245,158,11,' },
-      { label: 'Deploy', x: 0.8, color: 'rgba(20,184,166,' },
+      { label: 'Deploy', x: 0.8, color: 'rgba(34,197,94,' },
     ];
 
     function resize() {
