@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "sf mono",
+        "createdAt": "2026-11-11T13:53:31.274Z",
+        "reason": "Claude: system monospace stack used only for inline/block code in .prose, documented in DESIGN.md typography notes; not a UI face"
+      }
+    ]
+  }
+}
