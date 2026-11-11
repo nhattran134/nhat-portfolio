@@ -21,15 +21,15 @@ import { contactNote } from '../data/contact';
       <span>What you can hire me for</span>
     </div>
 
-    <form class="form request" name="request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
+    <form class="form-frame request" name="request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
       <input type="hidden" name="form-name" value="request" />
       <p class="vh"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
       <div class="form-cap"><span>Form 1 · Project request</span></div>
       <div class="row">
-        <label class="field">Email
+        <label class="form-field">Email
           <input type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
         </label>
-        <label class="field">What do you need?
+        <label class="form-field">What do you need?
           <select name="need" required>
             <option value="" disabled selected>Choose one</option>
             {services.map((s) => <option>{s.title}</option>)}
@@ -37,7 +37,7 @@ import { contactNote } from '../data/contact';
             <option>Other</option>
           </select>
         </label>
-        <button class="btn" type="submit">Send <Icon name="arrow" /></button>
+        <button class="button-solid" type="submit">Send <Icon name="arrow" /></button>
       </div>
       <p class="form-note">{contactNote}</p>
       <p class="form-status" role="status" hidden></p>
@@ -54,7 +54,6 @@ import { contactNote } from '../data/contact';
               <span class="lead" aria-hidden="true"></span>
               <Icon name="arrow" />
             </span>
-            <span class="d">{s.summary}</span>
           </a>
         </li>
       ))}
@@ -85,7 +84,7 @@ import { contactNote } from '../data/contact';
   .cap {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 700;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--on-field-mute);
@@ -100,7 +99,7 @@ import { contactNote } from '../data/contact';
   }
 
   .cover h1 {
-    font-size: clamp(44px, 4.8vw, 76px);
+    font-size: clamp(2.75rem, 4.8vw, 4.75rem);
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -109,7 +108,7 @@ import { contactNote } from '../data/contact';
 
   .cover p {
     margin-top: 18px;
-    font-size: 19px;
+    font-size: 1.1875rem;
     line-height: 1.45;
     max-width: 36ch;
     color: var(--on-field-mute);
@@ -123,7 +122,7 @@ import { contactNote } from '../data/contact';
   }
 
   .sheet-head h2 {
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: 700;
     letter-spacing: 0;
   }
@@ -143,7 +142,7 @@ import { contactNote } from '../data/contact';
 
   .n {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 0.9375rem;
     color: var(--field);
     padding-top: 4px;
   }
@@ -152,7 +151,7 @@ import { contactNote } from '../data/contact';
     display: flex;
     align-items: baseline;
     gap: 10px;
-    font-size: 21px;
+    font-size: 1.3125rem;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
@@ -163,7 +162,7 @@ import { contactNote } from '../data/contact';
 
   .lead {
     flex: 1;
-    border-bottom: 2px dotted #b4b8c2;
+    border-bottom: 2px dotted var(--leader);
     transform: translateY(-5px);
     min-width: 24px;
   }
@@ -179,7 +178,7 @@ import { contactNote } from '../data/contact';
 
   .new {
     flex: none;
-    font-size: 11px;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -189,12 +188,6 @@ import { contactNote } from '../data/contact';
     align-self: center;
   }
 
-  .d {
-    grid-column: 2;
-    font-size: 15px;
-    color: var(--mute);
-    margin-top: 2px;
-  }
 
   .toc a:hover .tt {
     color: var(--field);
@@ -209,11 +202,11 @@ import { contactNote } from '../data/contact';
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
   }
 
-  .request .field + .field {
+  .request .form-field + .form-field {
     border-left: 1px solid var(--ink);
   }
 
-  .request .btn {
+  .request .button-solid {
     min-height: 100%;
     border-width: 0;
     padding: 0 26px;
@@ -239,7 +232,7 @@ import { contactNote } from '../data/contact';
 
   @media (max-width: 640px) {
     .t {
-      font-size: 19px;
+      font-size: 1.1875rem;
     }
     .toc a {
       grid-template-columns: 40px minmax(0, 1fr);
@@ -247,11 +240,11 @@ import { contactNote } from '../data/contact';
     .request .row {
       grid-template-columns: minmax(0, 1fr);
     }
-    .request .field + .field {
+    .request .form-field + .form-field {
       border-left: 0;
       border-top: 1px solid var(--ink);
     }
-    .request .btn {
+    .request .button-solid {
       min-height: 52px;
     }
   }

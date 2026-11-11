@@ -24,14 +24,13 @@ const ref = (id: string) => {
         <li id={`standard-1-${i + 1}`}>
           <div class="what">
             <h3><span class="num">1.{i + 1}</span> {s.title}</h3>
-            {s.proof ? (
+            <p>{s.summary}</p>
+            {s.proof && (
               <ul class="proof" aria-label="Proven in">
                 {s.proof.map(ref).map((r) => (
                   <li><a class="link-arrow" href={r.href}><span class="num">{r.n}</span> {r.title} <Icon name="arrow" /></a></li>
                 ))}
               </ul>
-            ) : (
-              <p>{s.desc}</p>
             )}
           </div>
           <figure class="use ok">
@@ -50,7 +49,7 @@ const ref = (id: string) => {
 
 <style>
   .h3 {
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: 700;
     letter-spacing: 0;
   }
@@ -68,7 +67,7 @@ const ref = (id: string) => {
   }
 
   .what h3 {
-    font-size: 26px;
+    font-size: 1.625rem;
     font-weight: 800;
     display: flex;
     gap: 14px;
@@ -76,7 +75,7 @@ const ref = (id: string) => {
   }
 
   .what h3 .num {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--field);
     min-width: 2.4em;
@@ -101,7 +100,7 @@ const ref = (id: string) => {
   .proof::before {
     content: 'Proven in';
     display: block;
-    font-size: 13px;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -130,7 +129,7 @@ const ref = (id: string) => {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -144,7 +143,7 @@ const ref = (id: string) => {
   .use p {
     margin-top: 8px;
     color: var(--ink);
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: 600;
     line-height: 1.4;
   }
@@ -170,10 +169,10 @@ const ref = (id: string) => {
       padding: 22px 0 24px;
     }
     .what h3 {
-      font-size: 21px;
+      font-size: 1.3125rem;
     }
     .use p {
-      font-size: 15px;
+      font-size: 0.9375rem;
     }
   }
 </style>

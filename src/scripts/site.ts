@@ -79,12 +79,57 @@ if (motionOk && 'IntersectionObserver' in window) {
   });
 }
 
-// 4. Netlify forms: submit in place with a status line; fall back to a normal POST without JS.
+// 4. Field errors: say what is wrong under the field, not only in colour. JS-only, so the
+// browser's own validation still guards the form when script fails.
+type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+function errorFor(c: Control): string {
+  if (c.validity.valueMissing) {
+    if (c instanceof HTMLSelectElement) return 'Choose what you need.';
+    if (c.type === 'email') return 'Enter your email address.';
+    if (c.name === 'message') return 'Tell me a little about the work.';
+    return 'Enter your name.';
+  }
+  if (c.validity.typeMismatch) return 'Enter an email address like you@company.com.';
+  return '';
+}
+function showError(c: Control) {
+  const msg = errorFor(c);
+  let el = document.getElementById(`${c.id || c.name}-error`);
+  if (!msg) {
+    el?.remove();
+    c.removeAttribute('aria-invalid');
+    c.removeAttribute('aria-describedby');
+    return;
+  }
+  if (!el) {
+    el = Object.assign(document.createElement('span'), { id: `${c.id || c.name}-error`, className: 'field-error' });
+    c.after(el);
+  }
+  el.textContent = msg;
+  c.setAttribute('aria-invalid', 'true');
+  c.setAttribute('aria-describedby', el.id);
+}
+
+// 5. Netlify forms: submit in place with a status line; fall back to a normal POST without JS.
 document.querySelectorAll<HTMLFormElement>('form[data-ajax]').forEach((form) => {
+  form.noValidate = true;
+  const controls = [...form.querySelectorAll<Control>('input:not([type=hidden]):not([name=bot-field]), select, textarea')];
+  controls.forEach((c, i) => {
+    if (!c.id) c.id = `${form.name}-${c.name || i}`;
+    c.addEventListener('blur', () => c.value && showError(c));
+    c.addEventListener('input', () => c.hasAttribute('aria-invalid') && showError(c));
+    c.addEventListener('change', () => c.hasAttribute('aria-invalid') && showError(c));
+  });
   const status = form.querySelector<HTMLElement>('.form-status');
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
+    controls.forEach(showError);
+    const firstBad = controls.find((c) => !c.checkValidity());
+    if (firstBad) {
+      firstBad.focus();
+      return;
+    }
     if (!status || !button) return form.submit();
     const label = button.innerHTML;
     button.disabled = true;

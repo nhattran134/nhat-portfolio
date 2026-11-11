@@ -53,11 +53,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
     <Nav />
     <main id="main">
       <slot />
@@ -67,14 +66,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import '../scripts/site.ts';
     </script>
     <script is:inline>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', function (user) {
-          if (!user) {
-            window.netlifyIdentity.on('login', function () {
-              document.location.href = '/admin/';
-            });
-          }
-        });
+      // Netlify Identity is needed only when a CMS invite or login link lands here, so load it on demand.
+      if (/(invite|recovery|confirmation|email_change)_token=|access_token=/.test(location.hash)) {
+        var s = document.createElement('script');
+        s.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
+        s.onload = function () {
+          window.netlifyIdentity.on('login', function () {
+            document.location.href = '/admin/';
+          });
+        };
+        document.head.appendChild(s);
       }
     </script>
   </body>

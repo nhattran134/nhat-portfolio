@@ -287,8 +287,8 @@
       "kind": "button",
       "refersTo": "button-on-field",
       "description": "Inverted button for cobalt surfaces such as the close band.",
-      "html": "<div class=\"ds-field\"><a class=\"ds-btn-inv\" href=\"#\">Start a project <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></div>",
-      "css": ".ds-field{background:var(--field);padding:24px}.ds-btn-inv{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:2px solid var(--on-field);background:var(--on-field);color:var(--field);font:800 16px var(--font);text-decoration:none;transition:background-color .2s cubic-bezier(0.16, 1, 0.3, 1),border-color .2s cubic-bezier(0.16, 1, 0.3, 1)}.ds-btn-inv svg{width:18px;height:18px}.ds-btn-inv:hover{background:var(--on-field-mute);border-color:var(--on-field-mute)}.ds-btn-inv:focus-visible{outline:2px solid var(--on-field);outline-offset:3px}"
+      "html": "<div class=\"ds-form-field\"><a class=\"ds-btn-inv\" href=\"#\">Start a project <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-form-field{background:var(--field);padding:24px}.ds-btn-inv{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:2px solid var(--on-field);background:var(--on-field);color:var(--field);font:800 16px var(--font);text-decoration:none;transition:background-color .2s cubic-bezier(0.16, 1, 0.3, 1),border-color .2s cubic-bezier(0.16, 1, 0.3, 1)}.ds-btn-inv svg{width:18px;height:18px}.ds-btn-inv:hover{background:var(--on-field-mute);border-color:var(--on-field-mute)}.ds-btn-inv:focus-visible{outline:2px solid var(--on-field);outline-offset:3px}"
     },
     {
       "name": "Arrow Link",

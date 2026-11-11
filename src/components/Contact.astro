@@ -14,19 +14,19 @@ import { contactNote } from '../data/contact';
       </ul>
     </div>
 
-    <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
+    <form class="form-frame" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
       <input type="hidden" name="form-name" value="contact" />
       <p class="vh"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
       <div class="form-cap"><span>Form 2 · Message</span></div>
       <div class="row">
-        <label class="field">Name
+        <label class="form-field">Name
           <input type="text" name="name" autocomplete="name" required />
         </label>
-        <label class="field">Email
+        <label class="form-field">Email
           <input type="email" name="email" autocomplete="email" required />
         </label>
       </div>
-      <label class="field rule">Subject
+      <label class="form-field rule">Subject
         <select name="subject">
           <option>Consulting</option>
           <option>Job opportunity</option>
@@ -34,11 +34,11 @@ import { contactNote } from '../data/contact';
           <option>Other</option>
         </select>
       </label>
-      <label class="field rule">Message
+      <label class="form-field rule">Message
         <textarea name="message" rows="5" required></textarea>
       </label>
       <div class="send">
-        <button class="btn" type="submit">Send message <Icon name="arrow" /></button>
+        <button class="button-solid" type="submit">Send message <Icon name="arrow" /></button>
       </div>
       <p class="form-note">{contactNote}</p>
       <p class="form-status" role="status" hidden></p>
@@ -60,14 +60,14 @@ import { contactNote } from '../data/contact';
   }
 
   h2 {
-    font-size: clamp(40px, 5vw, 72px);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 800;
     letter-spacing: -0.03em;
   }
 
   .intro p {
     margin-top: 14px;
-    font-size: 19px;
+    font-size: 1.1875rem;
     line-height: 1.45;
     max-width: 40ch;
     color: var(--on-field-mute);
@@ -85,7 +85,7 @@ import { contactNote } from '../data/contact';
     align-items: center;
     gap: 8px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     text-decoration: none;
     border-bottom: 2px solid var(--on-field-mute);
     padding-bottom: 2px;
@@ -100,7 +100,7 @@ import { contactNote } from '../data/contact';
     height: 16px;
   }
 
-  .form {
+  .form-frame {
     border-color: var(--ink);
   }
 
@@ -109,7 +109,7 @@ import { contactNote } from '../data/contact';
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
-  .row .field + .field {
+  .row .form-field + .form-field {
     border-left: 1px solid var(--ink);
   }
 
@@ -123,14 +123,14 @@ import { contactNote } from '../data/contact';
     justify-content: flex-end;
   }
 
-  .send .btn {
+  .send .button-solid {
     border-width: 0;
     background: var(--field);
     color: var(--on-field);
     min-height: 56px;
   }
 
-  .send .btn:hover {
+  .send .button-solid:hover {
     background: var(--field-deep);
   }
 
@@ -144,11 +144,11 @@ import { contactNote } from '../data/contact';
     .row {
       grid-template-columns: minmax(0, 1fr);
     }
-    .row .field + .field {
+    .row .form-field + .form-field {
       border-left: 0;
       border-top: 1px solid var(--ink);
     }
-    .send .btn {
+    .send .button-solid {
       width: 100%;
     }
   }

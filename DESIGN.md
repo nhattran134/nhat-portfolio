@@ -19,87 +19,87 @@ colors:
 typography:
   display:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(40px, 5vw, 72px)"
+    fontSize: "clamp(2.5rem, 5vw, 4.5rem)"
     fontWeight: 800
     lineHeight: 1.05
     letterSpacing: "-0.03em"
   headline:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(36px, 4.4vw, 64px)"
+    fontSize: "clamp(2.25rem, 4.4vw, 4rem)"
     fontWeight: 800
     lineHeight: 1.02
     letterSpacing: "-0.03em"
   title:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "26px"
+    fontSize: "1.625rem"
     fontWeight: 800
     lineHeight: 1.05
     letterSpacing: "-0.02em"
   lede:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "19px"
+    fontSize: "1.1875rem"
     fontWeight: 400
     lineHeight: 1.45
   body:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "17px"
+    fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.55
   prose:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "18px"
+    fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.65
   sheet-label:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "15px"
+    fontSize: "0.9375rem"
     fontWeight: 700
     lineHeight: 1.05
     letterSpacing: "0em"
   caption:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "13px"
+    fontSize: "0.75rem"
     fontWeight: 700
     lineHeight: 1.55
     letterSpacing: "0.04em"
   hero:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(44px, 4.8vw, 76px)"
+    fontSize: "clamp(2.75rem, 4.8vw, 4.75rem)"
     fontWeight: 800
     lineHeight: 1
   close:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(36px, 4vw, 56px)"
+    fontSize: "clamp(2.25rem, 4vw, 3.5rem)"
     fontWeight: 800
     lineHeight: 1.05
   post-title:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "24px"
+    fontSize: "1.5rem"
     fontWeight: 800
     lineHeight: 1.05
   row-title:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "21px"
+    fontSize: "1.3125rem"
     fontWeight: 700
     lineHeight: 1.15
   ui:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "16px"
+    fontSize: "1rem"
     fontWeight: 700
     lineHeight: 1.3
   small:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "14px"
+    fontSize: "0.875rem"
     fontWeight: 500
     lineHeight: 1.4
   micro:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "12px"
+    fontSize: "0.75rem"
     fontWeight: 700
     lineHeight: 1.3
   badge:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "11px"
+    fontSize: "0.75rem"
     fontWeight: 800
     lineHeight: 1.2
 rounded:
@@ -176,7 +176,7 @@ The world is light-only by design. There is no dark theme and `color-scheme` is 
 - 2px black rules open sections; 1px hairlines separate rows.
 - The 12-column grid marked as 8px ticks under the contents rule, like a ruler; never drawn through content.
 - Correct (cobalt, check) and incorrect (red, cross) usage panels.
-- One family, Schibsted Grotesk, from 400 to 900; section numbers sit inside their headings in pale cobalt, never as standalone glyphs.
+- One family, Schibsted Grotesk, from 400 to 800, sized in rem so it follows the browser's text-size setting; section numbers sit inside their headings in pale cobalt, never as standalone glyphs.
 - Square corners everywhere; depth comes only from rules and colour fields.
 
 ## Colors
@@ -197,7 +197,7 @@ A two-ink manual: black on white, with one saturated cobalt used as surface or m
 - **Mute** (mute): descriptions, dates, secondary nav numbers, sheet-head notes, tag text.
 - **Hairline** (line): 1px row separators and the slash between tags.
 - **White on Field** (on-field) and **Pale Cobalt** (on-field-mute): text on cobalt; pale cobalt for ledes, back links, and the underline of links on cobalt.
-- **Input Rule** (input-rule), **Placeholder** (placeholder), **Leader** (leader), **Code Wash** (code-wash): the input underline, placeholder text, dotted contents leaders and inline code background. These are literal values in the build, not custom properties.
+- **Input Rule** (input-rule, #868a93, 3.6:1 on paper), **Placeholder** (placeholder), **Leader** (leader), **Code Wash** (code-wash), **Code Ink** (code-ink), **On-field Rule** (on-field-rule, 35% white): the input underline, placeholder text, dotted contents leaders, inline code and code block text, and row rules on cobalt. All are CSS custom properties; the only literal colour left is the page's theme-color meta, which cannot read a variable.
 
 ### Named Rules
 **The Surface Or Mark Rule.** Cobalt is either the entire page (a divider, cover, page head or close band, full bleed with a 2px ink rule on top) or a small mark on paper. It is never a tinted card, panel, or background block in the middle of a paper page.
@@ -220,8 +220,8 @@ A two-ink manual: black on white, with one saturated cobalt used as surface or m
 - **Lede** (400, 19px, 1.45): the line under a divider or page heading, in pale cobalt, 36 to 52ch.
 - **Body** (400, 17px, 1.55): default. Prose runs 18px / 1.65 at 62ch (about 70 characters in this face).
 - **Sheet label** (700, 15px, 0 tracking): the numbered sheet heading ("3.1 Experience") and the cobalt row numbers.
-- **Caption** (700, 13px, 0.04em, uppercase): form caption bars and field labels. Figure captions (flow figures, Figure 1.0) and table heads run 12px.
-- **Small steps:** ui 16px (name, buttons, tool tags, standard numbers), small 14px (tags, figure notes, footer, discipline line, phone nav), micro 12px (figure captions, aside terms, step numbers), badge 11px (New); row titles 21px, post titles 24px, close-band heading clamp(36px, 4vw, 56px), hero h1 clamp(44px, 4.8vw, 76px). Usage-panel captions run 800 at 0.06em; aside definition terms 12px 800.
+- **Caption** (700, 0.75rem / 12px, 0.04em, uppercase): form caption bars, field labels, figure captions, table heads, the New badge. One label step; the 11px and 13px steps were merged into it.
+- **Small steps** (all rem, px at the default 16px): ui 1rem / 16px (name, buttons, tool tags, standard numbers), small 0.875rem / 14px (tags, figure notes, footer, discipline line, phone nav, field errors), row titles 1.3125rem / 21px, post titles 1.5rem / 24px, close-band heading clamp(2.25rem, 4vw, 3.5rem), hero h1 clamp(2.75rem, 4.8vw, 4.75rem). Display sizes are fluid with the viewport and capped in rem.
 
 ### Named Rules
 **The Every Heading Is Numbered Rule.** A section heading, a sheet heading and a list row carry their manual number (2.3, 4.1) in cobalt or mute. A heading without a number is a page title, not a section.
@@ -271,7 +271,7 @@ Heavy, flat, rectangular.
 
 ### Forms
 A form is a page printed in the manual.
-- **Frame:** paper background, 2px ink border, opened by a black caption bar (caption type, form number). A note row at the foot carries confirmed contact facts only: location, time zone and reply time ("within 2 days"). No email address appears anywhere on the site, on purpose, to avoid spam. Selects open on a disabled, required "Choose one". Invalid inputs, selects and textareas turn their underline red.
+- **Frame:** paper background, 2px ink border, opened by a black caption bar (caption type, form number). A note row at the foot carries confirmed contact facts only: location, time zone and reply time ("within 2 days"). No email address appears anywhere on the site, on purpose, to avoid spam. Selects open on a disabled, required "Choose one". An invalid field turns its underline red and gets an inline message under it in red 600 0.875rem ("Enter your email address."), linked by aria-describedby; on submit, focus moves to the first invalid field.
 - **Fields:** uppercase caption labels with the input below; inputs are transparent with a 1px input-rule underline, 500 17px text, no radius. Adjacent fields are divided by 1px ink lines.
 - **Focus:** the underline thickens to 2px cobalt; the outline is suppressed in favour of it.
 - **Error:** invalid input underline turns red; the status line below the form (1px ink rule above) reads red for errors, cobalt for success.
@@ -280,13 +280,13 @@ A form is a page printed in the manual.
 The running header: name (800) and discipline line (mute, hidden under 1100px) left, a numbered section list right (600 15px, number in mute 500). Hover and the current section turn cobalt; the current section also gets a 2px cobalt bar that grows from the left along the header's bottom rule. `site.ts` sets `aria-current` from the section in view. On phones the list becomes a second scrolling row at 14px.
 
 ### Usage panels (signature)
-Each standard row pairs its description with two figures: **Correct** in cobalt with a check, **Incorrect** in red with a cross. Each is a 4px bar in its colour, an 800 13px uppercase caption with the icon, then a 600 17px ink statement.
+Each standard row pairs its one-line summary and "Proven in" project links with two figures: **Correct** in cobalt with a check, **Incorrect** in red with a cross. Each is a 4px bar in its colour, an 800 13px uppercase caption with the icon, then a 600 17px ink statement.
 
 ### Divider pages (signature)
 Full-bleed cobalt, 2px ink rule on top, numbered display heading and pale lede on a 5 / 7 grid. No standalone numerals and no entrance motion on dividers.
 
 ### Contents list
-Numbered rows (cobalt number, 700 21px title, dotted leader, cobalt arrow, mute description) separated by hairlines. A **New** badge (cobalt fill, white 800 11px uppercase, 0.08em) may mark one entry.
+Numbered rows (cobalt number, 700 21px title, dotted leader, cobalt arrow; titles only, so the first viewport stays calm) separated by hairlines. A **New** badge (cobalt fill, white 800 12px uppercase, 0.08em) may mark one entry.
 
 ### Flow figure
 A pipeline as a black caption bar over a grid of steps. Each step sits on a 2px ink track with a 10px cobalt square at its start, 700 14px label and a mute step number.

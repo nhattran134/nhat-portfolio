@@ -50,7 +50,7 @@ const gates: [string, string, boolean][] = [
 <style>
   figcaption {
     display: inline-block;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -65,7 +65,7 @@ const gates: [string, string, boolean][] = [
   }
 
   thead th {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -87,13 +87,13 @@ const gates: [string, string, boolean][] = [
 
   tbody th {
     text-align: left;
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: 700;
   }
 
   tbody th span {
     display: block;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
   }
 
@@ -131,14 +131,18 @@ const gates: [string, string, boolean][] = [
     color: var(--ink);
   }
 
-  .tone-field thead th,
-  .tone-field tbody th span {
+  .tone-field thead th {
     color: var(--on-field-mute);
+  }
+
+  /* The cover keeps gate names only; the sheet version carries the notes on wider screens. */
+  .tone-field tbody th span {
+    display: none;
   }
 
   .tone-field tbody th,
   .tone-field td {
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-top: 1px solid var(--on-field-rule);
   }
 
   /* On paper */
@@ -171,13 +175,13 @@ const gates: [string, string, boolean][] = [
 
   @media (max-width: 560px) {
     tbody th {
-      font-size: 15px;
+      font-size: 0.9375rem;
     }
     tbody th span {
       display: none;
     }
     thead th {
-      font-size: 11px;
+      font-size: 0.75rem;
       letter-spacing: 0.02em;
     }
   }
