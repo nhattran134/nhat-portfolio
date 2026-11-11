@@ -127,13 +127,26 @@ import { contactNote } from '../data/contact';
     letter-spacing: 0;
   }
 
+  /* The rows share the height left under the form, so the list ends level with the cover.
+     Capped so tall screens don't stretch a row past a comfortable line. */
   .toc {
     list-style: none;
+    flex: 1 1 auto;
+    display: grid;
+    grid-auto-rows: minmax(0, 1fr);
+    max-height: 44rem;
+    padding-bottom: 12px;
+  }
+
+  .toc li {
+    display: flex;
   }
 
   .toc a {
+    flex: 1;
     display: grid;
     grid-template-columns: 52px minmax(0, 1fr);
+    align-content: center;
     column-gap: 12px;
     padding: 11px 0 12px;
     border-bottom: 1px solid var(--line);
