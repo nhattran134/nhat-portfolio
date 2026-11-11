@@ -20,7 +20,8 @@ A platform engineer who also owns the release process: pipeline architecture, cl
 ## Operating Context
 - Visitors usually arrive from LinkedIn (linkedin.com/in/nathantr), GitHub (github.com/nhattran134) or a direct link to nathantr.com.
 - Content is edited through Decap CMS at `/admin` (Netlify Identity + git-gateway, branch `main`): blog posts, projects and testimonials are Markdown collections.
-- The contact form is a Netlify Form with a honeypot field; subjects are Job Opportunity, Consulting, Collaboration and Other.
+- The contact form is a Netlify Form with a honeypot field; subjects are Consulting, Job opportunity, Collaboration and Other.
+- Contact facts shown beside both forms: based in Ho Chi Minh City (UTC+7), replies within 2 days. No email address is published, on purpose, to avoid spam; contact goes through the forms, LinkedIn and GitHub.
 
 ## Capabilities and Constraints
 - Astro static site (`output: 'static'`), deployed on Netlify, sitemap via `@astrojs/sitemap`.

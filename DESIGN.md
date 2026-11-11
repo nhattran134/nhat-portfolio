@@ -271,7 +271,7 @@ Heavy, flat, rectangular.
 
 ### Forms
 A form is a page printed in the manual.
-- **Frame:** paper background, 2px ink border, opened by a black caption bar (caption type, form number). A note row at the foot carries confirmed contact facts only (location and time zone; reply time and email when confirmed). Selects open on a disabled, required "Choose one". Invalid inputs, selects and textareas turn their underline red.
+- **Frame:** paper background, 2px ink border, opened by a black caption bar (caption type, form number). A note row at the foot carries confirmed contact facts only: location, time zone and reply time ("within 2 days"). No email address appears anywhere on the site, on purpose, to avoid spam. Selects open on a disabled, required "Choose one". Invalid inputs, selects and textareas turn their underline red.
 - **Fields:** uppercase caption labels with the input below; inputs are transparent with a 1px input-rule underline, 500 17px text, no radius. Adjacent fields are divided by 1px ink lines.
 - **Focus:** the underline thickens to 2px cobalt; the outline is suppressed in favour of it.
 - **Error:** invalid input underline turns red; the status line below the form (1px ink rule above) reads red for errors, cobalt for success.

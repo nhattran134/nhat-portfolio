@@ -48,7 +48,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-ajax]').forEach((form) => 
       if (!res.ok) throw new Error(String(res.status));
       form.reset();
       status.dataset.state = 'ok';
-      status.textContent = 'Sent. I will reply to the email address you gave.';
+      status.textContent = 'Sent. I will reply to the email address you gave within 2 days.';
     } catch {
       status.dataset.state = 'error';
       const li = Object.assign(document.createElement('a'), { href: 'https://linkedin.com/in/nathantr', textContent: 'message me on LinkedIn' });
