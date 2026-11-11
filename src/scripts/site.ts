@@ -31,7 +31,55 @@ if (sections.length && 'IntersectionObserver' in window) {
   });
 }
 
-// 2. Netlify forms: submit in place with a status line; fall back to a normal POST without JS.
+const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+
+// Play `run` once, the first time `el` is mostly in view. Content stays visible until then:
+// animations use fill 'backwards', so nothing is hidden if this never runs.
+function once(el: Element, run: () => void, threshold = 0.4) {
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) {
+      io.disconnect();
+      run();
+    }
+  }, { threshold });
+  io.observe(el);
+}
+
+if (motionOk && 'IntersectionObserver' in window) {
+  // 2. Figure 1.0: one change passes the gates row by row; the typical setup's skips land last and harder.
+  document.querySelectorAll('.gates').forEach((fig) => {
+    once(fig, () => {
+      const marks = [...fig.querySelectorAll<HTMLElement>('td > :first-child')];
+      const passes = marks.filter((m) => !m.classList.contains('skipped'));
+      const skips = marks.filter((m) => m.classList.contains('skipped'));
+      passes.forEach((m, i) =>
+        m.animate([{ opacity: 0, transform: 'scale(0.4)' }, { opacity: 1, transform: 'none' }], {
+          duration: 260, delay: 120 + i * 55, easing: EASE, fill: 'backwards',
+        }),
+      );
+      const after = 120 + passes.length * 55 + 120;
+      skips.forEach((m, i) =>
+        m.animate([{ opacity: 0, transform: 'scale(1.8)' }, { opacity: 1, transform: 'none' }], {
+          duration: 340, delay: after + i * 140, easing: EASE, fill: 'backwards',
+        }),
+      );
+    });
+  });
+
+  // 3. Pipeline figures: stages arrive left to right, so the direction reads at a glance.
+  document.querySelectorAll('.flow').forEach((fig) => {
+    once(fig, () => {
+      fig.querySelectorAll<HTMLElement>('li').forEach((li, i) =>
+        li.animate([{ opacity: 0, transform: 'translateX(-10px)' }, { opacity: 1, transform: 'none' }], {
+          duration: 320, delay: Math.min(i, 7) * 60, easing: EASE, fill: 'backwards',
+        }),
+      );
+    }, 0.6);
+  });
+}
+
+// 4. Netlify forms: submit in place with a status line; fall back to a normal POST without JS.
 document.querySelectorAll<HTMLFormElement>('form[data-ajax]').forEach((form) => {
   const status = form.querySelector<HTMLElement>('.form-status');
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
@@ -57,6 +105,13 @@ document.querySelectorAll<HTMLFormElement>('form[data-ajax]').forEach((form) => 
       status.hidden = false;
       button.disabled = false;
       button.innerHTML = label;
+      // Feedback stays legible under reduced motion: fade only, no travel.
+      status.animate(
+        motionOk
+          ? [{ opacity: 0, transform: 'translateY(-4px)' }, { opacity: 1, transform: 'none' }]
+          : [{ opacity: 0 }, { opacity: 1 }],
+        { duration: 180, easing: EASE },
+      );
     }
   });
 });

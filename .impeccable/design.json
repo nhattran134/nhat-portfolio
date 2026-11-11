@@ -220,6 +220,26 @@
         "name": "nav-bar",
         "value": "0.35s",
         "purpose": "Active nav bar scaleX from left."
+      },
+      {
+        "name": "gates-stamp",
+        "value": "260ms / 55ms stagger; skips 340ms after",
+        "purpose": "Figure 1.0 runs its gates once in view: passes from scale 0.4, typical-setup skips land last from scale 1.8."
+      },
+      {
+        "name": "flow-stages",
+        "value": "320ms / 60ms stagger",
+        "purpose": "Pipeline figure stages arrive left to right once in view."
+      },
+      {
+        "name": "status",
+        "value": "180ms",
+        "purpose": "Form status line fades in with a 4px drop; fade only under reduced motion."
+      },
+      {
+        "name": "page",
+        "value": "220ms",
+        "purpose": "Cross-document view transition cross-fade; running header held still."
       }
     ],
     "breakpoints": [

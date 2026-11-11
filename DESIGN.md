@@ -283,7 +283,7 @@ The running header: name (800) and discipline line (mute, hidden under 1100px) l
 Each standard row pairs its description with two figures: **Correct** in cobalt with a check, **Incorrect** in red with a cross. Each is a 4px bar in its colour, an 800 13px uppercase caption with the icon, then a 600 17px ink statement.
 
 ### Divider pages (signature)
-Full-bleed cobalt, 2px ink rule on top, numbered display heading and pale lede on a 5 / 7 grid. No standalone numerals and no entrance motion.
+Full-bleed cobalt, 2px ink rule on top, numbered display heading and pale lede on a 5 / 7 grid. No standalone numerals and no entrance motion on dividers.
 
 ### Contents list
 Numbered rows (cobalt number, 700 21px title, dotted leader, cobalt arrow, mute description) separated by hairlines. Title text sits on a paper backing so the layout guides stop at the letterforms. A **New** badge (cobalt fill, white 800 11px uppercase, 0.08em) may mark one entry.
@@ -302,7 +302,8 @@ Projects, posts, experience, certifications and tools are all hairline-ruled row
 - **Do** separate rows with 1px hairlines and a fixed numeric gutter (52px, 40px on phones).
 - **Do** set forms as paper frames with a 2px ink border and a black caption bar, even on cobalt.
 - **Do** use the four authored icons (2.25 stroke, square caps) in `currentColor`.
-- **Do** keep motion to colour shifts, the nav bar growing from the left, and arrow nudges, all on cubic-bezier(0.16, 1, 0.3, 1), and all off under reduced motion.
+- **Do** keep motion to one authored moment and quiet feedback, all on cubic-bezier(0.16, 1, 0.3, 1). The moment is Figure 1.0 running its gates once when it enters view: passes stamp in row by row (260ms each, 55ms apart, from scale 0.4), then the typical setup's skips land last (340ms, from scale 1.8). Pipeline figures play their stages left to right once (320ms, 60ms apart, from 10px left). Feedback: form status fades in with a 4px drop (180ms), field underlines ease colour (150ms), the nav bar grows from the left, arrows nudge. Pages cross-fade (220ms) with the running header held still. Entrances use fill 'backwards' so content is visible if script never runs.
+- **Don't** add section reveals, hover lifts or parallax. Under reduced motion the stamps, stage order and page cross-fade are off; the form status keeps its fade.
 
 ### Don't:
 - **Don't** round a corner or add a shadow.
