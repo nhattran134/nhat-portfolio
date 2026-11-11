@@ -31,30 +31,7 @@ if (sections.length && 'IntersectionObserver' in window) {
   });
 }
 
-// 2. Section numerals rise once. Visible by default; hidden only when motion is allowed.
-const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-if (motionOk && 'IntersectionObserver' in window) {
-  const rise = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          e.target.classList.remove('is-pre');
-          rise.unobserve(e.target);
-        }
-      }
-    },
-    { threshold: 0.2 },
-  );
-  document.querySelectorAll('.rise').forEach((el) => {
-    const r = el.getBoundingClientRect();
-    if (r.top > window.innerHeight * 0.9) {
-      el.classList.add('is-pre');
-      rise.observe(el);
-    }
-  });
-}
-
-// 3. Netlify forms: submit in place with a status line; fall back to a normal POST without JS.
+// 2. Netlify forms: submit in place with a status line; fall back to a normal POST without JS.
 document.querySelectorAll<HTMLFormElement>('form[data-ajax]').forEach((form) => {
   const status = form.querySelector<HTMLElement>('.form-status');
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');

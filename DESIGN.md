@@ -17,12 +17,6 @@ colors:
   leader: "#b4b8c2"
   code-wash: "#eef0f7"
 typography:
-  numeral:
-    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(140px, 17vw, 260px)"
-    fontWeight: 900
-    lineHeight: 0.74
-    letterSpacing: "-0.06em"
   display:
     fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
     fontSize: "clamp(40px, 5vw, 72px)"
@@ -142,7 +136,7 @@ The world is light-only by design. There is no dark theme and `color-scheme` is 
 - 2px black rules open sections; 1px hairlines separate rows.
 - Hairline 12-column layout guides drawn on the contents page.
 - Correct (cobalt, check) and incorrect (red, cross) usage panels.
-- One family, Schibsted Grotesk, from 400 to 900; a giant 900 numeral is the signature mark.
+- One family, Schibsted Grotesk, from 400 to 900; section numbers sit inside their headings in pale cobalt, never as standalone glyphs.
 - Square corners everywhere; depth comes only from rules and colour fields.
 
 ## Colors
@@ -176,11 +170,11 @@ A two-ink manual: black on white, with one saturated cobalt used as surface or m
 **Body Font:** Schibsted Grotesk (same stack)
 **Label/Mono Font:** none for UI; inline and block code in `.prose` fall back to the system monospace stack.
 
-**Character:** One sturdy news grotesk does everything. Hierarchy comes from weight (400 body to 900 numerals) and scale, with tight negative tracking on large sizes and none on labels.
+**Character:** One sturdy news grotesk does everything. Hierarchy comes from weight (400 body to 800 display) and scale, with tight negative tracking on large sizes and none on labels.
 
 ### Hierarchy
-- **Numeral** (900, clamp(140px, 17vw, 260px), 0.74, -0.06em): the section number on divider pages and the contact page. The hero cover runs it larger (clamp(200px, 26vw, 400px)); inner page heads smaller (clamp(96px, 11vw, 168px), -0.05em). Decorative and `aria-hidden`; the heading carries the meaning.
-- **Display** (800, clamp(40px, 5vw, 72px), 1.05, -0.03em): divider and contact headings. The hero h1 is a tighter cousin (clamp(40px, 3.9vw, 62px), line-height 1, max 12ch).
+- **Section number** (inherits its heading's size and weight, coloured on-field-mute on cobalt): the number that opens a divider, page-head or contact heading, as in "2 Work" or "2.1 Governed AI Agent Platform". It is part of the heading text and read by screen readers.
+- **Display** (800, clamp(40px, 5vw, 72px), 1.05, -0.03em): divider and contact headings. The hero h1 is a tighter cousin (clamp(44px, 4.8vw, 76px), line-height 1, max 12ch).
 - **Headline** (800, clamp(36px, 4.4vw, 64px), 1.02): inner page h1 on blog posts and project pages, max 20ch. The close band uses clamp(36px, 4vw, 56px).
 - **Title** (800, 26px): a standard, project, or employer row. Post titles 24px; prose h2 30px with a 2px ink rule above it; role titles and prose h3 19 to 22px at 700.
 - **Lede** (400, 19px, 1.45): the line under a divider or page heading, in pale cobalt, 36 to 52ch.
@@ -197,13 +191,13 @@ A two-ink manual: black on white, with one saturated cobalt used as surface or m
 
 A centred 1440px container with a fluid gutter of clamp(16px, 3vw, 40px). The running header is sticky, 52px tall on desktop and 84px on phones where the numbered nav drops to a second, horizontally scrolling row; anchor scrolling is padded to clear it.
 
-Pages are a stack of **dividers** and **sheets**. A divider is a full-bleed cobalt band on a 5fr / 7fr grid: numeral left, heading and lede right, aligned to the bottom (40px 44px block padding; one column under 900px). A sheet is a paper page (32px top, 72px bottom) opening with a sheet head: a 2px ink rule beneath a numbered label on the left and a mute note or link on the right.
+Pages are a stack of **dividers** and **sheets**. A divider is a full-bleed cobalt band on a 5fr / 7fr grid: numbered heading left, lede right, aligned to the bottom (40px 44px block padding; one column under 900px). A sheet is a paper page (32px top, 72px bottom) opening with a sheet head: a 2px ink rule beneath a numbered label on the left and a mute note or link on the right.
 
 Inside sheets, content is horizontal rows divided by 1px hairlines with 26px / 28px padding. Rows use a fixed numeric gutter (52px, 40px on phones) followed by fractional columns: standards 5 / 3.5 / 3.5, projects number + 5 / 6 + link, experience 4 / 8, certifications and tools two equal columns. Rows collapse to two then one column at 900px to 1000px and 560px.
 
 The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page with 12-column guides right. Under 1100px it stacks; on phones the project-request form moves above the contents list.
 
-Inner pages: a cobalt page head (back link, numeral, h1 on 4 / 8), then a 4 / 8 article grid whose left aside of specifications is sticky below the header.
+Inner pages: a cobalt page head (back link, then the numbered h1 in the 8-column prose track), then a 4 / 8 article grid whose left aside of specifications is sticky below the header.
 
 ## Elevation & Depth
 
@@ -248,7 +242,7 @@ The running header: name (800) and discipline line (mute, hidden under 1100px) l
 Each standard row pairs its description with two figures: **Correct** in cobalt with a check, **Incorrect** in red with a cross. Each is a 4px bar in its colour, an 800 13px uppercase caption with the icon, then a 600 17px ink statement.
 
 ### Divider pages (signature)
-Full-bleed cobalt, 2px ink rule on top, giant numeral and display heading on a 5 / 7 grid. The numeral rises once into view (clip and 24px translate over 0.9s on cubic-bezier(0.16, 1, 0.3, 1)), only when motion is allowed and only for numerals below the first fold; content is visible by default.
+Full-bleed cobalt, 2px ink rule on top, numbered display heading and pale lede on a 5 / 7 grid. No standalone numerals and no entrance motion.
 
 ### Contents list
 Numbered rows (cobalt number, 700 21px title, dotted leader, cobalt arrow, mute description) separated by hairlines. Title text sits on a paper backing so the layout guides stop at the letterforms. A **New** badge (cobalt fill, white 800 11px uppercase, 0.08em) may mark one entry.
@@ -267,7 +261,7 @@ Projects, posts, experience, certifications and tools are all hairline-ruled row
 - **Do** separate rows with 1px hairlines and a fixed numeric gutter (52px, 40px on phones).
 - **Do** set forms as paper frames with a 2px ink border and a black caption bar, even on cobalt.
 - **Do** use the four authored icons (2.25 stroke, square caps) in `currentColor`.
-- **Do** keep motion to colour shifts, the nav bar growing from the left, arrow nudges, and the one-time numeral rise, all on cubic-bezier(0.16, 1, 0.3, 1), and all off under reduced motion.
+- **Do** keep motion to colour shifts, the nav bar growing from the left, and arrow nudges, all on cubic-bezier(0.16, 1, 0.3, 1), and all off under reduced motion.
 
 ### Don't:
 - **Don't** round a corner or add a shadow.

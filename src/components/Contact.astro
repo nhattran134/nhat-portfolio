@@ -5,8 +5,7 @@ import Icon from './Icon.astro';
 <section id="contact" class="on-field contact" data-sec="contact" aria-labelledby="contact-title">
   <div class="wrap grid">
     <div class="intro">
-      <div class="numeral rise num" aria-hidden="true">5</div>
-      <h2 id="contact-title">Contact</h2>
+      <h2 id="contact-title"><span class="num">5</span> Contact</h2>
       <p>A pipeline that needs fixing, a cloud estate to tidy, a release process to set up, or AI agents to put behind proper controls. Tell me what you are working with.</p>
       <ul class="links">
         <li><a href="https://linkedin.com/in/nathantr" target="_blank" rel="noopener noreferrer">LinkedIn <Icon name="arrow" /></a></li>
@@ -56,14 +55,6 @@ import Icon from './Icon.astro';
     gap: 40px;
     padding-block: 40px 64px;
     align-items: end;
-  }
-
-  .numeral {
-    font-weight: 900;
-    font-size: clamp(140px, 17vw, 260px);
-    line-height: 0.74;
-    letter-spacing: -0.06em;
-    margin: 0 0 32px;
   }
 
   h2 {
@@ -144,10 +135,6 @@ import Icon from './Icon.astro';
   @media (max-width: 900px) {
     .grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .numeral {
-      font-size: 120px;
-      margin-bottom: 20px;
     }
   }
 

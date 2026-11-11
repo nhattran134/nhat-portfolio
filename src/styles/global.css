@@ -142,11 +142,10 @@ svg {
   padding-block: 40px 44px;
 }
 
-.divider .numeral {
-  font-weight: 900;
-  font-size: clamp(140px, 17vw, 260px);
-  line-height: 0.74;
-  letter-spacing: -0.06em;
+/* Section numbers sit in the heading, one step quieter than the words. */
+.on-field h1 .num,
+.on-field h2 .num {
+  color: var(--on-field-mute);
 }
 
 .divider h2 {
@@ -431,16 +430,6 @@ svg {
   color: var(--mute);
 }
 
-/* Motion: content is visible by default; script adds .is-pre only when motion is allowed. */
-.rise.is-pre {
-  clip-path: inset(0 0 100% 0);
-  transform: translateY(24px);
-}
-
-.rise {
-  transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -463,8 +452,5 @@ svg {
   .divider .wrap {
     grid-template-columns: minmax(0, 1fr);
     padding-block: 28px 32px;
-  }
-  .divider .numeral {
-    font-size: 120px;
   }
 }

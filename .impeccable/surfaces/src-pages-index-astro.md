@@ -23,9 +23,9 @@ OWN-WORLD: Paper white pages and full-bleed cobalt (#1f3fd1) section divider pag
 
 STORY: In one viewport the visitor sees who this is, the six services as a contents page, and a form to ask for one. Scrolling, each service opens as a spec sheet; projects read as numbered case standards with their pipeline flow; experience is the record; notes are the blog; the page closes on a cobalt divider with the full contact form.
 
-FIRST VIEWPORT: Running header (name, discipline line, numbered section nav). Left 46%: cobalt divider page, "Section 1 / Services" rule, a giant white numeral 1, headline "I design the platforms your teams ship on." and the title line. Right 54%: white page with guides, "1.0 Contents", services 1.1 to 1.6 with dotted leaders and arrows, AI agent platforms marked New, then "Form 1 · Project request" (email, need, Send) as the primary action.
+FIRST VIEWPORT: Running header (name, discipline line, numbered section nav). Left 46%: cobalt divider page, "Section 1 / Services" rule, then at the foot the headline "I design the platforms your teams ship on." and the title line. Right 54%: white page with guides, "1.0 Contents", services 1.1 to 1.6 with dotted leaders and arrows, AI agent platforms marked New, then "Form 1 · Project request" (email, need, Send) as the primary action.
 
-FORM: Graphics standards manual, position 5 of 7 on the grounded list. seed:27180cb894ba363b. Signature interaction: the running header tracks the current section number as you scroll, and section divider numerals slide in once. Motion is restrained and disabled under reduced motion.
+FORM: Graphics standards manual, position 5 of 7 on the grounded list. seed:27180cb894ba363b. Signature interaction: the running header tracks the current section number as you scroll. Section numbers live inside headings ("2 Work"), never as giant standalone numerals (changed at the user's request). Motion is restrained and disabled under reduced motion.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 

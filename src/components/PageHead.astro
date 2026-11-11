@@ -13,9 +13,8 @@ const { n, title, back } = Astro.props;
 <header class="on-field page-head">
   <div class="wrap grid">
     <a class="back" href={back.href}><Icon name="back" /> {back.label}</a>
-    <div class="numeral rise num" aria-hidden="true">{n}</div>
     <div class="titles">
-      <h1>{title}</h1>
+      <h1><span class="num">{n}</span> {title}</h1>
       <slot />
     </div>
   </div>
@@ -52,11 +51,8 @@ const { n, title, back } = Astro.props;
     height: 16px;
   }
 
-  .numeral {
-    font-weight: 900;
-    font-size: clamp(96px, 11vw, 168px);
-    line-height: 0.74;
-    letter-spacing: -0.05em;
+  .titles {
+    grid-column: 2;
   }
 
   h1 {
@@ -79,8 +75,8 @@ const { n, title, back } = Astro.props;
     .grid {
       grid-template-columns: minmax(0, 1fr);
     }
-    .numeral {
-      font-size: 88px;
+    .titles {
+      grid-column: 1;
     }
   }
 </style>

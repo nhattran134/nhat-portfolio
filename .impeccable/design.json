@@ -166,13 +166,9 @@
       }
     },
     "typographyMeta": {
-      "numeral": {
-        "displayName": "Numeral",
-        "purpose": "Giant section number on divider, contact and page-head surfaces; hero 200-400px, page heads 96-168px. Decorative, aria-hidden."
-      },
       "display": {
         "displayName": "Display",
-        "purpose": "Divider and contact headings; hero h1 variant clamp(40px,3.9vw,62px)."
+        "purpose": "Divider and contact headings; hero h1 variant clamp(44px,4.8vw,76px)."
       },
       "headline": {
         "displayName": "Headline",
@@ -224,11 +220,6 @@
         "name": "nav-bar",
         "value": "0.35s",
         "purpose": "Active nav bar scaleX from left."
-      },
-      {
-        "name": "numeral-rise",
-        "value": "0.9s",
-        "purpose": "Once-only clip-path and 24px rise of below-fold numerals; skipped under reduced motion."
       }
     ],
     "breakpoints": [
@@ -315,7 +306,7 @@
       "name": "Divider Page",
       "kind": "custom",
       "refersTo": "divider-band",
-      "description": "Full-bleed cobalt section opener: giant numeral, display heading, pale lede.",
+      "description": "Full-bleed cobalt section opener: numbered display heading and pale lede.",
       "html": "<section class=\"ds-div\"><div class=\"ds-num\" aria-hidden=\"true\">2</div><div><h2>Projects</h2><p>Case standards with their pipeline flow.</p></div></section>",
       "css": ".ds-div{display:grid;grid-template-columns:5fr 7fr;gap:24px 40px;align-items:end;padding:40px 24px 44px;background:var(--field);color:var(--on-field);border-top:2px solid var(--ink);font-family:var(--font)}.ds-num{font-weight:900;font-size:160px;line-height:.74;letter-spacing:-.06em}.ds-div h2{margin:0;font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1.05}.ds-div p{margin:14px 0 0;font-size:19px;line-height:1.45;color:var(--on-field-mute)}"
     },
@@ -345,7 +336,7 @@
       "2px black rules open sections; 1px hairlines separate rows.",
       "Hairline 12-column layout guides drawn on the contents page.",
       "Correct (cobalt, check) and incorrect (red, cross) usage panels.",
-      "One family, Schibsted Grotesk, from 400 to 900; a giant 900 numeral is the signature mark.",
+      "One family, Schibsted Grotesk, from 400 to 900; section numbers sit inside their headings in pale cobalt, never as standalone glyphs.",
       "Square corners everywhere; depth comes only from rules and colour fields."
     ],
     "rules": [
@@ -381,7 +372,7 @@
       "**Do** separate rows with 1px hairlines and a fixed numeric gutter (52px, 40px on phones).",
       "**Do** set forms as paper frames with a 2px ink border and a black caption bar, even on cobalt.",
       "**Do** use the four authored icons (2.25 stroke, square caps) in `currentColor`.",
-      "**Do** keep motion to colour shifts, the nav bar growing from the left, arrow nudges, and the one-time numeral rise, all on cubic-bezier(0.16, 1, 0.3, 1), and all off under reduced motion."
+      "**Do** keep motion to colour shifts, the nav bar growing from the left, and arrow nudges, all on cubic-bezier(0.16, 1, 0.3, 1), and all off under reduced motion."
     ],
     "donts": [
       "**Don't** round a corner or add a shadow.",

@@ -6,8 +6,7 @@ import { services } from '../data/services';
 <section id="services" class="spread" data-sec="services" aria-labelledby="hero-title">
   <div class="on-field cover">
     <div class="cap" aria-hidden="true"><span>Section 1</span><span>Services</span></div>
-    <div class="numeral rise" aria-hidden="true">1</div>
-    <div>
+    <div class="foot">
       <h1 id="hero-title">I design the platforms your teams ship on.</h1>
       <p>Senior Platform Engineer &amp; Release Manager. CI/CD, cloud infrastructure, release process, and now governed AI agent platforms.</p>
     </div>
@@ -83,16 +82,12 @@ import { services } from '../data/services';
     border-bottom: 1px solid var(--on-field-mute);
   }
 
-  .cover .numeral {
-    font-weight: 900;
-    font-size: clamp(200px, 26vw, 400px);
-    line-height: 0.74;
-    letter-spacing: -0.06em;
+  .foot {
     margin-top: auto;
   }
 
   .cover h1 {
-    font-size: clamp(40px, 3.9vw, 62px);
+    font-size: clamp(44px, 4.8vw, 76px);
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -232,9 +227,6 @@ import { services } from '../data/services';
     }
     .cover {
       min-height: 0;
-    }
-    .cover .numeral {
-      font-size: 180px;
     }
   }
 
