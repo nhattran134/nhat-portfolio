@@ -1,53 +1,32 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import PostList from '../../components/PostList.astro';
 import { getCollection } from 'astro:content';
+import { byDate } from '../../data/content';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft).sort(byDate);
 ---
 
-<Base title="Blog | Nhat Tran Minh" description="Articles on CI/CD pipelines, cloud infrastructure, DevOps practices, and platform engineering.">
-  <section class="section">
-    <div class="container">
-      <p class="section-label">Blog</p>
-      <h2 class="section-title">All Posts</h2>
-      <div class="blog-grid">
-        {posts.map((post) => (
-          <a href={`/blog/${post.id}`} class="card blog-card">
-            <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-            <h4>{post.data.title}</h4>
-            <p>{post.data.excerpt}</p>
-            <div class="tag-row">
-              {post.data.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          </a>
-        ))}
+<Base title="Notes | Nathan Tran" description="Notes on CI/CD pipelines, release management, cloud infrastructure and AI agent platforms.">
+  <PageHead n="4" title="Notes" back={{ href: '/#notes', label: 'Home' }}>
+    <p>Write-ups from the work: pipeline patterns, release practice and AI agent platforms.</p>
+  </PageHead>
+  <section class="sheet">
+    <div class="wrap">
+      <div class="sheet-head">
+        <h2 class="h3"><span class="num">4.1–4.{posts.length}</span> All notes</h2>
+        <span>Newest first</span>
       </div>
+      <PostList posts={posts} />
     </div>
   </section>
 </Base>
 
 <style>
-  .blog-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-decoration: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .blog-card time {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .blog-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
+  .h3 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
   }
 </style>

@@ -1,154 +1,150 @@
 ---
-const navLinks = [
-  { href: '/#about', label: 'About' },
-  { href: '/#experience', label: 'Experience' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#services', label: 'Services' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/#contact', label: 'Contact' },
+// Running header: the manual's running head. Script marks the section in view.
+const path = Astro.url.pathname;
+const current = path === '/' ? 'services' : path.startsWith('/projects') ? 'work' : path.startsWith('/blog') ? 'notes' : '';
+const sections = [
+  { id: 'services', n: 1, label: 'Services' },
+  { id: 'work', n: 2, label: 'Work' },
+  { id: 'record', n: 3, label: 'Record' },
+  { id: 'notes', n: 4, label: 'Notes' },
+  { id: 'contact', n: 5, label: 'Contact' },
 ];
 ---
 
-<nav class="nav">
-  <div class="nav-inner container">
-    <a href="/" class="nav-logo">nathan<span class="logo-bracket">[</span>tr<span class="logo-bracket">]</span></a>
-    <ul class="nav-links" data-nav-links>
-      {navLinks.map((link) => (
-        <li><a href={link.href}>{link.label}</a></li>
-      ))}
-    </ul>
-    <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">
-      <span class="hamburger"></span>
-    </button>
+<header class="head">
+  <div class="wrap head-row">
+    <a class="who" href="/">
+      <b>Nathan Tran</b>
+      <span>Platform engineering, release management, AI agent platforms</span>
+    </a>
+    <nav aria-label="Sections">
+      <ol>
+        {sections.map((s) => (
+          <li>
+            <a href={`/#${s.id}`} data-nav={s.id} aria-current={s.id === current ? 'true' : undefined}>
+              <span class="num">{s.n}</span>{s.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
   </div>
-</nav>
+</header>
 
 <style>
-  .nav {
-    position: fixed;
+  .head {
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    z-index: 40;
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
   }
 
-  .nav-inner {
+  .head-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
+    gap: 24px;
+    min-height: var(--head-h);
   }
 
-  .nav-logo {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-heading);
-    letter-spacing: -0.02em;
-    font-family: var(--font-mono);
-  }
-
-  .nav-logo .logo-bracket {
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .nav-links {
+  .who {
     display: flex;
-    gap: 32px;
+    align-items: baseline;
+    gap: 24px;
+    text-decoration: none;
+    min-width: 0;
   }
 
-  .nav-links a {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    transition: color 0.2s;
+  .who b {
+    font-size: 16px;
+    font-weight: 800;
+    white-space: nowrap;
   }
 
-  .nav-links a:hover {
-    color: var(--text-heading);
+  .who span {
+    font-size: 14px;
+    color: var(--mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .nav-links a:global(.nav-active) {
-    color: var(--accent) !important;
+  ol {
+    display: flex;
+    gap: 22px;
+    list-style: none;
   }
 
-  .nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-
-  .hamburger,
-  .hamburger::before,
-  .hamburger::after {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  .hamburger {
+  nav a {
+    display: inline-flex;
+    gap: 6px;
+    align-items: baseline;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
     position: relative;
   }
 
-  .hamburger::before,
-  .hamburger::after {
+  nav a .num {
+    color: var(--mute);
+    font-weight: 500;
+  }
+
+  nav a::after {
     content: '';
     position: absolute;
     left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--field);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .hamburger::before { top: -7px; }
-  .hamburger::after { top: 7px; }
-
-  .nav-toggle[aria-expanded="true"] .hamburger {
-    background: transparent;
+  nav a:hover,
+  nav a[aria-current='true'] {
+    color: var(--field);
   }
 
-  .nav-toggle[aria-expanded="true"] .hamburger::before {
-    top: 0;
-    transform: rotate(45deg);
+  nav a:hover .num,
+  nav a[aria-current='true'] .num {
+    color: var(--field);
   }
 
-  .nav-toggle[aria-expanded="true"] .hamburger::after {
-    top: 0;
-    transform: rotate(-45deg);
+  nav a[aria-current='true']::after {
+    transform: scaleX(1);
   }
 
-  @media (max-width: 900px) {
-    .nav-toggle {
-      display: block;
-    }
-
-    .nav-links {
+  @media (max-width: 1100px) {
+    .who span {
       display: none;
-      position: absolute;
-      top: 64px;
-      left: 0;
-      right: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .head-row {
       flex-direction: column;
+      align-items: stretch;
       gap: 0;
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 8px 0;
+      padding-top: 10px;
     }
-
-    .nav-links:global(.open) {
-      display: flex;
+    nav {
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-inline: calc(var(--gutter) * -1);
+      padding-inline: var(--gutter);
     }
-
-    .nav-links li a {
-      display: block;
-      padding: 12px 24px;
+    ol {
+      gap: 14px;
+    }
+    nav a {
+      padding: 10px 0 12px;
+      font-size: 14px;
     }
   }
 </style>

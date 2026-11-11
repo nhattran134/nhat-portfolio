@@ -1,14 +1,15 @@
 ---
+import Divider from './Divider.astro';
+
 const experience = [
   {
     company: 'Datum Consulting',
-    period: 'Oct 2024 - Present',
+    period: 'Oct 2024–present',
     location: 'Ho Chi Minh City',
-    color: '#14b8a6',
     roles: [
       {
         title: 'Release Manager',
-        period: '2025 - Present',
+        period: '2025–present',
         bullets: [
           'Release planning and CAB coordination across multi-environment pipelines',
           'Rollback management and post-deployment monitoring for enterprise platforms',
@@ -17,146 +18,244 @@ const experience = [
       },
       {
         title: 'Senior Platform Engineer',
-        period: '2024 - Present',
+        period: '2024–present',
         bullets: [
+          'Designed a governed AI agent platform on EKS: agents, MCP tools and model calls behind identity-checking gateways',
           'Designed CI/CD pipeline blueprints for large .NET monorepos using GitHub Actions',
           'Built reusable Java Maven microservice pipelines with Helm deployments to Kubernetes',
-          'Created multi-cloud Terraform pipeline blueprints supporting AWS, Azure, and GCP with OIDC auth',
+          'Created multi-cloud Terraform pipeline blueprints for AWS, Azure and GCP with OIDC auth',
           'Implemented per-component versioning with GitOps deployment workflows',
-          'Built security scanning gates integrating Checkov, Trivy, and OPA',
-          'Set up AWS Landing Zones, FinOps dashboards, and Terraform pipelines',
+          'Built security scanning gates with Checkov, Trivy and OPA',
+          'Set up AWS landing zones, FinOps dashboards and Terraform pipelines',
         ],
       },
     ],
   },
   {
     company: 'FPT Software',
-    period: '2020 - 2024',
+    period: '2020–2024',
     location: 'Ho Chi Minh City',
-    color: '#8b5cf6',
     roles: [
       {
         title: 'DevOps / SRE',
-        period: '2020 - 2024',
+        period: '2020–2024',
         bullets: [
           'Terraform infrastructure for serverless and data pipelines on AWS',
           'Azure IoT platform infrastructure with Terraform and ARM templates',
           'CI/CD pipelines with Jenkins and GitHub Actions',
-          'Production SRE, incident management, and monitoring',
+          'Production SRE, incident management and monitoring',
         ],
       },
     ],
   },
 ];
+
+const certs = [
+  ['AWS Solutions Architect', 'Professional'],
+  ['AWS DevOps Engineer', 'Professional'],
+  ['AWS Developer', 'Associate'],
+  ['GCP Cloud Developer', 'Professional'],
+  ['GCP Solutions Architect', 'Professional'],
+  ['MongoDB Developer', 'Associate'],
+  ['Scrum Master II', 'PSM II'],
+];
+
+const tools = [
+  ['Plan & code', ['Python', 'Go', 'Bash', 'Jira', 'Confluence', 'Notion']],
+  ['Build & test', ['GitHub Actions', 'GitLab CI', 'Jenkins', 'SonarQube', 'Maven']],
+  ['Release & deploy', ['Terraform', 'Argo CD', 'Helm', 'AWS', 'Azure', 'GCP']],
+  ['Operate & monitor', ['Docker', 'Kubernetes', 'Linux', 'Grafana', 'Prometheus', 'Datadog']],
+  ['AI platforms', ['kagent', 'agentgateway', 'LiteLLM', 'Amazon Bedrock', 'Langfuse', 'MCP']],
+] as const;
 ---
 
-<section id="experience" class="section">
-  <div class="container">
-    <p class="section-label reveal">Experience</p>
-    <h2 class="section-title reveal stagger-1">Where I've Worked</h2>
-    <div class="timeline reveal stagger-2">
-      {experience.map((exp) => (
-        <div class="timeline-item" style={`--company-color: ${exp.color}`}>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-company">
-            <h3>{exp.company}</h3>
-            <span class="timeline-meta">{exp.period} &middot; {exp.location}</span>
-          </div>
-          <div class="timeline-roles">
-            {exp.roles.map((role) => (
-              <div class="timeline-role">
-                <h4>{role.title}</h4>
-                <span class="timeline-period">{role.period}</span>
-                <ul>
-                  {role.bullets.map((bullet) => (
-                    <li>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+<Divider id="record" n={3} title="Record">
+  More than five years in DevOps, platform engineering and release management, from SRE on call to running enterprise releases.
+</Divider>
+
+<section class="sheet" aria-label="Experience">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h3><span class="num">3.1</span> Experience</h3>
+      <span>Newest first</span>
+    </div>
+    {experience.map((job) => (
+      <article class="job">
+        <header>
+          <h4>{job.company}</h4>
+          <p class="num">{job.period}</p>
+          <p>{job.location}</p>
+        </header>
+        <div class="roles">
+          {job.roles.map((r) => (
+            <div class="role">
+              <h5>{r.title} <span class="num">{r.period}</span></h5>
+              <ul>{r.bullets.map((b) => <li>{b}</li>)}</ul>
+            </div>
+          ))}
         </div>
-      ))}
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="sheet" aria-label="Certifications and tools">
+  <div class="wrap two">
+    <div>
+      <div class="sheet-head">
+        <h3><span class="num">3.2</span> Certifications</h3>
+        <span class="num">{certs.length}</span>
+      </div>
+      <table class="certs">
+        <tbody>
+          {certs.map(([name, level]) => (
+            <tr>
+              <th scope="row">{name}</th>
+              <td>{level}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="sheet-head">
+        <h3><span class="num">3.3</span> Tools</h3>
+        <span>By pipeline stage</span>
+      </div>
+      <dl class="tools">
+        {tools.map(([stage, list]) => (
+          <div>
+            <dt>{stage}</dt>
+            <dd><ul class="tags">{list.map((t) => <li>{t}</li>)}</ul></dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  .timeline {
-    position: relative;
-    padding-left: 32px;
-    margin-top: 40px;
+  .job {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: 16px 28px;
+    padding: 26px 0 30px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border);
+  .job h4 {
+    font-size: 26px;
+    font-weight: 800;
   }
 
-  .timeline-item {
-    position: relative;
-    margin-bottom: 48px;
+  .job header p {
+    color: var(--mute);
+    margin-top: 4px;
   }
 
-  .timeline-item:last-child {
-    margin-bottom: 0;
+  .job header p.num {
+    color: var(--ink);
+    font-weight: 700;
+    margin-top: 10px;
   }
 
-  .timeline-dot {
-    position: absolute;
-    left: -32px;
-    top: 6px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--company-color);
-    border: 3px solid var(--bg);
-    box-shadow: 0 0 0 2px var(--company-color);
+  .role + .role {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
   }
 
-  .timeline-company h3 {
-    margin-bottom: 2px;
-  }
-
-  .timeline-meta {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .timeline-roles {
-    margin-top: 20px;
+  .role h5 {
+    font-size: 19px;
+    font-weight: 700;
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .timeline-role h4 {
-    font-size: 1.05rem;
-    margin-bottom: 2px;
-    border-left: 3px solid var(--company-color);
-    padding-left: 8px;
+  .role h5 .num {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--mute);
+    white-space: nowrap;
   }
 
-  .timeline-period {
-    font-size: 0.8rem;
-    color: var(--company-color);
+  .role ul {
+    margin-top: 10px;
+    padding-left: 1.1em;
+    max-width: 70ch;
   }
 
-  .timeline-role ul {
-    margin-top: 8px;
-    padding-left: 18px;
-    list-style: disc;
+  .role li + li {
+    margin-top: 4px;
   }
 
-  .timeline-role li {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 4px;
+  .role li::marker {
+    color: var(--field);
+  }
+
+  .two {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .certs {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .certs td,
+  .certs th {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+  .certs th {
+    font-weight: 700;
+    padding-right: 16px;
+  }
+
+  .certs td:last-child {
+    color: var(--mute);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .tools > div {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tools dt {
+    font-weight: 700;
+  }
+
+  .tools .tags {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .job,
+    .two {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .two {
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .tools > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
   }
 </style>

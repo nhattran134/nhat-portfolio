@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = 'Nhat Tran Minh | Platform Engineer & Release Manager',
-  description = 'Senior Platform Engineer specializing in CI/CD pipelines, cloud infrastructure, and release management. AWS & GCP certified.',
+  title = 'Nathan Tran | Platform Engineer & Release Manager',
+  description = 'Senior Platform Engineer and Release Manager: CI/CD pipelines, cloud infrastructure, release management and governed AI agent platforms. AWS and GCP certified.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,67 +21,57 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1f3fd1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="https://nathantr.com/og-image.png" />
-
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://nathantr.com/og-image.png" />
 
-    <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Nhat Tran Minh",
-      "url": "https://nathantr.com",
-      "jobTitle": "Senior Platform Engineer & Release Manager",
-      "sameAs": [
-        "https://linkedin.com/in/nathantr",
-        "https://github.com/nhattran134"
-      ],
-      "knowsAbout": ["CI/CD", "DevOps", "AWS", "Azure", "GCP", "Terraform", "Kubernetes", "GitHub Actions"]
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Nathan Tran',
+      alternateName: 'Nhat Tran Minh',
+      url: 'https://nathantr.com',
+      jobTitle: 'Senior Platform Engineer & Release Manager',
+      sameAs: ['https://linkedin.com/in/nathantr', 'https://github.com/nhattran134'],
+      knowsAbout: ['CI/CD', 'Release management', 'AWS', 'Azure', 'GCP', 'Terraform', 'Kubernetes', 'GitHub Actions', 'AI agent platforms'],
     })} />
 
-    <!-- Google Fonts: Inter 300-700 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <div class="dot-grid" id="dot-grid" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to content</a>
     <Nav />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer />
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-    <script src="../scripts/main.js"></script>
-    <div class="cursor-dot" id="cursor-dot"></div>
+    <script>
+      import '../scripts/site.ts';
+    </script>
     <script is:inline>
       if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", function(user) {
+        window.netlifyIdentity.on('init', function (user) {
           if (!user) {
-            window.netlifyIdentity.on("login", function() {
-              document.location.href = "/admin/";
+            window.netlifyIdentity.on('login', function () {
+              document.location.href = '/admin/';
             });
           }
         });

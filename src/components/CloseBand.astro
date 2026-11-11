@@ -1,0 +1,45 @@
+---
+// Closes inner pages with the way to get in touch.
+import Icon from './Icon.astro';
+---
+
+<section class="on-field close" aria-labelledby="close-title">
+  <div class="wrap row">
+    <div>
+      <h2 id="close-title"><span class="num">5</span> Contact</h2>
+      <p>Working on something like this? Tell me what you have and where it hurts.</p>
+    </div>
+    <a class="btn" href="/#contact">Start a project <Icon name="arrow" /></a>
+  </div>
+</section>
+
+<style>
+  .close {
+    border-top: 2px solid var(--ink);
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px 40px;
+    flex-wrap: wrap;
+    padding-block: 36px 44px;
+  }
+
+  h2 {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    display: flex;
+    gap: 0.3em;
+    align-items: baseline;
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 19px;
+    max-width: 44ch;
+    color: var(--on-field-mute);
+  }
+</style>

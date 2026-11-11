@@ -1,80 +1,109 @@
 ---
 import { getCollection } from 'astro:content';
+import Divider from './Divider.astro';
+import Flow from './Flow.astro';
+import Icon from './Icon.astro';
+import { byDate } from '../data/content';
 
-const projects = (await getCollection('projects')).sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+const projects = (await getCollection('projects')).sort(byDate);
 ---
 
-<section id="projects" class="section">
-  <div class="container">
-    <p class="section-label reveal">Projects</p>
-    <h2 class="section-title reveal">Things I've Built</h2>
-    <div class="projects-grid">
-      {projects.map((project) => (
-        <a href={`/projects/${project.id}`} class="card reveal project-card">
-          <h4>{project.data.title}</h4>
-          <p>{project.data.description}</p>
-          <div class="tag-row">
-            {project.data.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </div>
-        </a>
-      ))}
+<Divider id="work" n={2} title="Work">
+  Pipelines, cloud platforms and AI agent platforms built for enterprise teams. Client names left out.
+</Divider>
+
+<section class="sheet" aria-label="Projects">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h3><span class="num">2.1–2.{projects.length}</span> Projects</h3>
+      <span>Newest first</span>
     </div>
+    <ol class="projects">
+      {projects.map((p, i) => (
+        <li class:list={{ 'no-flow': !p.data.flow }}>
+          <span class="n num">2.{i + 1}</span>
+          <div class="body">
+            <h3><a href={`/projects/${p.id}`}>{p.data.title}</a></h3>
+            <p>{p.data.description}</p>
+            <ul class="tags">{p.data.tags.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          {p.data.flow && <Flow steps={p.data.flow} label={`Figure 2.${i + 1} · Flow`} />}
+          <a class="link-arrow more" href={`/projects/${p.id}`} aria-label={`Read ${p.data.title}`}>Read <Icon name="arrow" /></a>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
 <style>
-  .projects-grid {
+  .projects {
+    list-style: none;
+  }
+
+  .projects > li {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 32px;
+    grid-template-columns: 52px minmax(0, 5fr) minmax(0, 6fr) auto;
+    gap: 12px 28px;
+    align-items: start;
+    padding: 26px 0 28px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  .n {
+    font-weight: 700;
+    color: var(--field);
+    padding-top: 6px;
+  }
+
+  .body h3 {
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  h3 a {
     text-decoration: none;
-    position: relative;
-    padding-left: 28px;
   }
 
-  .project-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 12px;
-    bottom: 12px;
-    width: 3px;
-    border-radius: 3px;
-    background: linear-gradient(to bottom, #14b8a6, #8b5cf6);
+  h3 a:hover {
+    color: var(--field);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 
-  .project-card h4 {
-    transition: color 0.2s;
+  .body p {
+    margin: 8px 0 12px;
+    color: var(--mute);
+    max-width: 56ch;
   }
 
-  .project-card:hover h4 {
-    color: var(--accent);
+  .more {
+    grid-column: 4;
+    padding-top: 8px;
   }
 
-  .project-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
+  .no-flow .body {
+    grid-column: 2 / 4;
   }
 
-  .project-card :global(.tag-row) {
-    margin-top: auto;
+  .no-flow .body p {
+    max-width: 72ch;
   }
 
-  @media (max-width: 900px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 1000px) {
+    .projects > li {
+      grid-template-columns: 52px minmax(0, 1fr);
+    }
+    .projects > li > :global(*:nth-child(n + 3)) {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .projects > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .projects > li > :global(*) {
+      grid-column: 1 !important;
     }
   }
 </style>

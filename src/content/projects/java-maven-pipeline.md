@@ -3,6 +3,7 @@ title: 'Java Maven Microservice Pipeline'
 description: 'CI/CD pipeline for Java Maven microservices with container builds, Helm deployments, and SonarQube quality gates.'
 tags: ['GitHub Actions', 'Java', 'Maven', 'Kubernetes', 'Helm']
 date: '2026-04-01'
+flow: ['Build', 'Test', 'SonarQube', 'Docker Build', 'Trivy Scan', 'Push to Registry', 'Helm Deploy']
 ---
 
 ## Overview
@@ -17,7 +18,3 @@ Built a reusable CI/CD pipeline for Java Maven microservices, covering build, te
 - Trivy container image scanning before registry push
 - Helm-based deployments to Kubernetes with environment promotion
 - Artifact versioning tied to Git tags and Maven release plugin
-
-## Pipeline Flow
-
-Build → Test → SonarQube → Docker Build → Trivy Scan → Push to Registry → Helm Deploy

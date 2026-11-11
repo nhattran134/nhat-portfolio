@@ -3,6 +3,7 @@ title: 'Multi-Cloud Terraform Pipeline'
 description: 'Reusable Terraform CI/CD pipeline with multiple workflows and composite actions supporting AWS, Azure, and GCP.'
 tags: ['Terraform', 'GitHub Actions', 'AWS', 'Azure', 'GCP']
 date: '2026-02-01'
+flow: ['Discover', 'Resolve Backend', 'Validate', 'Plan', 'Scan', 'Apply']
 ---
 
 ## Overview
@@ -16,7 +17,3 @@ A reusable Terraform pipeline blueprint with validate, plan, scan, and apply sta
 - Integrated security scanning for compliance and misconfigurations
 - Environment protection rules with approval gates
 - Semantic versioning for consumers to pin to stable releases
-
-## Pipeline Flow
-
-Discover → Resolve Backend → Validate → Plan → Scan → Apply

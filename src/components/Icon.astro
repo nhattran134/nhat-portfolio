@@ -1,0 +1,17 @@
+---
+// Drawn icons, one 2px stroke. Decorative: callers label the control.
+interface Props {
+  name: 'arrow' | 'check' | 'cross' | 'back';
+}
+const { name } = Astro.props;
+const paths = {
+  arrow: 'M4 12h15M13 6l6 6-6 6',
+  back: 'M20 12H5M11 6l-6 6 6 6',
+  check: 'M4 12.5l5 5L20 6.5',
+  cross: 'M6 6l12 12M18 6L6 18',
+};
+---
+
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square" aria-hidden="true">
+  <path d={paths[name]} />
+</svg>

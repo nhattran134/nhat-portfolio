@@ -1,66 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
+import Divider from './Divider.astro';
+import PostList from './PostList.astro';
+import Icon from './Icon.astro';
+import { byDate } from '../data/content';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, 3);
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft).sort(byDate);
 ---
 
-<section id="blog" class="section">
-  <div class="container">
-    <p class="section-label reveal">Blog</p>
-    <h2 class="section-title reveal">Latest Posts</h2>
-    <div class="blog-grid">
-      {posts.map((post) => (
-        <a href={`/blog/${post.id}`} class="card reveal blog-card">
-          <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          <h4>{post.data.title}</h4>
-          <p>{post.data.excerpt}</p>
-          <div class="tag-row">
-            {post.data.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </div>
-        </a>
-      ))}
+<Divider id="notes" n={4} title="Notes">
+  Write-ups from the work: pipeline patterns, release practice and AI agent platforms.
+</Divider>
+
+<section class="sheet" aria-label="Latest notes">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h3><span class="num">4.1–4.{Math.min(posts.length, 3)}</span> Latest</h3>
+      <a class="link-arrow" href="/blog">All notes <Icon name="arrow" /></a>
     </div>
-    <div class="blog-more reveal">
-      <a href="/blog" class="btn btn-outline">View All Posts</a>
-    </div>
+    <PostList posts={posts.slice(0, 3)} />
   </div>
 </section>
-
-<style>
-  .blog-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 32px;
-  }
-
-  .blog-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-decoration: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .blog-card time {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .blog-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  .blog-more {
-    margin-top: 32px;
-    text-align: center;
-  }
-</style>

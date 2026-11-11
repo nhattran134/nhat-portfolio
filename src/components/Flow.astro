@@ -1,0 +1,74 @@
+---
+// A project's pipeline as a captioned figure: one column per stage.
+interface Props {
+  steps: string[];
+  label: string;
+  compact?: boolean; // narrow columns: two balanced rows
+}
+const { steps, label, compact = false } = Astro.props;
+const cols = compact ? Math.ceil(steps.length / 2) : steps.length;
+---
+
+<figure class="flow" style={`--cols: ${cols}; --half: ${Math.ceil(steps.length / 2)}`}>
+  <figcaption>{label}</figcaption>
+  <ol>
+    {steps.map((s, i) => (
+      <li><span class="num">{String(i + 1).padStart(2, '0')}</span>{s}</li>
+    ))}
+  </ol>
+</figure>
+
+<style>
+  .flow figcaption {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    margin-bottom: 14px;
+  }
+
+  ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    row-gap: 16px;
+  }
+
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 6px 0 0;
+    border-top: 2px solid var(--ink);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: var(--field);
+  }
+
+  li .num {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mute);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 700px) {
+    ol {
+      grid-template-columns: repeat(var(--half), minmax(0, 1fr));
+    }
+  }
+</style>
