@@ -34,7 +34,7 @@ const cols = compact ? Math.ceil(steps.length / 2) : steps.length;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-    row-gap: 16px;
+    gap: 16px;
   }
 
   li {
@@ -42,7 +42,7 @@ const cols = compact ? Math.ceil(steps.length / 2) : steps.length;
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 10px 6px 0 0;
+    padding: 10px 0 0;
     border-top: 2px solid var(--ink);
     font-size: 14px;
     font-weight: 700;

@@ -128,6 +128,16 @@ import { services } from '../data/services';
     list-style: none;
   }
 
+  /* Guides stop at the letterforms: text runs sit on paper. */
+  .n,
+  .tt,
+  .d {
+    justify-self: start;
+    background: var(--paper);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
   .toc a {
     display: grid;
     grid-template-columns: 52px minmax(0, 1fr);
