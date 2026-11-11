@@ -48,10 +48,11 @@ document.querySelectorAll<HTMLFormElement>('form[data-ajax]').forEach((form) => 
       if (!res.ok) throw new Error(String(res.status));
       form.reset();
       status.dataset.state = 'ok';
-      status.textContent = 'Sent. I will reply by email.';
+      status.textContent = 'Sent. I will reply to the email address you gave.';
     } catch {
       status.dataset.state = 'error';
-      status.textContent = 'That did not go through. Try again, or message me on LinkedIn.';
+      const li = Object.assign(document.createElement('a'), { href: 'https://linkedin.com/in/nathantr', textContent: 'message me on LinkedIn' });
+      status.replaceChildren('That did not go through. Try again, or ', li, '.');
     } finally {
       status.hidden = false;
       button.disabled = false;

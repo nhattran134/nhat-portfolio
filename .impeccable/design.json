@@ -188,7 +188,7 @@
       },
       "prose": {
         "displayName": "Prose",
-        "purpose": "Long-form posts and project pages, 68ch."
+        "purpose": "Long-form posts and project pages, 62ch."
       },
       "sheet-label": {
         "displayName": "Sheet Label",
@@ -284,7 +284,7 @@
       "refersTo": "input-field",
       "description": "A form printed in the manual: ink frame, black caption bar, underlined fields.",
       "html": "<form class=\"ds-form\"><div class=\"ds-cap\"><span>Form 1 · Project request</span><span>Goes straight to my inbox</span></div><label class=\"ds-fld\">Your email<input type=\"email\" placeholder=\"you@company.com\"></label></form>",
-      "css": ".ds-form{border:2px solid var(--ink);background:var(--paper);color:var(--ink);max-width:420px}.ds-cap{display:flex;justify-content:space-between;gap:12px;padding:9px 14px;background:var(--ink);color:var(--paper);font:700 13px var(--font);letter-spacing:.04em;text-transform:uppercase}.ds-fld{display:flex;flex-direction:column;gap:6px;padding:12px 14px 14px;font:700 13px var(--font);letter-spacing:.04em;text-transform:uppercase}.ds-fld input{font:500 17px/1.4 var(--font);letter-spacing:0;text-transform:none;color:var(--ink);background:transparent;border:0;border-bottom:1px solid #a9adb7;border-radius:0;padding:6px 0}.ds-fld input::placeholder{color:#6e717a}.ds-fld input:focus{outline:none;border-bottom:2px solid var(--field);margin-bottom:-1px}"
+      "css": ".ds-form{border:2px solid var(--ink);background:var(--paper);color:var(--ink);max-width:420px}.ds-cap{display:flex;justify-content:space-between;gap:12px;padding:9px 14px;background:var(--ink);color:var(--paper);font:700 13px var(--font);letter-spacing:.04em;text-transform:uppercase}.ds-fld{display:flex;flex-direction:column;gap:6px;padding:12px 14px 14px;font:700 13px var(--font);letter-spacing:.04em;text-transform:uppercase}.ds-fld input{font:500 17px/1.4 var(--font);letter-spacing:0;text-transform:none;color:var(--ink);background:transparent;border:0;border-bottom:1px solid #868a93;border-radius:0;padding:6px 0}.ds-fld input::placeholder{color:#6e717a}.ds-fld input:focus{outline:none;border-bottom:2px solid var(--field);margin-bottom:-1px}"
     },
     {
       "name": "Running Header Nav",

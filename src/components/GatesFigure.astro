@@ -1,0 +1,185 @@
+---
+// Figure 1.0: the same release gates for a team's change and a governed agent,
+// against what a typical agent setup skips. tone="field" sits on cobalt, "paper" on white.
+import Icon from './Icon.astro';
+
+interface Props {
+  tone: 'field' | 'paper';
+  class?: string;
+}
+const { tone, class: cls } = Astro.props;
+
+// [gate, note, typical agent setup passes?]
+const gates: [string, string, boolean][] = [
+  ['Build & test', 'Every commit', true],
+  ['Security scan', 'Trivy, Checkov, OPA', true],
+  ['Identity check', 'A named person or workload', false],
+  ['Approval', 'Code owners or CAB', false],
+  ['Release', 'Environment by environment, rollback ready', true],
+];
+---
+
+<figure class:list={['gates', `tone-${tone}`, cls]}>
+  <figcaption>Figure 1.0 · Same gates for people and agents</figcaption>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Gate</th>
+        <th scope="col">Your team</th>
+        <th scope="col">Agent, governed</th>
+        <th scope="col">Agent, typical setup</th>
+      </tr>
+    </thead>
+    <tbody>
+      {gates.map(([gate, note, typical]) => (
+        <tr>
+          <th scope="row">{gate}<span>{note}</span></th>
+          <td><Icon name="check" /><span class="vh">Passes</span></td>
+          <td><Icon name="check" /><span class="vh">Passes</span></td>
+          <td>
+            {typical
+              ? <><Icon name="check" /><span class="vh">Passes</span></>
+              : <span class="skipped"><Icon name="cross" /><span class="vh">Skipped</span></span>}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</figure>
+
+<style>
+  figcaption {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid currentColor;
+  }
+
+  thead th {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 6px 4px;
+    width: 17%;
+    line-height: 1.25;
+  }
+
+  thead th:first-child {
+    text-align: left;
+    width: auto;
+  }
+
+  tbody th,
+  td {
+    padding: 7px 0;
+  }
+
+  tbody th {
+    text-align: left;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  tbody th span {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  td :global(svg) {
+    width: 20px;
+    height: 20px;
+    margin-inline: auto;
+  }
+
+  /* Skipped gate: a red cross on a paper square, legible on cobalt and on white. */
+  .skipped {
+    display: flex;
+    width: 26px;
+    height: 26px;
+    margin-inline: auto;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    color: var(--no);
+    border: 1px solid var(--no);
+  }
+
+  .skipped :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* On cobalt */
+  .tone-field {
+    color: var(--on-field);
+  }
+
+  .tone-field figcaption {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .tone-field thead th,
+  .tone-field tbody th span {
+    color: var(--on-field-mute);
+  }
+
+  .tone-field tbody th,
+  .tone-field td {
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  /* On paper */
+  .tone-paper {
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  .tone-paper figcaption {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .tone-paper thead th,
+  .tone-paper tbody th span {
+    color: var(--mute);
+  }
+
+  .tone-paper tbody th,
+  .tone-paper td {
+    border-top: 1px solid var(--line);
+  }
+
+  .tone-paper td :global(svg) {
+    color: var(--field);
+  }
+
+  .tone-paper .skipped :global(svg) {
+    color: var(--no);
+  }
+
+  @media (max-width: 560px) {
+    tbody th {
+      font-size: 15px;
+    }
+    tbody th span {
+      display: none;
+    }
+    thead th {
+      font-size: 11px;
+      letter-spacing: 0.02em;
+    }
+  }
+</style>

@@ -18,7 +18,7 @@ const posts = (await getCollection('blog')).filter((p) => !p.data.draft).sort(by
         <h2 class="h3"><span class="num">4.1–4.{posts.length}</span> All notes</h2>
         <span>Newest first</span>
       </div>
-      <PostList posts={posts} />
+      <PostList posts={posts} level={3} />
     </div>
   </section>
 </Base>

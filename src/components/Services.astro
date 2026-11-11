@@ -1,6 +1,16 @@
 ---
+import { getCollection } from 'astro:content';
 import Icon from './Icon.astro';
 import { services } from '../data/services';
+import { byDate } from '../data/content';
+
+// Number projects the way the Work section does (newest first), so "2.4" matches.
+const projects = (await getCollection('projects')).sort(byDate);
+const ref = (id: string) => {
+  const i = projects.findIndex((p) => p.id === id);
+  if (i < 0) throw new Error(`services.ts: unknown project id "${id}"`);
+  return { n: `2.${i + 1}`, title: projects[i].data.title, href: `/projects/${id}` };
+};
 ---
 
 <section class="sheet" aria-labelledby="standards-title">
@@ -14,7 +24,15 @@ import { services } from '../data/services';
         <li id={`standard-1-${i + 1}`}>
           <div class="what">
             <h3><span class="num">1.{i + 1}</span> {s.title}</h3>
-            <p>{s.desc}</p>
+            {s.proof ? (
+              <ul class="proof" aria-label="Proven in">
+                {s.proof.map(ref).map((r) => (
+                  <li><a class="link-arrow" href={r.href}><span class="num">{r.n}</span> {r.title} <Icon name="arrow" /></a></li>
+                ))}
+              </ul>
+            ) : (
+              <p>{s.desc}</p>
+            )}
           </div>
           <figure class="use ok">
             <figcaption><Icon name="check" /> Correct</figcaption>
@@ -41,7 +59,7 @@ import { services } from '../data/services';
     list-style: none;
   }
 
-  .standards li {
+  .standards > li {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 3.5fr) minmax(0, 3.5fr);
     gap: 28px;
@@ -69,6 +87,30 @@ import { services } from '../data/services';
     color: var(--mute);
     max-width: 52ch;
     padding-left: calc(2.4em * 16 / 17 + 14px);
+  }
+
+  .proof {
+    list-style: none;
+    margin-top: 10px;
+    padding-left: calc(2.4em * 16 / 17 + 14px);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .proof::before {
+    content: 'Proven in';
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  .proof .num {
+    color: var(--mute);
+    font-weight: 600;
   }
 
   .use {
@@ -108,21 +150,30 @@ import { services } from '../data/services';
   }
 
   @media (max-width: 900px) {
-    .standards li {
+    .standards > li {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 18px 20px;
     }
     .what {
       grid-column: 1 / -1;
     }
-    .what p {
+    .what p,
+    .proof {
       padding-left: 0;
     }
   }
 
+  /* Phones: panels stay side by side so the seven standards take half the scroll. */
   @media (max-width: 560px) {
-    .standards li {
-      grid-template-columns: minmax(0, 1fr);
+    .standards > li {
+      gap: 14px 14px;
+      padding: 22px 0 24px;
+    }
+    .what h3 {
+      font-size: 21px;
+    }
+    .use p {
+      font-size: 15px;
     }
   }
 </style>

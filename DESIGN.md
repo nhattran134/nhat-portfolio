@@ -12,7 +12,7 @@ colors:
   on-field-mute: "#d5dcfb"
   no: "#c8321a"
   guide: "rgba(31, 63, 209, 0.13)"
-  input-rule: "#a9adb7"
+  input-rule: "#868a93"
   placeholder: "#6e717a"
   leader: "#b4b8c2"
   code-wash: "#eef0f7"
@@ -62,6 +62,46 @@ typography:
     fontWeight: 700
     lineHeight: 1.55
     letterSpacing: "0.04em"
+  hero:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(44px, 4.8vw, 76px)"
+    fontWeight: 800
+    lineHeight: 1
+  close:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(36px, 4vw, 56px)"
+    fontWeight: 800
+    lineHeight: 1.05
+  post-title:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "24px"
+    fontWeight: 800
+    lineHeight: 1.05
+  row-title:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "21px"
+    fontWeight: 700
+    lineHeight: 1.15
+  ui:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "16px"
+    fontWeight: 700
+    lineHeight: 1.3
+  small:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "14px"
+    fontWeight: 500
+    lineHeight: 1.4
+  micro:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "12px"
+    fontWeight: 700
+    lineHeight: 1.3
+  badge:
+    fontFamily: "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "11px"
+    fontWeight: 800
+    lineHeight: 1.2
 rounded:
   none: "0px"
 spacing:
@@ -124,7 +164,7 @@ components:
 
 **Creative North Star: "The Standards Manual"**
 
-The site is set like a corporate graphics standards manual. White paper pages hold the content; full-bleed cobalt divider pages open each numbered part. Everything is numbered (1.0, 1.1 to 1.6, 2.1, 3.1, 4.1), every section sits under a 2px black rule, and the work is stated as standards with correct and incorrect usage beside them. Black ink, one grotesk, square corners, no shadows.
+The site is set like a corporate graphics standards manual. White paper pages hold the content; full-bleed cobalt divider pages open each numbered part. Everything is numbered (1.0, 1.1 to 1.7, 2.1, 3.1, 4.1), every section sits under a 2px black rule, and the work is stated as standards with correct and incorrect usage beside them. Black ink, one grotesk, square corners, no shadows.
 
 Density is that of a printed reference: long horizontal rows separated by 1px hairlines, a numeric gutter on the left, text that runs wide but stops at a measure. Colour is almost binary: paper and ink carry the pages, cobalt is the only accent and is used either as a whole surface (divider pages, the hero cover, the closing contact page) or as small marks (section numbers, markers, links, the active nav rule). Red appears only as the "incorrect" signal.
 
@@ -178,9 +218,10 @@ A two-ink manual: black on white, with one saturated cobalt used as surface or m
 - **Headline** (800, clamp(36px, 4.4vw, 64px), 1.02): inner page h1 on blog posts and project pages, max 20ch. The close band uses clamp(36px, 4vw, 56px).
 - **Title** (800, 26px): a standard, project, or employer row. Post titles 24px; prose h2 30px with a 2px ink rule above it; role titles and prose h3 19 to 22px at 700.
 - **Lede** (400, 19px, 1.45): the line under a divider or page heading, in pale cobalt, 36 to 52ch.
-- **Body** (400, 17px, 1.55): default. Prose runs 18px / 1.65 at 68ch.
+- **Body** (400, 17px, 1.55): default. Prose runs 18px / 1.65 at 62ch (about 70 characters in this face).
 - **Sheet label** (700, 15px, 0 tracking): the numbered sheet heading ("3.1 Experience") and the cobalt row numbers.
-- **Caption** (700, 13px, 0.04em, uppercase): form caption bars, field labels, flow figure captions. Usage-panel captions run 800 at 0.06em; aside definition terms 12px 800.
+- **Caption** (700, 13px, 0.04em, uppercase): form caption bars and field labels. Figure captions (flow figures, Figure 1.0) and table heads run 12px.
+- **Small steps:** ui 16px (name, buttons, tool tags, standard numbers), small 14px (tags, figure notes, footer, discipline line, phone nav), micro 12px (figure captions, aside terms, step numbers), badge 11px (New); row titles 21px, post titles 24px, close-band heading clamp(36px, 4vw, 56px), hero h1 clamp(44px, 4.8vw, 76px). Usage-panel captions run 800 at 0.06em; aside definition terms 12px 800.
 
 ### Named Rules
 **The Every Heading Is Numbered Rule.** A section heading, a sheet heading and a list row carry their manual number (2.3, 4.1) in cobalt or mute. A heading without a number is a page title, not a section.
@@ -195,7 +236,7 @@ Pages are a stack of **dividers** and **sheets**. A divider is a full-bleed coba
 
 Inside sheets, content is horizontal rows divided by 1px hairlines with 26px / 28px padding. Rows use a fixed numeric gutter (52px, 40px on phones) followed by fractional columns: standards 5 / 3.5 / 3.5, projects number + 5 / 6 + link, experience 4 / 8, certifications and tools two equal columns. Rows collapse to two then one column at 900px to 1000px and 560px.
 
-The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page with 12-column guides right. The cover reads top to bottom: caption rule, h1 and lede, then Figure 1.0 anchored at the foot, a table of release gates (rows) against "your team's change" and "an agent's change" (columns), every cell a white check, with a paper caption bar, a 2px white top rule and 1px translucent white row rules. The figure is hidden once the spread stacks (under 1100px) so the request form stays high. Under 1100px it stacks; on phones the project-request form moves above the contents list.
+The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page with 12-column guides right. The cover reads top to bottom: caption rule, h1 and lede, then Figure 1.0 anchored at the foot. Figure 1.0 is a table of five release gates (rows) against "Your team", "Agent, governed" and "Agent, typical setup" (columns): checks everywhere except the typical setup's Identity check and Approval, which are red crosses on paper squares. The contents page opens with "1.0 Contents", then the project request form (so it is in the first viewport down to 1280×768 and first in keyboard order), then services 1.1 to 1.7. Once the spread stacks (under 1100px) the cover figure hides and a paper version of Figure 1.0 follows the services list.
 
 Inner pages: a cobalt page head (back link, then the numbered h1 in the 8-column prose track), then a 4 / 8 article grid whose left aside of specifications is sticky below the header.
 
@@ -230,7 +271,7 @@ Heavy, flat, rectangular.
 
 ### Forms
 A form is a page printed in the manual.
-- **Frame:** paper background, 2px ink border, opened by a black caption bar (caption type, form number left, a short note right).
+- **Frame:** paper background, 2px ink border, opened by a black caption bar (caption type, form number). A note row at the foot carries confirmed contact facts only (location and time zone; reply time and email when confirmed). Selects open on a disabled, required "Choose one". Invalid inputs, selects and textareas turn their underline red.
 - **Fields:** uppercase caption labels with the input below; inputs are transparent with a 1px input-rule underline, 500 17px text, no radius. Adjacent fields are divided by 1px ink lines.
 - **Focus:** the underline thickens to 2px cobalt; the outline is suppressed in favour of it.
 - **Error:** invalid input underline turns red; the status line below the form (1px ink rule above) reads red for errors, cobalt for success.

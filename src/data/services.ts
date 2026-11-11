@@ -1,7 +1,9 @@
 // Shared by the contents page (Hero) and the standards list (Services).
+// proof: project ids (src/content/projects) that demonstrate the service; omit when none does.
 export const services = [
   {
     title: 'CI/CD pipeline design',
+    proof: ['bdo-crm-pipeline', 'java-maven-pipeline'],
     summary: 'GitHub Actions, GitLab CI or Jenkins. Monorepos to multi-environment deploys.',
     desc: 'End-to-end pipeline architecture, from monorepo strategies to multi-environment deployments, with security gates built in.',
     correct: 'One reusable pipeline, called by every repository, versioned and pinned.',
@@ -9,6 +11,7 @@ export const services = [
   },
   {
     title: 'Cloud infrastructure',
+    proof: ['aws-landing-zone'],
     summary: 'AWS and Azure landing zones, networking, security, cost.',
     desc: 'AWS and Azure infrastructure design, implementation and optimisation: landing zones, networking, security and cost management.',
     correct: 'An account per environment under one organisation, guardrails on from day one.',
@@ -16,6 +19,7 @@ export const services = [
   },
   {
     title: 'Release management',
+    proof: ['bdo-crm-pipeline'],
     summary: 'Release planning, CAB, environment promotion, rollback.',
     desc: 'Release planning, CAB coordination, environment promotion strategies and rollback procedures for enterprise applications.',
     correct: 'Every release promoted through the same environments, with its rollback written before it ships.',
@@ -23,6 +27,7 @@ export const services = [
   },
   {
     title: 'AI agent platforms',
+    proof: ['governed-ai-agent-platform', 'agent-platform-blueprint'],
     summary: 'Agents, tools and models behind gateways that check identity.',
     desc: 'Platforms where AI agents, their tools and their model calls run behind gateways that check identity outside the model.',
     correct: 'Every tool call checked against the caller’s identity at the gateway.',
@@ -31,6 +36,7 @@ export const services = [
   },
   {
     title: 'Platform engineering',
+    proof: ['terraform-blueprint', 'bdo-crm-pipeline'],
     summary: 'Internal platforms, golden paths, self-service.',
     desc: 'Internal developer platforms, golden paths, reusable pipeline blueprints and self-service infrastructure.',
     correct: 'A golden path teams pick because it is the fastest way.',
@@ -38,6 +44,7 @@ export const services = [
   },
   {
     title: 'Infrastructure as code',
+    proof: ['terraform-blueprint', 'aws-landing-zone'],
     summary: 'Terraform modules, state, drift detection.',
     desc: 'Terraform modules, state management, multi-account strategies and drift detection for AWS, Azure and GCP.',
     correct: 'State in a locked remote backend, drift checked on a schedule.',

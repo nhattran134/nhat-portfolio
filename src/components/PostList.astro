@@ -4,8 +4,10 @@ import { formatDate } from '../data/content';
 
 interface Props {
   posts: CollectionEntry<'blog'>[];
+  level?: 3 | 4; // heading level under the surrounding section heading
 }
-const { posts } = Astro.props;
+const { posts, level = 4 } = Astro.props;
+const H = `h${level}` as 'h3' | 'h4';
 ---
 
 <ol class="posts">
@@ -14,7 +16,7 @@ const { posts } = Astro.props;
       <span class="n num">4.{i + 1}</span>
       <time class="num" datetime={post.data.date}>{formatDate(post.data.date)}</time>
       <div>
-        <h4><a href={`/blog/${post.id}`}>{post.data.title}</a></h4>
+        <H class="title"><a href={`/blog/${post.id}`}>{post.data.title}</a></H>
         <p>{post.data.excerpt}</p>
         <ul class="tags">{post.data.tags.map((t) => <li>{t}</li>)}</ul>
       </div>
@@ -47,17 +49,17 @@ const { posts } = Astro.props;
     padding-top: 4px;
   }
 
-  h4 {
+  .title {
     font-size: 24px;
     font-weight: 800;
     max-width: 30ch;
   }
 
-  h4 a {
+  .title a {
     text-decoration: none;
   }
 
-  h4 a:hover {
+  .title a:hover {
     color: var(--field);
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -66,7 +68,7 @@ const { posts } = Astro.props;
   p {
     margin: 8px 0 12px;
     color: var(--mute);
-    max-width: 68ch;
+    max-width: 62ch;
   }
 
   @media (max-width: 700px) {

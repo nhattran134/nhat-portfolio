@@ -1,14 +1,8 @@
 ---
 import Icon from './Icon.astro';
+import GatesFigure from './GatesFigure.astro';
 import { services } from '../data/services';
-
-const gates = [
-  ['Build & test', 'Every commit'],
-  ['Security scan', 'Trivy, Checkov, OPA'],
-  ['Identity check', 'A named person or workload'],
-  ['Approval', 'Code owners or CAB'],
-  ['Release', 'Environment by environment, rollback ready'],
-];
+import { contactNote } from '../data/contact';
 ---
 
 <section id="services" class="spread" data-sec="services" aria-labelledby="hero-title">
@@ -18,23 +12,7 @@ const gates = [
       <h1 id="hero-title">I design the platforms your teams ship on.</h1>
       <p>Senior Platform Engineer &amp; Release Manager. CI/CD, cloud infrastructure, release process, and now governed AI agent platforms.</p>
     </div>
-    <figure class="gates">
-      <figcaption>Figure 1.0 · Same gates for people and agents</figcaption>
-      <table>
-        <thead>
-          <tr><th scope="col">Gate</th><th scope="col">Your team’s change</th><th scope="col">An agent’s change</th></tr>
-        </thead>
-        <tbody>
-          {gates.map(([gate, note]) => (
-            <tr>
-              <th scope="row">{gate}<span>{note}</span></th>
-              <td><Icon name="check" /><span class="vh">Passes</span></td>
-              <td><Icon name="check" /><span class="vh">Passes</span></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </figure>
+    <GatesFigure tone="field" class="gates-cover" />
   </div>
 
   <div class="contents guides">
@@ -42,6 +20,29 @@ const gates = [
       <h2><span class="num">1.0</span> Contents</h2>
       <span>What you can hire me for</span>
     </div>
+
+    <form class="form request" name="request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
+      <input type="hidden" name="form-name" value="request" />
+      <p class="vh"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="form-cap"><span>Form 1 · Project request</span></div>
+      <div class="row">
+        <label class="field">Email
+          <input type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+        </label>
+        <label class="field">What do you need?
+          <select name="need" required>
+            <option value="" disabled selected>Choose one</option>
+            {services.map((s) => <option>{s.title}</option>)}
+            <option>Job opportunity</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Send <Icon name="arrow" /></button>
+      </div>
+      <p class="form-note">{contactNote}</p>
+      <p class="form-status" role="status" hidden></p>
+    </form>
+
     <ol class="toc">
       {services.map((s, i) => (
         <li>
@@ -59,25 +60,8 @@ const gates = [
       ))}
     </ol>
 
-    <form class="form request" name="request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
-      <input type="hidden" name="form-name" value="request" />
-      <p class="vh"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
-      <div class="form-cap"><span>Form 1 · Project request</span><span>Goes straight to my inbox</span></div>
-      <div class="row">
-        <label class="field">Your email
-          <input type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
-        </label>
-        <label class="field">What do you need?
-          <select name="need">
-            {services.map((s) => <option>{s.title}</option>)}
-            <option>A full-time hire</option>
-            <option>Something else</option>
-          </select>
-        </label>
-        <button class="btn" type="submit">Send <Icon name="arrow" /></button>
-      </div>
-      <p class="form-status" role="status" hidden></p>
-    </form>
+    <GatesFigure tone="paper" class="gates-sheet" />
+
   </div>
 </section>
 
@@ -107,67 +91,12 @@ const gates = [
     border-bottom: 1px solid var(--on-field-mute);
   }
 
-  .gates {
+  .cover :global(.gates-cover) {
     margin-top: auto;
   }
 
-  .gates figcaption {
-    display: inline-block;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 6px 10px;
-    margin-bottom: 12px;
-  }
-
-  .gates table {
-    width: 100%;
-    border-collapse: collapse;
-    border-top: 2px solid var(--on-field);
-  }
-
-  .gates thead th {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--on-field-mute);
-    text-align: center;
-    padding: 6px 0;
-    width: 22%;
-  }
-
-  .gates thead th:first-child {
-    text-align: left;
-    width: auto;
-  }
-
-  .gates tbody th,
-  .gates td {
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
-    padding: 7px 0;
-  }
-
-  .gates tbody th {
-    text-align: left;
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-  .gates tbody th span {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--on-field-mute);
-  }
-
-  .gates td :global(svg) {
-    width: 20px;
-    height: 20px;
-    margin-inline: auto;
+  .contents :global(.gates-sheet) {
+    display: none;
   }
 
   .cover h1 {
@@ -306,8 +235,12 @@ const gates = [
 
   @media (max-width: 1100px) {
     /* Single column: keep the request form near the top; the contents list carries the same facts. */
-    .gates {
+    .cover :global(.gates-cover) {
       display: none;
+    }
+    .contents :global(.gates-sheet) {
+      display: block;
+      margin-top: 8px;
     }
     .spread {
       grid-template-columns: minmax(0, 1fr);
@@ -324,10 +257,6 @@ const gates = [
     }
     .toc a {
       grid-template-columns: 40px minmax(0, 1fr);
-    }
-    /* On phones the primary action comes before the contents list. */
-    .request {
-      order: -1;
     }
     .request .row {
       grid-template-columns: minmax(0, 1fr);

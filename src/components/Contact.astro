@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { contactNote } from '../data/contact';
 ---
 
 <section id="contact" class="on-field contact" data-sec="contact" aria-labelledby="contact-title">
@@ -16,7 +17,7 @@ import Icon from './Icon.astro';
     <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
       <input type="hidden" name="form-name" value="contact" />
       <p class="vh"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
-      <div class="form-cap"><span>Form 2 · Message</span><span>Goes straight to my inbox</span></div>
+      <div class="form-cap"><span>Form 2 · Message</span></div>
       <div class="row">
         <label class="field">Name
           <input type="text" name="name" autocomplete="name" required />
@@ -39,6 +40,7 @@ import Icon from './Icon.astro';
       <div class="send">
         <button class="btn" type="submit">Send message <Icon name="arrow" /></button>
       </div>
+      <p class="form-note">{contactNote}</p>
       <p class="form-status" role="status" hidden></p>
     </form>
   </div>
