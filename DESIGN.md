@@ -195,7 +195,7 @@ Pages are a stack of **dividers** and **sheets**. A divider is a full-bleed coba
 
 Inside sheets, content is horizontal rows divided by 1px hairlines with 26px / 28px padding. Rows use a fixed numeric gutter (52px, 40px on phones) followed by fractional columns: standards 5 / 3.5 / 3.5, projects number + 5 / 6 + link, experience 4 / 8, certifications and tools two equal columns. Rows collapse to two then one column at 900px to 1000px and 560px.
 
-The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page with 12-column guides right. Under 1100px it stacks; on phones the project-request form moves above the contents list.
+The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page with 12-column guides right. The cover reads top to bottom: caption rule, h1 and lede, then Figure 1.0 anchored at the foot, a table of release gates (rows) against "your team's change" and "an agent's change" (columns), every cell a white check, with a paper caption bar, a 2px white top rule and 1px translucent white row rules. The figure is hidden once the spread stacks (under 1100px) so the request form stays high. Under 1100px it stacks; on phones the project-request form moves above the contents list.
 
 Inner pages: a cobalt page head (back link, then the numbered h1 in the 8-column prose track), then a 4 / 8 article grid whose left aside of specifications is sticky below the header.
 

@@ -1,6 +1,14 @@
 ---
 import Icon from './Icon.astro';
 import { services } from '../data/services';
+
+const gates = [
+  ['Build & test', 'Every commit'],
+  ['Security scan', 'Trivy, Checkov, OPA'],
+  ['Identity check', 'A named person or workload'],
+  ['Approval', 'Code owners or CAB'],
+  ['Release', 'Environment by environment, rollback ready'],
+];
 ---
 
 <section id="services" class="spread" data-sec="services" aria-labelledby="hero-title">
@@ -10,6 +18,23 @@ import { services } from '../data/services';
       <h1 id="hero-title">I design the platforms your teams ship on.</h1>
       <p>Senior Platform Engineer &amp; Release Manager. CI/CD, cloud infrastructure, release process, and now governed AI agent platforms.</p>
     </div>
+    <figure class="gates">
+      <figcaption>Figure 1.0 · Same gates for people and agents</figcaption>
+      <table>
+        <thead>
+          <tr><th scope="col">Gate</th><th scope="col">Your team’s change</th><th scope="col">An agent’s change</th></tr>
+        </thead>
+        <tbody>
+          {gates.map(([gate, note]) => (
+            <tr>
+              <th scope="row">{gate}<span>{note}</span></th>
+              <td><Icon name="check" /><span class="vh">Passes</span></td>
+              <td><Icon name="check" /><span class="vh">Passes</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
   </div>
 
   <div class="contents guides">
@@ -82,8 +107,67 @@ import { services } from '../data/services';
     border-bottom: 1px solid var(--on-field-mute);
   }
 
-  .foot {
+  .gates {
     margin-top: auto;
+  }
+
+  .gates figcaption {
+    display: inline-block;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+  }
+
+  .gates table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid var(--on-field);
+  }
+
+  .gates thead th {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--on-field-mute);
+    text-align: center;
+    padding: 6px 0;
+    width: 22%;
+  }
+
+  .gates thead th:first-child {
+    text-align: left;
+    width: auto;
+  }
+
+  .gates tbody th,
+  .gates td {
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 7px 0;
+  }
+
+  .gates tbody th {
+    text-align: left;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .gates tbody th span {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-field-mute);
+  }
+
+  .gates td :global(svg) {
+    width: 20px;
+    height: 20px;
+    margin-inline: auto;
   }
 
   .cover h1 {
@@ -221,6 +305,10 @@ import { services } from '../data/services';
   }
 
   @media (max-width: 1100px) {
+    /* Single column: keep the request form near the top; the contents list carries the same facts. */
+    .gates {
+      display: none;
+    }
     .spread {
       grid-template-columns: minmax(0, 1fr);
       min-height: 0;
