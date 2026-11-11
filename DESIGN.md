@@ -11,7 +11,7 @@ colors:
   on-field: "#ffffff"
   on-field-mute: "#d5dcfb"
   no: "#c8321a"
-  guide: "rgba(31, 63, 209, 0.13)"
+  guide: "rgba(31, 63, 209, 0.4)"
   input-rule: "#868a93"
   placeholder: "#6e717a"
   leader: "#b4b8c2"
@@ -174,7 +174,7 @@ The world is light-only by design. There is no dark theme and `color-scheme` is 
 - Paper pages and full-bleed cobalt divider pages, alternating as the manual's parts.
 - Section numbering on every heading, nav item and list row.
 - 2px black rules open sections; 1px hairlines separate rows.
-- Hairline 12-column layout guides drawn on the contents page.
+- The 12-column grid marked as 8px ticks under the contents rule, like a ruler; never drawn through content.
 - Correct (cobalt, check) and incorrect (red, cross) usage panels.
 - One family, Schibsted Grotesk, from 400 to 900; section numbers sit inside their headings in pale cobalt, never as standalone glyphs.
 - Square corners everywhere; depth comes only from rules and colour fields.
@@ -186,7 +186,7 @@ A two-ink manual: black on white, with one saturated cobalt used as surface or m
 ### Primary
 - **Manual Cobalt** (field): the divider page colour. Fills the hero cover, every section divider, inner page heads and the closing contact band. As a mark on paper: section numbers, list markers, links, the active nav underline, the focus outline, text selection, the correct-usage panel and the primary button.
 - **Pressed Cobalt** (field-deep): hover state of the cobalt button only.
-- **Cobalt Guide** (guide): the 13% cobalt hairline of the 12-column guides. Never used as a fill.
+- **Cobalt Guide** (guide): the 40% cobalt of the 12-column ticks under the contents rule. Never used as a fill or drawn through content.
 
 ### Secondary
 - **Incorrect Red** (no): the incorrect-usage panel, an invalid input's underline, and the error status line. Nothing decorative.
@@ -236,7 +236,7 @@ Pages are a stack of **dividers** and **sheets**. A divider is a full-bleed coba
 
 Inside sheets, content is horizontal rows divided by 1px hairlines with 26px / 28px padding. Rows use a fixed numeric gutter (52px, 40px on phones) followed by fractional columns: standards 5 / 3.5 / 3.5, projects number + 5 / 6 + link, experience 4 / 8, certifications and tools two equal columns. Rows collapse to two then one column at 900px to 1000px and 560px.
 
-The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page with 12-column guides right. The cover reads top to bottom: caption rule, h1 and lede, then Figure 1.0 anchored at the foot. Figure 1.0 is a table of five release gates (rows) against "Your team", "Agent, governed" and "Agent, typical setup" (columns): checks everywhere except the typical setup's Identity check and Approval, which are red crosses on paper squares. The contents page opens with "1.0 Contents", then the project request form (so it is in the first viewport down to 1280×768 and first in keyboard order), then services 1.1 to 1.7. Once the spread stacks (under 1100px) the cover figure hides and a paper version of Figure 1.0 follows the services list.
+The home cover is a 46 / 54 spread at full viewport height under the header: the cobalt cover left, the contents page right, its "1.0 Contents" rule carrying 12-column ticks. The cover reads top to bottom: caption rule, h1 and lede, then Figure 1.0 anchored at the foot. Figure 1.0 is a table of five release gates (rows) against "Your team", "Agent, governed" and "Agent, typical setup" (columns): checks everywhere except the typical setup's Identity check and Approval, which are red crosses on paper squares. The contents page opens with "1.0 Contents", then the project request form (so it is in the first viewport down to 1280×768 and first in keyboard order), then services 1.1 to 1.7. Once the spread stacks (under 1100px) the cover figure hides and a paper version of Figure 1.0 follows the services list.
 
 Inner pages: a cobalt page head (back link, then the numbered h1 in the 8-column prose track), then a 4 / 8 article grid whose left aside of specifications is sticky below the header.
 
@@ -245,7 +245,7 @@ Inner pages: a cobalt page head (back link, then the numbered h1 in the 8-column
 Flat. There are no shadows anywhere. Depth and grouping come from three things only: the cobalt field against paper, 2px ink rules, and 1px hairlines. A form set on cobalt is a white page with a 2px ink frame, not a lifted card.
 
 ### Named Rules
-**The Rules Not Shadows Rule.** If something needs separating, draw a rule. Never a shadow, blur, or tonal gradient fill. The repeating-gradient technique that draws the 1px layout guides is a drawing tool for hairlines, not a permission for gradients.
+**The Rules Not Shadows Rule.** If something needs separating, draw a rule. Never a shadow, blur, or tonal gradient fill. The repeating-gradient technique that draws the 1px column ticks is a drawing tool for hairlines, not a permission for gradients.
 
 ## Shapes
 
@@ -286,7 +286,7 @@ Each standard row pairs its description with two figures: **Correct** in cobalt 
 Full-bleed cobalt, 2px ink rule on top, numbered display heading and pale lede on a 5 / 7 grid. No standalone numerals and no entrance motion on dividers.
 
 ### Contents list
-Numbered rows (cobalt number, 700 21px title, dotted leader, cobalt arrow, mute description) separated by hairlines. Title text sits on a paper backing so the layout guides stop at the letterforms. A **New** badge (cobalt fill, white 800 11px uppercase, 0.08em) may mark one entry.
+Numbered rows (cobalt number, 700 21px title, dotted leader, cobalt arrow, mute description) separated by hairlines. A **New** badge (cobalt fill, white 800 11px uppercase, 0.08em) may mark one entry.
 
 ### Flow figure
 A pipeline as a black caption bar over a grid of steps. Each step sits on a 2px ink track with a 10px cobalt square at its start, 700 14px label and a mute step number.
@@ -307,7 +307,7 @@ Projects, posts, experience, certifications and tools are all hairline-ruled row
 
 ### Don't:
 - **Don't** round a corner or add a shadow.
-- **Don't** fill a surface with a gradient; the repeating-gradient hairline guides are the only gradient, and they draw lines.
+- **Don't** fill a surface with a gradient; the repeating-gradient column ticks are the only gradient, and they draw lines.
 - **Don't** set tags as pills or chips; they are slash-separated text.
 - **Don't** use red for anything but incorrect usage and errors.
 - **Don't** add a second typeface or a dark theme.

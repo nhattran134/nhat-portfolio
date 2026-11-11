@@ -15,8 +15,8 @@ import { contactNote } from '../data/contact';
     <GatesFigure tone="field" class="gates-cover" />
   </div>
 
-  <div class="contents guides">
-    <div class="sheet-head">
+  <div class="contents">
+    <div class="sheet-head ticks">
       <h2><span class="num">1.0</span> Contents</h2>
       <span>What you can hire me for</span>
     </div>
@@ -122,10 +122,6 @@ import { contactNote } from '../data/contact';
     gap: 22px;
   }
 
-  .contents .sheet-head {
-    background: var(--paper);
-  }
-
   .sheet-head h2 {
     font-size: 15px;
     font-weight: 700;
@@ -134,16 +130,6 @@ import { contactNote } from '../data/contact';
 
   .toc {
     list-style: none;
-  }
-
-  /* Guides stop at the letterforms: text runs sit on paper. */
-  .n,
-  .tt,
-  .d {
-    justify-self: start;
-    background: var(--paper);
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
   }
 
   .toc a {

@@ -10,7 +10,7 @@
   --on-field: #ffffff;
   --on-field-mute: #d5dcfb;
   --no: #c8321a;
-  --guide: rgba(31, 63, 209, 0.13);
+  --guide: rgba(31, 63, 209, 0.4);
   --font: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --gutter: clamp(16px, 3vw, 40px);
   --max: 1440px;
@@ -112,15 +112,20 @@ svg {
   padding-inline: var(--gutter);
 }
 
-/* Hairline 12-column layout guides, drawn inside the content box. */
-.guides {
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--guide) 0 1px,
-    transparent 1px calc(100% / 12)
-  );
-  background-origin: content-box;
-  background-clip: content-box;
+/* Column ticks: the 12-column grid marked under a rule, like a ruler. Never drawn through content. */
+.ticks {
+  position: relative;
+}
+
+.ticks::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 8px;
+  border-right: 1px solid var(--guide);
+  background: repeating-linear-gradient(90deg, var(--guide) 0 1px, transparent 1px calc(100% / 12));
 }
 
 /* Field (cobalt) surfaces */
