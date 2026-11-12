@@ -1,0 +1,33 @@
+---
+// A long-form page (blog post, project, blog list) on the kit: one section that grows with its text.
+interface Props {
+  back: { href: string; label: string };
+  title: string;
+  meta?: string;
+  lead?: string;
+}
+const { back, title, meta, lead } = Astro.props;
+---
+
+<section class="section article" aria-labelledby="article-h">
+  <div class="wrap">
+    <div class="measure stack-6">
+      <a class="link" href={back.href}>{back.label}</a>
+      {meta && <p class="t-label muted">{meta}</p>}
+      <h1 id="article-h">{title}</h1>
+      {lead && <p class="t-lead">{lead}</p>}
+      <div class="article__body"><slot /></div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* sub-pages hold long text: the section grows with it instead of one fixed screen */
+  main > section.article { height: auto; min-height: 100svh; padding-top: calc(var(--nav) + var(--hgap)); }
+  .article h1 { font: var(--display-weight) var(--t-h2) / 1.1 var(--font-display); letter-spacing: var(--display-tracking); margin: 0; }
+  .article__body { line-height: 1.7; }
+  .article__body h2 { font: var(--display-weight) var(--t-h3) / 1.2 var(--font-display); margin: var(--s-7) 0 var(--s-4); }
+  .article__body ul { padding-left: var(--s-5); }
+  .article__body li + li { margin-top: var(--s-2); }
+  .article__body pre { overflow-x: auto; padding: var(--s-5); border-radius: var(--r-md); background: var(--surface); font-size: var(--t-small); }
+</style>

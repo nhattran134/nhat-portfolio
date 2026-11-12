@@ -1,33 +1,19 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Kit from '../../layouts/Kit.astro';
+import Article from '../../components/Article.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((entry) => ({
-    params: { id: entry.id },
-    props: { entry },
-  }));
+  return projects.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<Base title={`${entry.data.title} | Nhat Tran Minh`} description={entry.data.description}>
-  <article class="section">
-    <div class="container prose">
-      <a href="/#projects" class="back-link">← Back to Projects</a>
-      <header class="post-header">
-        <h1>{entry.data.title}</h1>
-        <p class="post-description">{entry.data.description}</p>
-        <div class="tag-row">
-          {entry.data.tags.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
-        </div>
-      </header>
-      <Content />
-    </div>
-  </article>
-</Base>
+<Kit title={`${entry.data.title}: a pipeline project by Nhat Tran`} description={entry.data.description}>
+  <Article back={{ href: '/#work', label: 'All pipeline projects' }} title={entry.data.title} meta={entry.data.tags.join(', ')} lead={entry.data.description}>
+    <Content />
+  </Article>
+</Kit>

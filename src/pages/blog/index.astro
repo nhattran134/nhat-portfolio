@@ -1,53 +1,20 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Kit from '../../layouts/Kit.astro';
+import Article from '../../components/Article.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Base title="Blog | Nhat Tran Minh" description="Articles on CI/CD pipelines, cloud infrastructure, DevOps practices, and platform engineering.">
-  <section class="section">
-    <div class="container">
-      <p class="section-label">Blog</p>
-      <h2 class="section-title">All Posts</h2>
-      <div class="blog-grid">
-        {posts.map((post) => (
-          <a href={`/blog/${post.id}`} class="card blog-card">
-            <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-            <h4>{post.data.title}</h4>
-            <p>{post.data.excerpt}</p>
-            <div class="tag-row">
-              {post.data.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-</Base>
-
-<style>
-  .blog-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-decoration: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .blog-card time {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .blog-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-</style>
+<Kit title="Blog: CI/CD and release notes by Nhat Tran" description="Posts on CI/CD pipelines, Terraform, cloud infrastructure and release management.">
+  <Article back={{ href: '/', label: 'Home' }} title="Posts on pipelines and releases">
+    <ul class="rows">
+      {posts.map((post) => (
+        <li><a class="rows__name link" href={`/blog/${post.id}`}>{post.data.title}</a><p>{post.data.excerpt}</p><span class="rows__value">{fmt(post.data.date)}</span></li>
+      ))}
+    </ul>
+  </Article>
+</Kit>
