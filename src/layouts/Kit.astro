@@ -7,7 +7,7 @@ interface Props {
 }
 
 const {
-  title = 'Nhat Tran: CI/CD and release engineering in Ho Chi Minh City',
+  title = 'Nathan Tran: CI/CD and release engineering in Ho Chi Minh City',
   description = 'Platform engineer and release manager who builds GitHub Actions, Terraform and Kubernetes pipelines for enterprise teams on AWS, Azure and Google Cloud.',
   home = false,
 } = Astro.props;
@@ -57,6 +57,8 @@ const year = new Date().getFullYear();
   --display-tracking: -0.02em;
   --display-tracking-xl: -0.026em;
 }
+/* under 360px the name, the main button and the menu need the mark's room in the bar */
+@media (max-width: 359px) { .nav__bar .nav__logo .mark { display: none; } }
 </style>
 <slot name="head" />
 <script is:inline>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
@@ -78,9 +80,9 @@ const year = new Date().getFullYear();
       <div class="nav__item"><a class="nav__link" href={to('work')}>Work</a></div>
       <div class="nav__item"><a class="nav__link" href={to('experience')}>Experience</a></div>
     </nav>
-    <a class="nav__logo" href={home ? '#top' : '/'}><span class="mark" data-mark="stack" aria-hidden="true"></span>Nhat Tran</a>
+    <a class="nav__logo" href={home ? '#top' : '/'}><span class="mark" data-mark="stack" aria-hidden="true"></span>Nathan Tran</a>
     <div class="nav__actions">
-      <a class="btn btn--primary" href={to('brief')}>Contact Nhat</a>
+      <a class="btn btn--primary" href={to('brief')}>Send a brief</a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -96,14 +98,14 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div class="closing__cta close--word">
       <div class="section-head--split">
-        <div><h2 id="close-h">Work with Nhat on your releases</h2><p class="t-lead">Consulting, contract or full-time, from Ho Chi Minh City.</p></div>
-        <a class="btn btn--primary" href={to('brief')}>Contact Nhat<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+        <div><h2 id="close-h">Work with Nathan on your releases</h2><p class="t-lead">Consulting, contract or full-time, from Ho Chi Minh City.</p></div>
+        <a class="btn btn--primary" href={to('brief')}>Send a brief<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
     </div>
     <div class="closing__links">
       <div class="grid">
         <div class="span-4 stack-4">
-          <a class="nav__logo" href={home ? '#top' : '/'}><span class="mark" data-mark="stack" aria-hidden="true"></span>Nhat Tran</a>
+          <a class="nav__logo" href={home ? '#top' : '/'}><span class="mark" data-mark="stack" aria-hidden="true"></span>Nathan Tran</a>
           <p class="footer__lede">Platform engineering and release management for teams on AWS, Azure and Google Cloud.</p>
         </div>
         <div class="span-2 footer__col"><h3>Services</h3><ul><li><a href={to('services')}>What I build</a></li><li><a href={to('releases')}>Release steps</a></li></ul></div>
@@ -112,7 +114,7 @@ const year = new Date().getFullYear();
         <div class="span-2 footer__col"><h3>Writing</h3><ul><li><a href="/blog">Blog</a></li></ul></div>
       </div>
       <div class="footer__legal">
-        <span>&copy; {year} Nhat Tran. Product names and logos are trademarks of their owners.</span>
+        <span>&copy; {year} Nathan Tran. Product names and logos are trademarks of their owners.</span>
         <div class="socials">
           <a href="https://linkedin.com/in/nathantr" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/icons/linkedin.svg" alt="" width="20" height="20"></a>
           <a href="https://github.com/nhattran134" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="ic-ink" src="/assets/icons/github.svg" alt="" width="20" height="20"></a>

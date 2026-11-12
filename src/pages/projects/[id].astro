@@ -12,7 +12,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<Kit title={`${entry.data.title}: a pipeline project by Nhat Tran`} description={entry.data.description}>
+<Kit title={`${entry.data.title}: a pipeline project by Nathan Tran`} description={entry.data.description}>
   <Article back={{ href: '/#work', label: 'All pipeline projects' }} title={entry.data.title} meta={entry.data.tags.join(', ')} lead={entry.data.description}>
     <Content />
   </Article>

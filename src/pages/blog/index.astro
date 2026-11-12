@@ -9,7 +9,7 @@ const posts = (await getCollection('blog'))
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Kit title="Blog: CI/CD and release notes by Nhat Tran" description="Posts on CI/CD pipelines, Terraform, cloud infrastructure and release management.">
+<Kit title="Blog: CI/CD and release notes by Nathan Tran" description="Posts on CI/CD pipelines, Terraform, cloud infrastructure and release management.">
   <Article back={{ href: '/', label: 'Home' }} title="Posts on pipelines and releases">
     <ul class="rows">
       {posts.map((post) => (

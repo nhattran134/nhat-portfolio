@@ -88,8 +88,8 @@ const lanes = JSON.stringify({
     <div class="wrap"><div class="hero-text grid hero__grid">
       <div class="hero__text span-5">
         <h1 id="hero-h">CI/CD and releases for enterprise teams</h1>
-        <p class="hero__lead">I’m Nhat Tran, a platform engineer in Ho Chi Minh City. I build GitHub Actions and Terraform pipelines and run the releases they ship: more than 35 pipelines since 2020.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="#brief">Contact Nhat<Fragment set:html={arrow} /></a><a class="btn btn--secondary" href="#work">See the pipelines</a></div>
+        <p class="hero__lead">I’m Nathan Tran, a platform engineer in Ho Chi Minh City. I build GitHub Actions and Terraform pipelines and run the releases they ship: more than 35 pipelines since 2020.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#brief">Send a brief<Fragment set:html={arrow} /></a><a class="btn btn--secondary" href="#work">See the pipelines</a></div>
       </div>
       <div class="hero__media span-6 start-7" data-visual role="img" aria-label="A Terraform pipeline run on GitHub Actions, planned and waiting for two approvals before it applies to production">
         <div class="stage"><div class="at-rise fit" style="--fit-max:520px;--ax:max(32px, 50% - 260px);--ay:48px;--ay-sm:24px" data-ui-still>
@@ -145,7 +145,7 @@ const lanes = JSON.stringify({
           ))}
         </ul>
       </div>
-      <div class="frame span-6 start-7" data-visual role="img" aria-label="The tools Nhat works with">
+      <div class="frame span-6 start-7" data-visual role="img" aria-label="The tools Nathan works with">
         <div class="tools">
           {tools.map(([id, name]) => (
             <div><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon={id} src={`/assets/icons/${id}.svg`} alt="" width="40" height="40"></span><span class="t-label">{name}</span></div>
@@ -346,7 +346,7 @@ const lanes = JSON.stringify({
           </div></div>
         </div>
       </div>
-      <form class="form span-6 start-7" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-endpoint="/" data-sent="Your message is with Nhat. The reply comes to the email address above." novalidate>
+      <form class="form span-6 start-7" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-endpoint="/" data-sent="Your message is with Nathan. The reply comes to the email address above." novalidate>
         <input type="hidden" name="form-name" value="contact">
         <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <div class="field"><label for="f-name">Name</label>
@@ -362,7 +362,7 @@ const lanes = JSON.stringify({
         <div class="field field--full"><label for="f-msg">Message</label>
           <textarea id="f-msg" name="message" rows="6" required aria-describedby="f-msg-err"></textarea>
           <p class="field__error" id="f-msg-err" hidden>Write a line or two about the work.</p></div>
-        <div class="btn-row"><button class="btn btn--primary" type="submit">Contact Nhat</button></div>
+        <div class="btn-row"><button class="btn btn--primary" type="submit">Send a brief</button></div>
         <p class="form__status" role="status" data-form-status></p>
       </form>
     </div>

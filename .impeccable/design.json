@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-11T13:53:58+00:00",
+  "title": "Design System: Nathan Tran",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(26% 0.000 90)",
+          "oklch(38% 0.000 90)",
+          "oklch(49% 0.000 90)",
+          "oklch(61% 0.000 90)",
+          "oklch(72% 0.000 90)",
+          "oklch(84% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(16.0% 0.004 286)",
+        "tonalRamp": [
+          "oklch(15% 0.004 286)",
+          "oklch(26% 0.004 286)",
+          "oklch(38% 0.004 286)",
+          "oklch(49% 0.004 286)",
+          "oklch(61% 0.004 286)",
+          "oklch(72% 0.004 286)",
+          "oklch(84% 0.004 286)",
+          "oklch(95% 0.004 286)"
+        ]
+      },
+      "mute": {
+        "role": "neutral",
+        "displayName": "Mute",
+        "canonical": "oklch(46.8% 0.015 271)",
+        "tonalRamp": [
+          "oklch(15% 0.008 271)",
+          "oklch(26% 0.011 271)",
+          "oklch(38% 0.013 271)",
+          "oklch(49% 0.014 271)",
+          "oklch(61% 0.012 271)",
+          "oklch(72% 0.010 271)",
+          "oklch(84% 0.007 271)",
+          "oklch(95% 0.005 271)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(89.1% 0.007 269)",
+        "tonalRamp": [
+          "oklch(15% 0.007 269)",
+          "oklch(26% 0.007 269)",
+          "oklch(38% 0.007 269)",
+          "oklch(49% 0.007 269)",
+          "oklch(61% 0.007 269)",
+          "oklch(72% 0.007 269)",
+          "oklch(84% 0.007 269)",
+          "oklch(95% 0.007 269)"
+        ]
+      },
+      "field": {
+        "role": "primary",
+        "displayName": "Manual Cobalt",
+        "canonical": "oklch(45.6% 0.225 266)",
+        "tonalRamp": [
+          "oklch(15% 0.128 266)",
+          "oklch(26% 0.164 266)",
+          "oklch(38% 0.200 266)",
+          "oklch(49% 0.213 266)",
+          "oklch(61% 0.177 266)",
+          "oklch(72% 0.141 266)",
+          "oklch(84% 0.105 266)",
+          "oklch(95% 0.069 266)"
+        ]
+      },
+      "field-deep": {
+        "role": "primary",
+        "displayName": "Pressed Cobalt",
+        "canonical": "oklch(40.0% 0.198 266)",
+        "tonalRamp": [
+          "oklch(15% 0.129 266)",
+          "oklch(26% 0.161 266)",
+          "oklch(38% 0.192 266)",
+          "oklch(49% 0.173 266)",
+          "oklch(61% 0.141 266)",
+          "oklch(72% 0.109 266)",
+          "oklch(84% 0.077 266)",
+          "oklch(95% 0.046 266)"
+        ]
+      },
+      "on-field-mute": {
+        "role": "neutral",
+        "displayName": "Pale Cobalt",
+        "canonical": "oklch(89.9% 0.043 275)",
+        "tonalRamp": [
+          "oklch(15% 0.000 275)",
+          "oklch(26% 0.005 275)",
+          "oklch(38% 0.012 275)",
+          "oklch(49% 0.019 275)",
+          "oklch(61% 0.026 275)",
+          "oklch(72% 0.032 275)",
+          "oklch(84% 0.039 275)",
+          "oklch(95% 0.040 275)"
+        ]
+      },
+      "no": {
+        "role": "secondary",
+        "displayName": "Incorrect Red",
+        "canonical": "oklch(54.9% 0.190 32)",
+        "tonalRamp": [
+          "oklch(15% 0.084 32)",
+          "oklch(26% 0.114 32)",
+          "oklch(38% 0.145 32)",
+          "oklch(49% 0.175 32)",
+          "oklch(61% 0.175 32)",
+          "oklch(72% 0.144 32)",
+          "oklch(84% 0.114 32)",
+          "oklch(95% 0.083 32)"
+        ]
+      },
+      "on-field": {
+        "role": "neutral",
+        "displayName": "White on Field",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(26% 0.000 90)",
+          "oklch(38% 0.000 90)",
+          "oklch(49% 0.000 90)",
+          "oklch(61% 0.000 90)",
+          "oklch(72% 0.000 90)",
+          "oklch(84% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "guide": {
+        "role": "primary",
+        "displayName": "Cobalt Guide",
+        "canonical": "rgba(31, 63, 209, 0.13)"
+      },
+      "input-rule": {
+        "role": "neutral",
+        "displayName": "Input Rule",
+        "note": "Literal value in the build, not a custom property."
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder",
+        "note": "Literal value in the build, not a custom property."
+      },
+      "leader": {
+        "role": "neutral",
+        "displayName": "Leader",
+        "note": "Literal value in the build, not a custom property."
+      },
+      "code-wash": {
+        "role": "neutral",
+        "displayName": "Code Wash",
+        "note": "Literal value in the build, not a custom property."
+      }
+    },
+    "typographyMeta": {
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Giant section number on divider, contact and page-head surfaces; hero 200-400px, page heads 96-168px. Decorative, aria-hidden."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Divider and contact headings; hero h1 variant clamp(40px,3.9vw,62px)."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Inner page h1 on posts and projects."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Standard, project and employer row titles."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Line under divider and page headings, pale cobalt."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text."
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Long-form posts and project pages, 68ch."
+      },
+      "sheet-label": {
+        "displayName": "Sheet Label",
+        "purpose": "Numbered sheet heading and cobalt row numbers."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Form caption bars, field labels, flow captions; uppercase."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-house",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every transition in the build."
+      },
+      {
+        "name": "state",
+        "value": "0.2s",
+        "purpose": "Button background and border colour."
+      },
+      {
+        "name": "arrow-nudge",
+        "value": "0.25s-0.3s",
+        "purpose": "Arrow translate 3-4px on link and contents hover."
+      },
+      {
+        "name": "nav-bar",
+        "value": "0.35s",
+        "purpose": "Active nav bar scaleX from left."
+      },
+      {
+        "name": "numeral-rise",
+        "value": "0.9s",
+        "purpose": "Once-only clip-path and 24px rise of below-fold numerals; skipped under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "560px"
+      },
+      {
+        "name": "head-phone",
+        "value": "640px"
+      },
+      {
+        "name": "stack-small",
+        "value": "700px"
+      },
+      {
+        "name": "article",
+        "value": "800px"
+      },
+      {
+        "name": "divider",
+        "value": "900px"
+      },
+      {
+        "name": "projects",
+        "value": "1000px"
+      },
+      {
+        "name": "spread",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Cobalt rectangular action with trailing arrow; the form submit and page CTA.",
+      "html": "<button class=\"ds-btn\">Send <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:2px solid var(--field);background:var(--field);color:var(--on-field);font:800 16px var(--font);border-radius:0;cursor:pointer;transition:background-color .2s cubic-bezier(0.16, 1, 0.3, 1),border-color .2s cubic-bezier(0.16, 1, 0.3, 1)}.ds-btn svg{width:18px;height:18px}.ds-btn:hover{background:var(--field-deep);border-color:var(--field-deep)}.ds-btn:focus-visible{outline:2px solid var(--field);outline-offset:3px}.ds-btn:disabled{opacity:.55;cursor:progress}"
+    },
+    {
+      "name": "Button on Cobalt",
+      "kind": "button",
+      "refersTo": "button-on-field",
+      "description": "Inverted button for cobalt surfaces such as the close band.",
+      "html": "<div class=\"ds-field\"><a class=\"ds-btn-inv\" href=\"#\">Start a project <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-field{background:var(--field);padding:24px}.ds-btn-inv{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:2px solid var(--on-field);background:var(--on-field);color:var(--field);font:800 16px var(--font);text-decoration:none;transition:background-color .2s cubic-bezier(0.16, 1, 0.3, 1),border-color .2s cubic-bezier(0.16, 1, 0.3, 1)}.ds-btn-inv svg{width:18px;height:18px}.ds-btn-inv:hover{background:var(--on-field-mute);border-color:var(--on-field-mute)}.ds-btn-inv:focus-visible{outline:2px solid var(--on-field);outline-offset:3px}"
+    },
+    {
+      "name": "Arrow Link",
+      "kind": "custom",
+      "refersTo": "link-arrow",
+      "description": "Cobalt text link with an arrow that nudges on hover.",
+      "html": "<a class=\"ds-link\" href=\"#\">All notes <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;gap:8px;font:700 17px var(--font);color:var(--field);text-decoration:none;text-underline-offset:.2em}.ds-link svg{width:16px;height:16px;transition:transform .25s cubic-bezier(0.16, 1, 0.3, 1)}.ds-link:hover{text-decoration:underline}.ds-link:hover svg{transform:translateX(3px)}.ds-link:focus-visible{outline:2px solid var(--field);outline-offset:3px}"
+    },
+    {
+      "name": "Captioned Form",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "A form printed in the manual: ink frame, black caption bar, underlined fields.",
+      "html": "<form class=\"ds-form\"><div class=\"ds-cap\"><span>Form 1 · Project request</span><span>Goes straight to my inbox</span></div><label class=\"ds-fld\">Your email<input type=\"email\" placeholder=\"you@company.com\"></label></form>",
+      "css": ".ds-form{border:2px solid var(--ink);background:var(--paper);color:var(--ink);max-width:420px}.ds-cap{display:flex;justify-content:space-between;gap:12px;padding:9px 14px;background:var(--ink);color:var(--paper);font:700 13px var(--font);letter-spacing:.04em;text-transform:uppercase}.ds-fld{display:flex;flex-direction:column;gap:6px;padding:12px 14px 14px;font:700 13px var(--font);letter-spacing:.04em;text-transform:uppercase}.ds-fld input{font:500 17px/1.4 var(--font);letter-spacing:0;text-transform:none;color:var(--ink);background:transparent;border:0;border-bottom:1px solid #a9adb7;border-radius:0;padding:6px 0}.ds-fld input::placeholder{color:#6e717a}.ds-fld input:focus{outline:none;border-bottom:2px solid var(--field);margin-bottom:-1px}"
+    },
+    {
+      "name": "Running Header Nav",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Numbered section nav; the current section turns cobalt with a 2px bar on the header rule.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">1 Services</a><a href=\"#\" aria-current=\"true\">2 Projects</a><a href=\"#\">3 Record</a></nav>",
+      "css": ".ds-nav{display:flex;gap:22px;border-bottom:2px solid var(--ink);background:var(--paper)}.ds-nav a{position:relative;padding:12px 0;font:600 15px var(--font);color:var(--ink);text-decoration:none}.ds-nav a::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--field);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(0.16, 1, 0.3, 1)}.ds-nav a:hover,.ds-nav a[aria-current='true']{color:var(--field)}.ds-nav a[aria-current='true']::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--field);outline-offset:3px}"
+    },
+    {
+      "name": "Usage Panels",
+      "kind": "card",
+      "refersTo": "usage-panel",
+      "description": "Correct (cobalt, check) and incorrect (red, cross) statements under a 4px bar.",
+      "html": "<div class=\"ds-use-row\"><figure class=\"ds-use ds-ok\"><figcaption><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12.5l5 5L20 6.5\"/></svg>Correct</figcaption><p>Every change ships through the same pipeline.</p></figure><figure class=\"ds-use ds-no\"><figcaption><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6L6 18\"/></svg>Incorrect</figcaption><p>Hotfixes copied to servers by hand.</p></figure></div>",
+      "css": ".ds-use-row{display:grid;grid-template-columns:1fr 1fr;gap:28px;font-family:var(--font)}.ds-use{margin:0;border-top:4px solid currentColor;padding-top:10px}.ds-ok{color:var(--field)}.ds-no{color:var(--no)}.ds-use figcaption{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.ds-use svg{width:16px;height:16px}.ds-use p{margin:8px 0 0;color:var(--ink);font-size:17px;font-weight:600;line-height:1.4}"
+    },
+    {
+      "name": "Divider Page",
+      "kind": "custom",
+      "refersTo": "divider-band",
+      "description": "Full-bleed cobalt section opener: giant numeral, display heading, pale lede.",
+      "html": "<section class=\"ds-div\"><div class=\"ds-num\" aria-hidden=\"true\">2</div><div><h2>Projects</h2><p>Case standards with their pipeline flow.</p></div></section>",
+      "css": ".ds-div{display:grid;grid-template-columns:5fr 7fr;gap:24px 40px;align-items:end;padding:40px 24px 44px;background:var(--field);color:var(--on-field);border-top:2px solid var(--ink);font-family:var(--font)}.ds-num{font-weight:900;font-size:160px;line-height:.74;letter-spacing:-.06em}.ds-div h2{margin:0;font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1.05}.ds-div p{margin:14px 0 0;font-size:19px;line-height:1.45;color:var(--on-field-mute)}"
+    },
+    {
+      "name": "Contents Row",
+      "kind": "custom",
+      "refersTo": "contents-row",
+      "description": "Numbered contents entry with dotted leader, arrow and mute description.",
+      "html": "<a class=\"ds-toc\" href=\"#\"><span class=\"ds-n\">1.6</span><span class=\"ds-t\"><span>AI agent platforms</span><span class=\"ds-new\">New</span><span class=\"ds-lead\"></span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></span><span class=\"ds-d\">Agents behind gateways that check identity.</span></a>",
+      "css": ".ds-toc{display:grid;grid-template-columns:52px 1fr;column-gap:12px;padding:11px 0 12px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-family:var(--font)}.ds-n{font-weight:700;font-size:15px;color:var(--field);padding-top:4px}.ds-t{display:flex;align-items:baseline;gap:10px;font-size:21px;font-weight:700;letter-spacing:-.01em}.ds-lead{flex:1;border-bottom:2px dotted #b4b8c2;transform:translateY(-5px);min-width:24px}.ds-t svg{width:18px;height:18px;flex:none;align-self:center;color:var(--field);transition:transform .3s cubic-bezier(0.16, 1, 0.3, 1)}.ds-new{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--field);color:var(--on-field);padding:3px 6px;align-self:center}.ds-d{grid-column:2;font-size:15px;color:var(--mute);margin-top:2px}.ds-toc:hover .ds-t>span:first-child{color:var(--field)}.ds-toc:hover svg{transform:translateX(4px)}.ds-toc:focus-visible{outline:2px solid var(--field);outline-offset:3px}"
+    },
+    {
+      "name": "Slash Tags",
+      "kind": "chip",
+      "refersTo": "tags",
+      "description": "Tags as plain mute text with hairline slashes, never pills.",
+      "html": "<ul class=\"ds-tags\"><li>Terraform</li><li>GitHub Actions</li><li>AWS</li></ul>",
+      "css": ".ds-tags{display:flex;flex-wrap:wrap;list-style:none;margin:0;padding:0;font:600 14px var(--font);color:var(--mute)}.ds-tags li+li::before{content:'/';margin:0 8px;color:var(--line)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Standards Manual",
+    "overview": "The site is set like a corporate graphics standards manual. White paper pages hold the content; full-bleed cobalt divider pages open each numbered part. Everything is numbered (1.0, 1.1 to 1.6, 2.1, 3.1, 4.1), every section sits under a 2px black rule, and the work is stated as standards with correct and incorrect usage beside them. Black ink, one grotesk, square corners, no shadows.\n\nDensity is that of a printed reference: long horizontal rows separated by 1px hairlines, a numeric gutter on the left, text that runs wide but stops at a measure. Colour is almost binary: paper and ink carry the pages, cobalt is the only accent and is used either as a whole surface (divider pages, the hero cover, the closing contact page) or as small marks (section numbers, markers, links, the active nav rule). Red appears only as the \"incorrect\" signal.\n\nThe world is light-only by design. There is no dark theme and `color-scheme` is pinned to light.",
+    "keyCharacteristics": [
+      "Paper pages and full-bleed cobalt divider pages, alternating as the manual's parts.",
+      "Section numbering on every heading, nav item and list row.",
+      "2px black rules open sections; 1px hairlines separate rows.",
+      "Hairline 12-column layout guides drawn on the contents page.",
+      "Correct (cobalt, check) and incorrect (red, cross) usage panels.",
+      "One family, Schibsted Grotesk, from 400 to 900; a giant 900 numeral is the signature mark.",
+      "Square corners everywhere; depth comes only from rules and colour fields."
+    ],
+    "rules": [
+      {
+        "name": "The Surface Or Mark Rule",
+        "body": "Cobalt is either the entire page (a divider, cover, page head or close band, full bleed with a 2px ink rule on top) or a small mark on paper. It is never a tinted card, panel, or background block in the middle of a paper page.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Means Wrong Rule",
+        "body": "Red is only the incorrect-usage panel and error states. It never decorates.",
+        "section": "colors"
+      },
+      {
+        "name": "The Every Heading Is Numbered Rule",
+        "body": "A section heading, a sheet heading and a list row carry their manual number (2.3, 4.1) in cobalt or mute. A heading without a number is a page title, not a section.",
+        "section": "typography"
+      },
+      {
+        "name": "The Weight Not Face Rule",
+        "body": "Never add a second family. Contrast comes from 400 against 800/900.",
+        "section": "typography"
+      },
+      {
+        "name": "The Rules Not Shadows Rule",
+        "body": "If something needs separating, draw a rule. Never a shadow, blur, or tonal gradient fill. The repeating-gradient technique that draws the 1px layout guides is a drawing tool for hairlines, not a permission for gradients.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** open every section with either a cobalt divider page or a sheet head under a 2px ink rule, and number it.",
+      "**Do** keep cobalt (#1f3fd1) to whole surfaces or small marks; text on it is white or pale cobalt.",
+      "**Do** separate rows with 1px hairlines and a fixed numeric gutter (52px, 40px on phones).",
+      "**Do** set forms as paper frames with a 2px ink border and a black caption bar, even on cobalt.",
+      "**Do** use the four authored icons (2.25 stroke, square caps) in `currentColor`.",
+      "**Do** keep motion to colour shifts, the nav bar growing from the left, arrow nudges, and the one-time numeral rise, all on cubic-bezier(0.16, 1, 0.3, 1), and all off under reduced motion."
+    ],
+    "donts": [
+      "**Don't** round a corner or add a shadow.",
+      "**Don't** fill a surface with a gradient; the repeating-gradient hairline guides are the only gradient, and they draw lines.",
+      "**Don't** set tags as pills or chips; they are slash-separated text.",
+      "**Don't** use red for anything but incorrect usage and errors.",
+      "**Don't** add a second typeface or a dark theme.",
+      "**Don't** place a cobalt tinted box inside a paper page."
+    ]
+  }
+}

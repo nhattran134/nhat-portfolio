@@ -13,7 +13,7 @@ const { Content } = await render(entry);
 const date = new Date(entry.data.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Kit title={`${entry.data.title}: Nhat Tran's blog`} description={entry.data.excerpt}>
+<Kit title={`${entry.data.title}: Nathan Tran's blog`} description={entry.data.excerpt}>
   <Article back={{ href: '/blog', label: 'All posts' }} title={entry.data.title} meta={date} lead={entry.data.excerpt}>
     <Content />
   </Article>
