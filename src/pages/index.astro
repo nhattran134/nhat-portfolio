@@ -52,6 +52,7 @@ const lanes = JSON.stringify({
     <link rel="stylesheet" href="/assets/ui/terminal-run/fragment.css">
     <link rel="stylesheet" href="/assets/ui/code/fragment.css">
     <link rel="stylesheet" href="/assets/ui/stat/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/chat/fragment.css">
     <link rel="stylesheet" href="/assets/diagrams/diagram.css">
     <script is:inline>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
     <link rel="modulepreload" href="/assets/moments/moments.js">
@@ -78,6 +79,7 @@ const lanes = JSON.stringify({
       @media (max-width: 639px) {
         #work .panel { --p-h: 180px; }
         #work .card > p { display: none; }
+        #agents .frame { aspect-ratio: auto; height: 100%; }
         main > #releases[data-moment]:not(.is-live) { height: calc(2 * 100lvh); }
         .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: var(--s-5); gap: var(--s-5) var(--s-3); }
       }
@@ -295,6 +297,40 @@ const lanes = JSON.stringify({
     </div>
   </section>
 
+  <section class="section g2m" id="agents" aria-labelledby="agents-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="agents-h">AI agent platforms on Kubernetes</h2>
+          <p>Agents, tools and model calls run behind gateways that check identity outside the model, with the same gates I use for releases.</p>
+        </div>
+        <ul class="rows">
+          <li><a class="rows__name link" href="/projects/governed-ai-agent-platform">Governed AI agent platform</a><p>Designed for an enterprise team on Amazon EKS: 18 MCP tool servers behind one gateway, models through LiteLLM. The team built it.</p></li>
+          <li><a class="rows__name link" href="/projects/agent-platform-blueprint">Agent platform blueprint</a><p>Coding, user-facing and operations agents that never hold more access than a person. A reference design, not yet built.</p></li>
+        </ul>
+      </div>
+      <div class="frame frame--split span-6 start-7" data-visual role="img" aria-label="A cost agent declines to show billing figures to a user without billing access">
+        <div class="stage stage--fade-b"><div class="at-rise to-edge fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:48px;--ay-sm:24px" data-ui-still>
+          <div class="ui ui-panel ui-chat" data-ui="chat">
+            <div class="ui-head"><span class="ui-agent" aria-hidden="true"></span><div class="ui-title">Cost agent</div><span class="ui-chat__online">Online</span><span class="ui-spacer"></span></div>
+            <div class="ui-chat__body">
+              <div class="ui-chat__day">Today, 9:41</div>
+              <div class="ui-msg ui-msg--me" data-chat-q><span class="ui-msg__text">What did the payments account spend last week?</span></div>
+              <div class="ui-msg ui-msg--bot" data-chat-a>
+                <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
+                <span class="ui-msg__col">
+                  <span class="ui-chat__answer">I can’t show that: your sign-in has <b>no billing role</b>. Ask a billing viewer, or request the role.</span>
+                  <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Checked at the tool gateway</span></span>
+                </span>
+              </div>
+            </div>
+            <div class="ui-chat__input"><span class="ui-chat__ph">Write a message</span><span class="ui-chat__send" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3.5M3.8 7.5 8 3.3l4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section statement" id="approach" data-moment="word-highlight" aria-label="Approach">
     <div class="wrap">
       <p class="t-label">Approach</p>
@@ -302,7 +338,7 @@ const lanes = JSON.stringify({
     </div>
   </section>
 
-  <section class="section ground-surface" id="experience" style="--hm: 2" aria-labelledby="experience-h">
+  <section class="section ground-surface g2m" id="experience" aria-labelledby="experience-h">
     <div class="wrap grid grid--top">
       <div class="span-5">
         <div class="section-head">
@@ -324,7 +360,7 @@ const lanes = JSON.stringify({
     </div>
   </section>
 
-  <section class="section" id="brief" style="--hm: 2" aria-labelledby="brief-h">
+  <section class="section g2m" id="brief" aria-labelledby="brief-h">
     <div class="wrap grid grid--top">
       <div class="span-5">
         <div class="section-head">
