@@ -1,132 +1,98 @@
 ---
+// The landing page: its hero (the collage dealt for it) over the shared sections; the look is the layout's.
 import Kit from '../layouts/Kit.astro';
 import Sections from '../components/Sections.astro';
 
-const tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg>';
+
+// the runs in the window: workflow, commit, status, its tone
+const runs = [
+  ['TF', 1, 'terraform-plan', 'Add VPC endpoints for prod', 'Queued'],
+  ['MV', 3, 'java-maven', 'Bump Spring Boot to 3.4', 'Queued'],
+  ['NX', 4, 'monorepo-ci', 'Version billing 1.9.0', 'Queued'],
+  ['HL', 2, 'deploy-staging', 'Promote worker 1.8.1', 'Needs approval'],
+  ['TF', 1, 'terraform-apply', 'Rotate KMS key alias', 'Passed'],
+  ['AR', 5, 'argocd-sync', 'portal 5.0.4 to prod', 'Passed'],
+];
 const arrow = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>';
 ---
 
 <Kit home>
   <Fragment slot="head">
+    <link rel="stylesheet" href="/assets/ui/window/fragment.css">
     <link rel="stylesheet" href="/assets/ui/pipeline-board/fragment.css">
     <link rel="stylesheet" href="/assets/ui/checklist/fragment.css">
     <link rel="stylesheet" href="/assets/ui/terminal-run/fragment.css">
     <link rel="stylesheet" href="/assets/ui/stat/fragment.css">
     <link rel="stylesheet" href="/assets/ui/chat/fragment.css">
-    <link rel="stylesheet" href="/assets/ui/diff-review/fragment.css">
-    <link rel="stylesheet" href="/assets/ui/notify/fragment.css">
     <link rel="stylesheet" href="/assets/diagrams/diagram.css">
     <script is:inline>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
     <link rel="modulepreload" href="/assets/moments/moments.js">
     <link rel="modulepreload" href="/assets/moments/lib.js">
     <link rel="modulepreload" href="/assets/moments/pinned-chapters/moment.js">
-    <link rel="modulepreload" href="/assets/moments/word-highlight/moment.js">
+    <link rel="modulepreload" href="/assets/moments/counter-rolls/moment.js">
     <style is:inline>
-      /* page CSS: the hero collage's small pieces, a real mark on its tile and a short note */
-      .pc-tile { display: grid; place-items: center; background: transparent; }
-      .pc-note { display: grid; align-content: center; gap: var(--s-1); padding: var(--s-4); }
-      .pc-note small { font-size: var(--t-label); color: var(--muted); }
-      .pc-note b { font-weight: 500; }
-      @media (max-width: 639px) {
-        .ly-collage .pc-a { left: 4% !important; width: 92% !important; }
-        .ly-collage :is(.pc-tile, .pc-note) { display: none; }
-      }
+      /* page CSS inside the hero art: the window keeps its cut margin, the result card sits 32px in from
+         the frame's lower left, 300 wide, over the window */
+      .hero__art .ui-win__main { padding-right: var(--ly-cut-room); }
+      /* the pause disc sits on the light glass: its focus ring takes the dark ink there */
+      .hero__art > button:is(.ui-pause, .loop-pause):focus-visible { outline-color: var(--p-inv-ink); }
+      .hero__art > .ly-piece--note { left: var(--s-6); bottom: var(--s-6); width: min(300px, calc(100% - 2 * var(--s-6)));
+        display: grid; gap: var(--s-2); padding: var(--s-4); border-radius: var(--r-md);
+        background: var(--frag, var(--surface)); color: var(--ink); border: 1px solid var(--line); }
+      .pc-card__row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+      .pc-card__row b { font-weight: 500; }
+      .pc-card__line { display: flex; gap: var(--s-2); font-size: var(--t-small); }
+      .pc-card__line i { font-style: normal; color: var(--accent); }
     </style>
   </Fragment>
 
-  <section class="hero hero--triptych" data-enter aria-labelledby="hero-h">
+  <section class="hero hero--collage" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
-      <div class="span-3">
-        <h1 id="hero-h">CI/CD and releases for enterprises</h1>
-        <p class="hero__lead">I’m Nathan Tran, a platform engineer in Ho Chi Minh City: more than 35 pipelines since 2020, GitHub Actions to Terraform.</p>
+      <div class="hero__text span-5">
+        <h1 id="hero-h">CI/CD and releases for enterprise teams</h1>
+        <p class="hero__lead">I’m Nathan Tran, a platform engineer in Ho Chi Minh City. I build GitHub Actions and Terraform pipelines and run the releases they ship, on AWS, Azure and Google Cloud.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#brief">Send a brief<Fragment set:html={arrow} /></a><a class="btn btn--secondary" href="#work">See the pipelines</a></div>
+        <p class="hero__proof">Pipelines on GitHub Actions, GitLab CI and Jenkins.</p>
       </div>
-      <div class="ly-collage span-6 start-4" data-fx="painterly-landscape" data-fx-seed="7" data-fx-palette='{"bg":"#a3b0b6","accent":"#c49a6c"}' data-fx-params='{"blur":1,"brush":0.35,"slope":0,"hillY":0.3,"horizon":0.62}' data-visual role="img" aria-label="Three views of the work: a Terraform pipeline waiting for approval, a code review that swaps stored keys for OIDC, and release notifications from Argo CD">
-        <div class="ly-collage__set is-on">
-          <div class="ly-piece pc-a ui ui-panel ui-pipe" style="left: 13%; top: 6%; width: 74%" data-ui="pipeline-board" data-ui-still>
-            <div class="ui-pipe__head">
-              <svg class="ui-icon ui-pipe__branch" viewBox="0 0 16 16" aria-hidden="true"><circle cx="4.5" cy="3.5" r="1.5"/><circle cx="4.5" cy="12.5" r="1.5"/><circle cx="11.5" cy="5" r="1.5"/><path d="M4.5 5v6M11.5 6.5c0 2.6-2.2 3.6-5.6 4.6"/></svg>
-              <span class="ui-pipe__repo">platform/infra-live</span><i class="ui-pipe__slash">/</i><code class="ui-pipe__ref">main</code>
-              <span class="ui-pipe__run">#418</span>
-              <span class="ui-spacer"></span>
-              <span class="ui-pipe__total"><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8.5" r="5.5"/><path d="M8 5.5v3l2 1.25M6.5 1.75h3"/></svg><span data-pipe-total>2m 31s</span></span>
-              <span class="ui-chip ui-chip--ink ui-chip--live ui-pipe__chip" data-pipe-chip data-done="Applied">Waiting</span>
+      <div class="hero__art span-6 start-7" data-fx="fluted-glass" data-fx-seed="11" data-visual role="img" aria-label="A list of GitHub Actions runs moving from queued to passed, and a release card going live after approval and three security gates">
+        <div class="ly-piece ly-piece--main" aria-hidden="true">
+          <div class="ui ui-panel ui-win" data-ui="window" data-open="Queued" data-work="Running" data-done="Passed" data-ui-still>
+            <div class="ui-win__bar">
+              <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ui-win__crumb">Actions <i>/</i> <b>All runs</b></span>
             </div>
-            <div class="ui-pipe__commit">
-              <span class="ui-avatar" data-tone="4">NT</span>
-              <span class="ui-pipe__msg">Add VPC endpoints for prod</span>
-              <code class="ui-pipe__sha">9c41e2b</code>
-              <button class="ui-btn ui-btn--ghost ui-btn--sm ui-pipe__btn" type="button" tabindex="-1" data-pipe-btn data-done="Re-run">Cancel</button>
-            </div>
-            <ol class="ui-pipe__steps">
-              <li class="ui-pipe__step is-done" data-step="checkout"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img data-icon="github" src="/assets/icons/github.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Checkout</span></span><code class="ui-pipe__cmd">actions/checkout</code><span class="ui-pipe__time" data-time>3s</span><span class="ui-pipe__bar"><i></i></span></li>
-              <li class="ui-pipe__step is-done" data-step="validate"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img data-icon="terraform" src="/assets/icons/terraform.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Validate</span></span><code class="ui-pipe__cmd">terraform validate</code><span class="ui-pipe__time" data-time>11s</span><span class="ui-pipe__bar"><i></i></span></li>
-              <li class="ui-pipe__step is-done" data-step="plan"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img data-icon="terraform" src="/assets/icons/terraform.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Plan</span></span><code class="ui-pipe__cmd">terraform plan</code><span class="ui-pipe__time" data-time>1m 04s</span><span class="ui-pipe__bar"><i></i></span></li>
-              <li class="ui-pipe__step is-run" data-step="approve" style="--k:0.6"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img data-icon="github" src="/assets/icons/github.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Approve</span></span><code class="ui-pipe__cmd">environment: prod</code><span class="ui-pipe__time" data-time="48s">29s</span><span class="ui-pipe__bar"><i></i></span></li>
-              <li class="ui-pipe__step" data-step="apply"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img data-icon="aws" src="/assets/icons/aws.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Apply</span></span><code class="ui-pipe__cmd">terraform apply</code><span class="ui-pipe__time" data-time="25s">Queued</span><span class="ui-pipe__bar"><i></i></span></li>
-            </ol>
-            <div class="ui-pipe__log" aria-hidden="true">
-              <span class="ui-pipe__line" data-step="plan"><b>$</b>terraform plan -out=prod.tfplan</span>
-              <span class="ui-pipe__line" data-step="plan">Plan: 6 to add, 1 to change, 0 to destroy.</span>
-              <span class="ui-pipe__line is-on" data-step="approve">Waiting for 2 reviewers on prod</span>
-              <span class="ui-pipe__line is-on" data-step="approve">Checkov: 212 passed, 0 failed</span>
-              <span class="ui-pipe__line" data-step="apply"><b>$</b>terraform apply prod.tfplan</span>
+            <div class="ui-win__body">
+              <nav class="ui-win__side" aria-hidden="true">
+                <span class="ui-win__nav is-on">All runs<em>128</em></span>
+                <span class="ui-win__nav">Queued<em>3</em></span>
+                <span class="ui-win__nav">Waiting<em>1</em></span>
+                <span class="ui-win__nav">Failed</span>
+                <span class="ui-win__label">Workflows</span>
+                <span class="ui-win__nav"><span class="ui-win__hash">#</span>terraform</span>
+                <span class="ui-win__nav"><span class="ui-win__hash">#</span>deploy</span>
+              </nav>
+              <div class="ui-win__main">
+                <div class="ui-win__cols" aria-hidden="true"><span>Workflow</span><span>Commit</span><span>Status</span></div>
+                <ul class="ui-win__rows">
+                  {runs.map(([av, tone, wf, msg, st]) => (
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone={tone}>{av}</span><span class="ui-win__who">{wf}</span><span class="ui-win__sub">{msg}</span><span class={`ui-win__st${st === 'Passed' ? ' is-done' : st === 'Needs approval' ? ' is-you' : ''}`} data-st>{st}</span></li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="ly-piece pc-tile" style="left: 4%; top: 74%; width: 14%; height: 12%"><span class="ic-tile ic-tile--56"><img class="ic ic-40" data-icon="aws" src="/assets/icons/aws.svg" alt="" width="40" height="24"></span></div>
-          <div class="ly-piece pc-note" style="left: 44%; top: 74%; width: 52%; height: 22%"><small>Production</small><b>Apply waits for two approvals</b><span>OIDC sign-in, no stored keys</span></div>
         </div>
-        <div class="ly-collage__set" aria-hidden="true">
-          <div class="ly-piece pc-a ui ui-panel ui-diff" style="left: 13%; top: 6%; width: 74%" data-ui="diff-review" data-ui-still>
-              <div class="ui-diff__head">
-                <span class="ui-diff__tool" aria-hidden="true"><img loading="lazy" decoding="async" data-icon="github-actions" src="/assets/icons/github-actions.svg" alt="" width="20" height="20"></span>
-                <span class="ui-diff__repo">platform/api</span><i class="ui-diff__slash" aria-hidden="true">/</i>
-                <span class="ui-diff__path"><span class="ui-diff__dir">.github/workflows/</span><b>deploy.yml</b></span>
-                <span class="ui-spacer"></span>
-                <span class="ui-diff__stat"><b class="is-add"><span class="ui-diff__was">+1</span><span class="ui-diff__now">+2</span></b><b class="is-del"><span class="ui-diff__was">&minus;1</span><span class="ui-diff__now">&minus;1</span></b><span class="ui-diff__bar" aria-hidden="true"><i class="is-add"></i><i class="is-add"></i><i class="is-del"></i></span></span>
-              </div>
-              <div class="ui-diff__hunk"><span>@@ -14,5 +14,6 @@</span> <em class="ui-diff__sig">deploy:</em></div>
-              <div class="ui-diff__lines">
-                <div class="ui-diff__ln"><i>14</i><i>14</i><span class="ui-diff__code" data-i="1"><span class="ui-diff__ind">  </span><span class="k">uses:</span> aws-actions/configure-aws-credentials@v4</span></div>
-                <div class="ui-diff__ln is-del"><i>15</i><i></i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><mark class="ui-diff__w">aws-access-key-id: secrets.AWS_KEY</mark></span></div>
-                <div class="ui-diff__ln is-add"><i></i><i>15</i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><mark class="ui-diff__w">role-to-assume: role/deploy-prod</mark></span></div>
-                <div class="ui-diff__ln is-target" data-diff-target><i>16</i><i>16</i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><span class="f">aws-region:</span> ap-southeast-1</span></div>
-                <div class="ui-diff__sug" data-diff-sug><div class="ui-diff__ln is-add"><i></i><i>17</i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><span class="f">role-duration-seconds:</span> <mark class="ui-diff__w"><span class="n">900</span></mark></span></div></div>
-                <div class="ui-diff__thread">
-                  <div class="ui-diff__by">
-                    <span class="ui-avatar" data-tone="4">NT</span>
-                    <span class="ui-diff__name">Nathan Tran</span>
-                    <span class="ui-diff__time">2m</span>
-                    <span class="ui-spacer"></span>
-                    <span class="ui-diff__act" data-diff-act>
-                      <button class="ui-btn ui-btn--sm ui-diff__apply" type="button" tabindex="-1" data-diff-apply><span class="ui-diff__lbl">Apply suggestion</span><i class="ui-diff__spin" aria-hidden="true"></i></button>
-                      <span class="ui-chip ui-diff__done">Applied</span>
-                    </span>
-                  </div>
-                  <div class="ui-diff__msg">Keep the token short-lived: 15 minutes.</div>
-                </div>
-                <div class="ui-diff__ln"><i>17</i><i>18</i><span class="ui-diff__code" data-i="1"><span class="ui-diff__ind">  </span><span class="k">run:</span> terraform apply prod.tfplan</span></div>
-              </div>
-            </div>
-          <div class="ly-piece pc-tile" style="left: 4%; top: 74%; width: 14%; height: 12%"><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon="github-actions" src="/assets/icons/github-actions.svg" alt="" width="40" height="40"></span></div>
-          <div class="ly-piece pc-note" style="left: 44%; top: 74%; width: 52%; height: 22%"><small>Code review</small><b>Stored keys swapped for OIDC</b><span>One role per environment</span></div>
-        </div>
-        <div class="ly-collage__set" aria-hidden="true">
-          <div class="ly-piece pc-a ui ui-notify" style="left: 4%; top: 6%; width: 74%" data-ui="notify" data-ui-still>
-              <ul class="ui-notify__list" data-notify-list>
-                <li class="ui-note"><span class="ui-avatar ui-note__av" data-tone="4">NT</span><span class="ui-note__text"><span class="ui-note__title">Release 2026.11 promoted to prod<time>now</time></span><span class="ui-note__body">14 merge requests, CAB approved Tuesday</span></span><span class="ui-btn ui-btn--sm ui-note__btn">Open</span></li>
-                <li class="ui-note"><span class="ui-note__ico"><img loading="lazy" decoding="async" data-icon="argo" src="/assets/icons/argo.svg" alt="" width="20" height="20"></span><span class="ui-note__text"><span class="ui-note__title">worker 1.8.1 synced<time>3m</time></span><span class="ui-note__body">Health check passed on 3 of 3 pods</span></span></li>
-                <li class="ui-note"><span class="ui-note__ico"><img loading="lazy" decoding="async" data-icon="argo" src="/assets/icons/argo.svg" alt="" width="20" height="20"></span><span class="ui-note__text"><span class="ui-note__title">portal 5.0.3 rolled back<time>1d</time></span><span class="ui-note__body">Failed health check, previous version restored</span></span></li>
-              </ul>
-            </div>
-          <div class="ly-piece pc-tile" style="left: 82%; top: 6%; width: 14%; height: 12%"><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon="argo" src="/assets/icons/argo.svg" alt="" width="31" height="40"></span></div>
-          <div class="ly-piece pc-note" style="left: 44%; top: 74%; width: 52%; height: 22%"><small>GitOps</small><b>Rollback is one Argo CD sync</b><span>Each component keeps its own version</span></div>
+        <div class="ly-piece ly-piece--note" aria-hidden="true" data-ly-steps="700">
+          <div class="pc-card__row"><b>Release 2026.11</b><span class="ui-chip" data-step data-step-at="4">Live</span></div>
+          <div class="pc-card__line" data-step><i>✓</i><span>CAB approved on Tuesday</span></div>
+          <div class="pc-card__line" data-step><i>✓</i><span>3 security gates passed</span></div>
+          <div class="pc-card__line" data-step><i>✓</i><span>Promoted to prod at 16:02</span></div>
         </div>
       </div>
-      <div class="span-3 start-10 hero__cta"><a class="btn btn--primary" href="#brief">Send a brief<Fragment set:html={arrow} /></a></div>
     </div></div>
   </section>
 
-  <Sections variant="statement" />
+  <Sections />
 
   <Fragment slot="scripts">
     <script type="module" is:inline src="/assets/diagrams/mount.js"></script>
