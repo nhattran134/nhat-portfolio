@@ -1,32 +1,20 @@
 ---
-import Base from '../../layouts/Base.astro';
-import PageHead from '../../components/PageHead.astro';
-import PostList from '../../components/PostList.astro';
+import Kit from '../../layouts/Kit.astro';
+import Article from '../../components/Article.astro';
 import { getCollection } from 'astro:content';
-import { byDate } from '../../data/content';
 
-const posts = (await getCollection('blog')).filter((p) => !p.data.draft).sort(byDate);
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Base title="Notes | Nathan Tran" description="Notes on CI/CD pipelines, release management, cloud infrastructure and AI agent platforms.">
-  <PageHead n="4" title="Notes" back={{ href: '/#notes', label: 'Home' }}>
-    <p>Write-ups from the work: pipeline patterns, release practice and AI agent platforms.</p>
-  </PageHead>
-  <section class="sheet">
-    <div class="wrap">
-      <div class="sheet-head">
-        <h2 class="h3"><span class="num">4.1–4.{posts.length}</span> All notes</h2>
-        <span>Newest first</span>
-      </div>
-      <PostList posts={posts} />
-    </div>
-  </section>
-</Base>
-
-<style>
-  .h3 {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0;
-  }
-</style>
+<Kit title="Blog: CI/CD and release notes by Nathan Tran" description="Posts on CI/CD pipelines, Terraform, cloud infrastructure and release management.">
+  <Article back={{ href: '/', label: 'Home' }} title="Posts on pipelines and releases">
+    <ul class="rows">
+      {posts.map((post) => (
+        <li><a class="rows__name link" href={`/blog/${post.id}`}>{post.data.title}</a><p>{post.data.excerpt}</p><span class="rows__value">{fmt(post.data.date)}</span></li>
+      ))}
+    </ul>
+  </Article>
+</Kit>

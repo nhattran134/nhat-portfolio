@@ -8,6 +8,18 @@
         "value": "sf mono",
         "createdAt": "2026-11-11T13:53:31.274Z",
         "reason": "Claude: system monospace stack used only for inline/block code in .prose, documented in DESIGN.md typography notes; not a UI face"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "source serif 4",
+        "createdAt": "2026-11-12T03:01:51.435Z",
+        "reason": "user chose the taste-skill rebuild (PR #1) over the standards-manual design that DESIGN.md still records; pairing dealt by start.mjs"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "libre franklin",
+        "createdAt": "2026-11-12T03:01:51.453Z",
+        "reason": "user chose the taste-skill rebuild (PR #1) over the standards-manual design that DESIGN.md still records; pairing dealt by start.mjs"
       }
     ]
   }

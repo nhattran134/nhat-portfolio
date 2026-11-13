@@ -1,29 +1,19 @@
 ---
-import Base from '../../layouts/Base.astro';
-import PageHead from '../../components/PageHead.astro';
+import Kit from '../../layouts/Kit.astro';
 import Article from '../../components/Article.astro';
-import Flow from '../../components/Flow.astro';
 import { getCollection, render } from 'astro:content';
-import { byDate } from '../../data/content';
-import CloseBand from '../../components/CloseBand.astro';
 
 export async function getStaticPaths() {
-  const projects = (await getCollection('projects')).sort(byDate);
-  return projects.map((entry, i) => ({ params: { id: entry.id }, props: { entry, n: i + 1 } }));
+  const projects = await getCollection('projects');
+  return projects.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
-const { entry, n } = Astro.props;
+const { entry } = Astro.props;
 const { Content } = await render(entry);
-const steps = entry.data.flow;
 ---
 
-<Base title={`${entry.data.title} | Nathan Tran`} description={entry.data.description}>
-  <PageHead n={`2.${n}`} title={entry.data.title} back={{ href: '/#work', label: 'All work' }}>
-    <p>{entry.data.description}</p>
-  </PageHead>
-  <Article specs={[['Stack', entry.data.tags]]}>
-    {steps && <div slot="aside"><Flow steps={steps} label={`Figure 2.${n} · Flow`} compact /></div>}
+<Kit title={`${entry.data.title}: a pipeline project by Nathan Tran`} description={entry.data.description}>
+  <Article back={{ href: '/#work', label: 'All pipeline projects' }} title={entry.data.title} meta={entry.data.tags.join(', ')} lead={entry.data.description}>
     <Content />
   </Article>
-  <CloseBand />
-</Base>
+</Kit>

@@ -1,84 +1,33 @@
 ---
-// Body of a post or project page: a margin column of specs beside the prose.
+// A long-form page (blog post, project, blog list) on the kit: one section that grows with its text.
 interface Props {
-  specs: [string, string | string[]][];
+  back: { href: string; label: string };
+  title: string;
+  meta?: string;
+  lead?: string;
 }
-const { specs } = Astro.props;
+const { back, title, meta, lead } = Astro.props;
 ---
 
-<div class="wrap article">
-  <aside aria-label="Details">
-    <dl>
-      {specs.map(([k, v]) => (
-        <div>
-          <dt>{k}</dt>
-          <dd>{Array.isArray(v) ? <ul class="tags">{v.map((t) => <li>{t}</li>)}</ul> : v}</dd>
-        </div>
-      ))}
-    </dl>
-    <slot name="aside" />
-  </aside>
-  <div class="prose">
-    <slot />
+<section class="section article" aria-labelledby="article-h">
+  <div class="wrap">
+    <div class="measure stack-6">
+      <a class="link" href={back.href}>{back.label}</a>
+      {meta && <p class="t-label muted">{meta}</p>}
+      <h1 id="article-h">{title}</h1>
+      {lead && <p class="t-lead">{lead}</p>}
+      <div class="article__body"><slot /></div>
+    </div>
   </div>
-</div>
+</section>
 
-<style>
-  .article {
-    display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-    gap: 32px 40px;
-    padding-block: 40px 88px;
-    align-items: start;
-  }
-
-  aside {
-    position: sticky;
-    top: calc(var(--head-h) + 24px);
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
-
-  dl {
-    border-top: 2px solid var(--ink);
-  }
-
-  dl > div {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  dt {
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--mute);
-  }
-
-  dd {
-    margin-top: 2px;
-    font-weight: 600;
-  }
-
-  dd .tags {
-    color: var(--ink);
-    font-size: 15px;
-  }
-
-  .prose > :global(:first-child) {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  @media (max-width: 800px) {
-    .article {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    aside {
-      position: static;
-    }
-  }
+<style is:global>
+  /* sub-pages hold long text: the section grows with it instead of one fixed screen */
+  main > section.article { height: auto; min-height: 100svh; padding-top: calc(var(--nav) + var(--hgap)); }
+  .article h1 { font: var(--display-weight) var(--t-h2) / 1.1 var(--font-display); letter-spacing: var(--display-tracking); margin: 0; }
+  .article__body { line-height: 1.7; }
+  .article__body h2 { font: var(--display-weight) var(--t-h3) / 1.2 var(--font-display); margin: var(--s-7) 0 var(--s-4); }
+  .article__body ul { padding-left: var(--s-5); }
+  .article__body li + li { margin-top: var(--s-2); }
+  .article__body pre { overflow-x: auto; padding: var(--s-5); border-radius: var(--r-md); background: var(--surface); font-size: var(--t-small); }
 </style>

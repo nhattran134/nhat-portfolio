@@ -1,29 +1,20 @@
 ---
-import Base from '../../layouts/Base.astro';
-import PageHead from '../../components/PageHead.astro';
+import Kit from '../../layouts/Kit.astro';
 import Article from '../../components/Article.astro';
 import { getCollection, render } from 'astro:content';
-import { byDate, formatDate } from '../../data/content';
-import CloseBand from '../../components/CloseBand.astro';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter((p) => !p.data.draft).sort(byDate);
-  return posts.map((entry, i) => ({ params: { id: entry.id }, props: { entry, n: i + 1 } }));
+  const posts = await getCollection('blog');
+  return posts.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
-const { entry, n } = Astro.props;
+const { entry } = Astro.props;
 const { Content } = await render(entry);
+const date = new Date(entry.data.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Base title={`${entry.data.title} | Nathan Tran`} description={entry.data.excerpt}>
-  <PageHead n={`4.${n}`} title={entry.data.title} back={{ href: '/blog', label: 'All notes' }}>
-    <p>{entry.data.excerpt}</p>
-  </PageHead>
-  <Article specs={[
-    ['Published', formatDate(entry.data.date)],
-    ['Topics', entry.data.tags],
-  ]}>
+<Kit title={`${entry.data.title}: Nathan Tran's blog`} description={entry.data.excerpt}>
+  <Article back={{ href: '/blog', label: 'All posts' }} title={entry.data.title} meta={date} lead={entry.data.excerpt}>
     <Content />
   </Article>
-  <CloseBand />
-</Base>
+</Kit>
