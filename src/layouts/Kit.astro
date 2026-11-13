@@ -20,7 +20,7 @@ const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
+<html lang="en" data-type="software" data-radius="sharp" data-ground="sky" data-buttons="arrow" data-motion>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -34,53 +34,89 @@ const year = new Date().getFullYear();
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href={canonicalURL}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#dfdedb">
-<meta name="site-kind" content="other">
-<meta name="page-type" content="service">
+<meta name="theme-color" content="#161c1a">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Libre+Franklin:wght@400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/system.css">
 <link rel="stylesheet" href="/assets/ui/cards.css">
 <link rel="stylesheet" href="/assets/motion/motion.css">
+<link rel="stylesheet" href="/assets/backgrounds/backgrounds.css">
 <link rel="stylesheet" href="/assets/layout/layout.css">
 <link rel="stylesheet" href="/assets/icons/icon.css">
+<link rel="stylesheet" href="/assets/ui/base.css">
+<link rel="stylesheet" href="/assets/ui/code/fragment.css">
 <style is:inline>
 :root {
-  --p-bg: #dfdedb; --p-surface: #d3d2ce; --p-ink: #26251e; --p-muted: #5a5850;
-  --p-accent: #2456d6; --p-accent-ink: #ffffff; --p-action: #2456d6; --p-action-ink: #ffffff;
-  --p-inv-bg: #26251e; --p-inv-surface: #313029; --p-inv-ink: #dfdedb; --p-inv-muted: #9e9d99;
-  --p-inv-accent: #dfdedb; --p-inv-accent-ink: #26251e; --p-inv-action: #dfdedb; --p-inv-action-ink: #26251e;
-  --font-display: "Source Serif 4", Georgia, serif;
-  --font-text: "Libre Franklin", system-ui, sans-serif;
-  --display-weight: 400;
-  --display-tracking: -0.02em;
-  --display-tracking-xl: -0.026em;
+  --p-bg: #161c1a; --p-surface: #1f2725; --p-ink: #e3e2da; --p-muted: #8e948d;
+  --p-accent: #9fc7b8; --p-accent-ink: #161c1a; --p-action: #9fc7b8; --p-action-ink: #161c1a;
+  --p-inv-bg: #e3e2da; --p-inv-surface: #d3d2cb; --p-inv-ink: #161c1a; --p-inv-muted: #555a55;
+  --p-inv-accent: #161c1a; --p-inv-accent-ink: #e3e2da; --p-inv-action: #161c1a; --p-inv-action-ink: #e3e2da;
+  --font-display: "Geist", system-ui, sans-serif;
+  --font-text: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
 }
 /* under 360px the name, the main button and the menu need the mark's room in the bar */
 @media (max-width: 359px) { .nav__bar .nav__logo .mark { display: none; } }
 </style>
 <slot name="head" />
+<script is:inline src="/assets/backgrounds/backgrounds.js"></script>
 <script is:inline>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body>
-<!-- type: service (a platform engineer people hire)
-     deal: hero split, nav nav-split (re-dealt: no panel, no photographs), close close-word head row without the name
-     (re-dealt from close-photo: no photograph), footer footer-dark (re-dealt from footer-visit: no door to visit),
-     rhythm surface-pairs (#experience), buttons arrow, mark stack, palette stone-blueprint, type source-serif
+<!-- type: software (a platform engineer whose subject is developer tooling and AI agent platforms)
+     deal: hero triptych, nav nav-mega (re-dealt: nav-split is not on the software list), close close-word head row
+     without the name, footer footer-dark, rhythm surface-pairs (#experience), buttons arrow, mark stack,
+     palette green-black-bone, type geist, radius sharp, lit ground sky
+     effect: painterly-landscape behind the hero collage (the one [data-visual])
      moments: pinned-chapters in #releases (the release walks through three steps), word-highlight in #approach
-     (the one statement about monorepo pipelines) -->
-<header class="nav nav--split">
+     (the one statement about monorepo pipelines); loops: one per card group (#work, #agents) -->
+<header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href={home ? '#top' : '/'}><span class="mark" data-mark="stack" aria-hidden="true"></span>Nathan Tran</a>
     <nav class="nav__links" aria-label="Main">
       <div class="nav__item"><a class="nav__link" href={to('services')}>Services</a></div>
       <div class="nav__item"><a class="nav__link" href={to('releases')}>Releases</a></div>
-      <div class="nav__item"><a class="nav__link" href={to('work')}>Work</a></div>
+      <div class="nav__item">
+        <a class="nav__link" href={to('work')}>Work <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-3">
+              <p class="t-label">Pipelines</p>
+              <a href="/projects/bdo-crm-pipeline">Monorepo CI/CD<span>.NET, a version per component</span></a>
+              <a href="/projects/terraform-blueprint">Terraform pipeline<span>AWS, Azure and Google Cloud</span></a>
+              <a href="/projects/java-maven-pipeline">Java services<span>Maven to Kubernetes with Helm</span></a>
+              <a href="/projects/aws-landing-zone">AWS landing zone<span>Accounts, guardrails, FinOps</span></a>
+            </div>
+            <div class="menu-col span-3">
+              <p class="t-label">AI agents</p>
+              <a href="/projects/governed-ai-agent-platform">Governed agent platform<span>Amazon EKS, 18 MCP tools</span></a>
+              <a href="/projects/agent-platform-blueprint">Agent platform blueprint<span>Coding, user and ops agents</span></a>
+            </div>
+            <a class="menu-card span-3 start-10" href="/projects/governed-ai-agent-platform">
+              <div class="panel"><div class="stage stage--fade-br"><div class="at-corner" style="--ax:24px;--ay:24px" data-ui-still>
+                <div class="ui ui-panel ui-code" data-ui="code">
+                  <div class="ui-code__tabs"><span class="ui-code__tab is-on"><i class="ui-code__lang">YML</i>tools.yaml</span></div>
+                  <pre class="ui-code__pre"><code><span class="ui-code__ln" data-n="1"><span class="f">billing.read:</span></span>
+<span class="ui-code__ln is-mark" data-n="2">  <span class="f">jwt:</span> entra-id</span>
+<span class="ui-code__ln" data-n="3">  <span class="f">role:</span> billing.viewer</span></code></pre>
+                </div>
+              </div></div></div>
+              <span class="t-card">New: governed agents</span>
+              <span class="t-small muted">Identity checked at the gateway</span>
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="nav__item"><a class="nav__link" href={to('experience')}>Experience</a></div>
     </nav>
-    <a class="nav__logo" href={home ? '#top' : '/'}><span class="mark" data-mark="stack" aria-hidden="true"></span>Nathan Tran</a>
     <div class="nav__actions">
       <a class="btn btn--primary" href={to('brief')}>Send a brief</a>
     </div>
@@ -116,8 +152,8 @@ const year = new Date().getFullYear();
       <div class="footer__legal">
         <span>&copy; {year} Nathan Tran. Product names and logos are trademarks of their owners.</span>
         <div class="socials">
-          <a href="https://linkedin.com/in/nathantr" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/icons/linkedin.svg" alt="" width="20" height="20"></a>
-          <a href="https://github.com/nhattran134" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="ic-ink" src="/assets/icons/github.svg" alt="" width="20" height="20"></a>
+          <a href="https://linkedin.com/in/nathantr" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img loading="lazy" decoding="async" src="/assets/icons/linkedin.svg" alt="" width="20" height="20"></a>
+          <a href="https://github.com/nhattran134" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img loading="lazy" decoding="async" class="ic-ink" src="/assets/icons/github.svg" alt="" width="20" height="20"></a>
         </div>
       </div>
     </div>

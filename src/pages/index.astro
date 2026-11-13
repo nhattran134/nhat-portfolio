@@ -32,8 +32,6 @@ const lanes = JSON.stringify({
   layout: 'lanes',
   alt: 'A push to main is checked for changed components, and each changed one is built and versioned on its own.',
   curve: 'curve',
-  ground: 'none',
-  motion: { pulse: 'none' },
   input: { label: 'Push', icon: 'github' },
   core: { label: 'Find changes', icon: 'github-actions' },
   lanes: [
@@ -46,13 +44,13 @@ const lanes = JSON.stringify({
 
 <Kit home>
   <Fragment slot="head">
-    <link rel="stylesheet" href="/assets/ui/base.css">
     <link rel="stylesheet" href="/assets/ui/pipeline-board/fragment.css">
     <link rel="stylesheet" href="/assets/ui/checklist/fragment.css">
     <link rel="stylesheet" href="/assets/ui/terminal-run/fragment.css">
-    <link rel="stylesheet" href="/assets/ui/code/fragment.css">
     <link rel="stylesheet" href="/assets/ui/stat/fragment.css">
     <link rel="stylesheet" href="/assets/ui/chat/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/diff-review/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/notify/fragment.css">
     <link rel="stylesheet" href="/assets/diagrams/diagram.css">
     <script is:inline>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
     <link rel="modulepreload" href="/assets/moments/moments.js">
@@ -61,12 +59,17 @@ const lanes = JSON.stringify({
     <link rel="modulepreload" href="/assets/moments/word-highlight/moment.js">
     <style is:inline>
       /* page CSS: only inside visuals, and one --p-h for the card group */
-      .hero__media .stage { position: absolute; inset: 0; }
+      /* the hero collage's small pieces: a real mark on its tile, and a short note */
+      .pc-tile { display: grid; place-items: center; background: transparent; }
+      .pc-note { display: grid; align-content: center; gap: var(--s-1); padding: var(--s-4); }
+      .pc-note small { font-size: var(--t-label); color: var(--muted); }
+      .pc-note b { font-weight: 500; }
       #work .panel { --p-h: 320px; }
       /* the tools: real marks over their names, four across inside the frame */
       .tools { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); padding: var(--s-7) 0; align-content: center; height: 100%; }
       .tools > div { display: grid; justify-items: center; gap: var(--s-3); text-align: center; }
-      .brief-frame { height: 320px; margin-top: var(--s-7); }
+      .brief-frame { --p-h: 320px; margin-top: var(--s-7); }
+      #agents .panel { --p-h: 540px; }
       /* sections planned again for the upright tablet */
       @media (min-width: 640px) and (max-width: 1023px) {
         #services { --h: 2; }
@@ -78,24 +81,30 @@ const lanes = JSON.stringify({
       /* the phone: shorter panels, the card lines left to the project pages */
       @media (max-width: 639px) {
         #work .panel { --p-h: 180px; }
+        .ly-collage .pc-a { left: 4% !important; width: 92% !important; }
+        .ly-collage :is(.pc-tile, .pc-note) { display: none; }
+        /* captions sit under the tiles on the lit panel here, so they take its ink */
+        #work .dg-node--tile .dg-cap { color: var(--ground-ink); }
+        /* the checklist panel fills the first phone screen of the form section */
+        #brief .span-5 { display: flex; flex-direction: column; }
+        #brief .brief-frame { flex: 1 1 auto; --p-h: auto; }
         #work .card > p { display: none; }
-        #agents .frame { aspect-ratio: auto; height: 100%; }
+        #agents .panel { --p-h: 100%; }
         main > #releases[data-moment]:not(.is-live) { height: calc(2 * 100lvh); }
         .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: var(--s-5); gap: var(--s-5) var(--s-3); }
       }
     </style>
   </Fragment>
 
-  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+  <section class="hero hero--triptych" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
-      <div class="hero__text span-5">
-        <h1 id="hero-h">CI/CD and releases for enterprise teams</h1>
-        <p class="hero__lead">I’m Nathan Tran, a platform engineer in Ho Chi Minh City. I build GitHub Actions and Terraform pipelines and run the releases they ship: more than 35 pipelines since 2020.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="#brief">Send a brief<Fragment set:html={arrow} /></a><a class="btn btn--secondary" href="#work">See the pipelines</a></div>
+      <div class="span-3">
+        <h1 id="hero-h">CI/CD and releases for enterprises</h1>
+        <p class="hero__lead">I’m Nathan Tran, a platform engineer in Ho Chi Minh City: more than 35 pipelines since 2020, GitHub Actions to Terraform.</p>
       </div>
-      <div class="hero__media span-6 start-7" data-visual role="img" aria-label="A Terraform pipeline run on GitHub Actions, planned and waiting for two approvals before it applies to production">
-        <div class="stage"><div class="at-rise fit" style="--fit-max:520px;--ax:max(32px, 50% - 260px);--ay:48px;--ay-sm:24px" data-ui-still>
-          <div class="ui ui-panel ui-pipe" data-ui="pipeline-board">
+      <div class="ly-collage span-6 start-4" data-fx="painterly-landscape" data-fx-seed="7" data-fx-palette='{"bg":"#a3b0b6","accent":"#c49a6c"}' data-fx-params='{"blur":1,"brush":0.35,"slope":0,"hillY":0.3,"horizon":0.62}' data-visual role="img" aria-label="Three views of the work: a Terraform pipeline waiting for approval, a code review that swaps stored keys for OIDC, and release notifications from Argo CD">
+        <div class="ly-collage__set is-on">
+          <div class="ly-piece pc-a ui ui-panel ui-pipe" style="left: 13%; top: 6%; width: 74%" data-ui="pipeline-board" data-ui-still>
             <div class="ui-pipe__head">
               <svg class="ui-icon ui-pipe__branch" viewBox="0 0 16 16" aria-hidden="true"><circle cx="4.5" cy="3.5" r="1.5"/><circle cx="4.5" cy="12.5" r="1.5"/><circle cx="11.5" cy="5" r="1.5"/><path d="M4.5 5v6M11.5 6.5c0 2.6-2.2 3.6-5.6 4.6"/></svg>
               <span class="ui-pipe__repo">platform/infra-live</span><i class="ui-pipe__slash">/</i><code class="ui-pipe__ref">main</code>
@@ -125,12 +134,57 @@ const lanes = JSON.stringify({
               <span class="ui-pipe__line" data-step="apply"><b>$</b>terraform apply prod.tfplan</span>
             </div>
           </div>
-        </div></div>
-        <div class="ly-float">
-          <div class="ly-float__row"><span class="ly-live">Production</span><span>OIDC, no stored keys</span></div>
-          <div class="ly-float__title">Apply waits for two approvals</div>
+          <div class="ly-piece pc-tile" style="left: 4%; top: 74%; width: 14%; height: 12%"><span class="ic-tile ic-tile--56"><img class="ic ic-40" data-icon="aws" src="/assets/icons/aws.svg" alt="" width="40" height="24"></span></div>
+          <div class="ly-piece pc-note" style="left: 44%; top: 74%; width: 52%; height: 22%"><small>Production</small><b>Apply waits for two approvals</b><span>OIDC sign-in, no stored keys</span></div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece pc-a ui ui-panel ui-diff" style="left: 13%; top: 6%; width: 74%" data-ui="diff-review" data-ui-still>
+              <div class="ui-diff__head">
+                <span class="ui-diff__tool" aria-hidden="true"><img loading="lazy" decoding="async" data-icon="github-actions" src="/assets/icons/github-actions.svg" alt="" width="20" height="20"></span>
+                <span class="ui-diff__repo">platform/api</span><i class="ui-diff__slash" aria-hidden="true">/</i>
+                <span class="ui-diff__path"><span class="ui-diff__dir">.github/workflows/</span><b>deploy.yml</b></span>
+                <span class="ui-spacer"></span>
+                <span class="ui-diff__stat"><b class="is-add"><span class="ui-diff__was">+1</span><span class="ui-diff__now">+2</span></b><b class="is-del"><span class="ui-diff__was">&minus;1</span><span class="ui-diff__now">&minus;1</span></b><span class="ui-diff__bar" aria-hidden="true"><i class="is-add"></i><i class="is-add"></i><i class="is-del"></i></span></span>
+              </div>
+              <div class="ui-diff__hunk"><span>@@ -14,5 +14,6 @@</span> <em class="ui-diff__sig">deploy:</em></div>
+              <div class="ui-diff__lines">
+                <div class="ui-diff__ln"><i>14</i><i>14</i><span class="ui-diff__code" data-i="1"><span class="ui-diff__ind">  </span><span class="k">uses:</span> aws-actions/configure-aws-credentials@v4</span></div>
+                <div class="ui-diff__ln is-del"><i>15</i><i></i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><mark class="ui-diff__w">aws-access-key-id: secrets.AWS_KEY</mark></span></div>
+                <div class="ui-diff__ln is-add"><i></i><i>15</i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><mark class="ui-diff__w">role-to-assume: role/deploy-prod</mark></span></div>
+                <div class="ui-diff__ln is-target" data-diff-target><i>16</i><i>16</i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><span class="f">aws-region:</span> ap-southeast-1</span></div>
+                <div class="ui-diff__sug" data-diff-sug><div class="ui-diff__ln is-add"><i></i><i>17</i><span class="ui-diff__code" data-i="2"><span class="ui-diff__ind">    </span><span class="f">role-duration-seconds:</span> <mark class="ui-diff__w"><span class="n">900</span></mark></span></div></div>
+                <div class="ui-diff__thread">
+                  <div class="ui-diff__by">
+                    <span class="ui-avatar" data-tone="4">NT</span>
+                    <span class="ui-diff__name">Nathan Tran</span>
+                    <span class="ui-diff__time">2m</span>
+                    <span class="ui-spacer"></span>
+                    <span class="ui-diff__act" data-diff-act>
+                      <button class="ui-btn ui-btn--sm ui-diff__apply" type="button" tabindex="-1" data-diff-apply><span class="ui-diff__lbl">Apply suggestion</span><i class="ui-diff__spin" aria-hidden="true"></i></button>
+                      <span class="ui-chip ui-diff__done">Applied</span>
+                    </span>
+                  </div>
+                  <div class="ui-diff__msg">Keep the token short-lived: 15 minutes.</div>
+                </div>
+                <div class="ui-diff__ln"><i>17</i><i>18</i><span class="ui-diff__code" data-i="1"><span class="ui-diff__ind">  </span><span class="k">run:</span> terraform apply prod.tfplan</span></div>
+              </div>
+            </div>
+          <div class="ly-piece pc-tile" style="left: 4%; top: 74%; width: 14%; height: 12%"><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon="github-actions" src="/assets/icons/github-actions.svg" alt="" width="40" height="40"></span></div>
+          <div class="ly-piece pc-note" style="left: 44%; top: 74%; width: 52%; height: 22%"><small>Code review</small><b>Stored keys swapped for OIDC</b><span>One role per environment</span></div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece pc-a ui ui-notify" style="left: 4%; top: 6%; width: 74%" data-ui="notify" data-ui-still>
+              <ul class="ui-notify__list" data-notify-list>
+                <li class="ui-note"><span class="ui-avatar ui-note__av" data-tone="4">NT</span><span class="ui-note__text"><span class="ui-note__title">Release 2026.11 promoted to prod<time>now</time></span><span class="ui-note__body">14 merge requests, CAB approved Tuesday</span></span><span class="ui-btn ui-btn--sm ui-note__btn">Open</span></li>
+                <li class="ui-note"><span class="ui-note__ico"><img loading="lazy" decoding="async" data-icon="argo" src="/assets/icons/argo.svg" alt="" width="20" height="20"></span><span class="ui-note__text"><span class="ui-note__title">worker 1.8.1 synced<time>3m</time></span><span class="ui-note__body">Health check passed on 3 of 3 pods</span></span></li>
+                <li class="ui-note"><span class="ui-note__ico"><img loading="lazy" decoding="async" data-icon="argo" src="/assets/icons/argo.svg" alt="" width="20" height="20"></span><span class="ui-note__text"><span class="ui-note__title">portal 5.0.3 rolled back<time>1d</time></span><span class="ui-note__body">Failed health check, previous version restored</span></span></li>
+              </ul>
+            </div>
+          <div class="ly-piece pc-tile" style="left: 82%; top: 6%; width: 14%; height: 12%"><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon="argo" src="/assets/icons/argo.svg" alt="" width="31" height="40"></span></div>
+          <div class="ly-piece pc-note" style="left: 44%; top: 74%; width: 52%; height: 22%"><small>GitOps</small><b>Rollback is one Argo CD sync</b><span>Each component keeps its own version</span></div>
         </div>
       </div>
+      <div class="span-3 start-10 hero__cta"><a class="btn btn--primary" href="#brief">Send a brief<Fragment set:html={arrow} /></a></div>
     </div></div>
   </section>
 
@@ -147,7 +201,7 @@ const lanes = JSON.stringify({
           ))}
         </ul>
       </div>
-      <div class="frame span-6 start-7" data-visual role="img" aria-label="The tools Nathan works with">
+      <div class="frame span-6 start-7" role="img" aria-label="The tools Nathan works with">
         <div class="tools">
           {tools.map(([id, name]) => (
             <div><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon={id} src={`/assets/icons/${id}.svg`} alt="" width="40" height="40"></span><span class="t-label">{name}</span></div>
@@ -231,7 +285,7 @@ const lanes = JSON.stringify({
           <a class="card card--row card--open span-6" href="/projects/bdo-crm-pipeline">
             <h3>Builds what changed on GitHub Actions</h3>
             <p>Dozens of .NET projects in one repository: matrix builds, a version per component and GitOps state per environment.</p>
-            <div class="panel"><div class="dg" data-diagram={lanes}></div></div>
+            <div class="panel"><div class="dg" data-diagram={lanes} data-dg-still></div></div>
           </a>
           <a class="card card--row card--open span-6" href="/projects/terraform-blueprint">
             <h3>Runs Terraform on three clouds</h3>
@@ -256,7 +310,7 @@ const lanes = JSON.stringify({
         <a class="card card--row card--open span-6" href="/projects/java-maven-pipeline">
           <h3>Ships Java services to Kubernetes</h3>
           <p>Maven builds with cached dependencies, SonarQube gates on each pull request and Trivy scans before every push.</p>
-          <div class="panel"><div class="stage"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:36px" data-ui-still>
+          <div class="panel"><div class="stage"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:36px" data-ui-loop>
             <div class="ui ui-panel ui-pipe" data-ui="pipeline-board">
               <div class="ui-pipe__head">
                 <span class="ui-pipe__repo">payments/ledger</span><i class="ui-pipe__slash">/</i><code class="ui-pipe__ref">main</code>
@@ -309,8 +363,8 @@ const lanes = JSON.stringify({
           <li><a class="rows__name link" href="/projects/agent-platform-blueprint">Agent platform blueprint</a><p>Coding, user-facing and operations agents that never hold more access than a person. A reference design, not yet built.</p></li>
         </ul>
       </div>
-      <div class="frame frame--split span-6 start-7" data-visual role="img" aria-label="A cost agent declines to show billing figures to a user without billing access">
-        <div class="stage stage--fade-b"><div class="at-rise to-edge fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:48px;--ay-sm:24px" data-ui-still>
+      <div class="panel span-6 start-7" role="img" aria-label="A cost agent declines to show billing figures to a user without billing access">
+        <div class="stage stage--fade-b"><div class="at-rise to-edge fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:48px;--ay-sm:24px" data-ui-loop>
           <div class="ui ui-panel ui-chat" data-ui="chat">
             <div class="ui-head"><span class="ui-agent" aria-hidden="true"></span><div class="ui-title">Cost agent</div><span class="ui-chat__online">Online</span><span class="ui-spacer"></span></div>
             <div class="ui-chat__body">
@@ -350,7 +404,7 @@ const lanes = JSON.stringify({
           <li><span class="rows__name">FPT Software</span><p>DevOps and SRE: Terraform on AWS, an Azure IoT platform, Jenkins and on-call incidents.</p><span class="rows__value">2020 to 2024</span></li>
         </ul>
       </div>
-      <div class="frame span-6 start-7" data-visual role="img" aria-label="Six cloud and database certifications">
+      <div class="frame span-6 start-7" role="img" aria-label="Six cloud and database certifications">
         <div class="ic-list">
           {certs.map(([id, name, level]) => (
             <div class="ic-row"><span class="ic-tile ic-tile--40"><img loading="lazy" decoding="async" class="ic ic-40" data-icon={id} src={`/assets/icons/${id}.svg`} alt="" width="40" height="40"></span><div class="ic-row__main"><span class="ic-row__title">{name}</span><span class="ic-row__meta">{level}</span></div></div>
@@ -367,7 +421,7 @@ const lanes = JSON.stringify({
           <h2 id="brief-h">Send a platform project or a role</h2>
           <p>Say what you run today and where releases get stuck. I work from Ho Chi Minh City, UTC+7.</p>
         </div>
-        <div class="frame brief-frame" data-visual role="img" aria-label="A project brief checklist: what you run, where releases stall, clouds and team size, and when to start">
+        <div class="panel brief-frame" role="img" aria-label="A project brief checklist: what you run, where releases stall, clouds and team size, and when to start">
           <div class="stage"><div class="at-rise fit" style="--fit-max:360px;--ax:max(24px, 50% - 180px);--ay:40px;--ay-sm:24px" data-ui-still>
             <div class="ui ui-panel ui-checks" data-ui="checklist">
               <div class="ui-checks__head"><div class="ui-title">Project brief</div><span class="ui-spacer"></span><div class="ui-meta" data-checks-count>4 of 4</div></div>
