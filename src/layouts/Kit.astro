@@ -4,12 +4,17 @@ interface Props {
   title?: string;
   description?: string;
   home?: boolean;
+  // a dealt look for a page of its own (/taste); the defaults are the home page's deal
+  look?: { fonts: string; root: string; ground: string; themeColor: string };
+  noindex?: boolean;
 }
 
 const {
   title = 'Nathan Tran: CI/CD and release engineering in Ho Chi Minh City',
   description = 'Platform engineer and release manager who builds GitHub Actions, Terraform and Kubernetes pipelines for enterprise teams on AWS, Azure and Google Cloud.',
   home = false,
+  look,
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -20,7 +25,7 @@ const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en" data-type="software" data-radius="sharp" data-ground="sky" data-buttons="arrow" data-motion>
+<html lang="en" data-type="software" data-radius="sharp" data-ground={look?.ground ?? "sky"} data-buttons="arrow" data-motion>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -34,12 +39,13 @@ const year = new Date().getFullYear();
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href={canonicalURL}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#161c1a">
+<meta name="theme-color" content={look?.themeColor ?? "#161c1a"}>
+{noindex && <meta name="robots" content="noindex">}
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link href={look?.fonts ?? "https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap"} rel="stylesheet">
 <link rel="stylesheet" href="/assets/system.css">
 <link rel="stylesheet" href="/assets/ui/cards.css">
 <link rel="stylesheet" href="/assets/motion/motion.css">
@@ -64,6 +70,7 @@ const year = new Date().getFullYear();
 /* under 360px the name, the main button and the menu need the mark's room in the bar */
 @media (max-width: 359px) { .nav__bar .nav__logo .mark { display: none; } }
 </style>
+{look && <style is:inline set:html={look.root} />}
 <slot name="head" />
 <script is:inline src="/assets/backgrounds/backgrounds.js"></script>
 <script is:inline>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
@@ -145,7 +152,7 @@ const year = new Date().getFullYear();
           <p class="footer__lede">Platform engineering and release management for teams on AWS, Azure and Google Cloud.</p>
         </div>
         <div class="span-2 footer__col"><h3>Services</h3><ul><li><a href={to('services')}>What I build</a></li><li><a href={to('releases')}>Release steps</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href={to('work')}>Pipeline projects</a></li><li><a href={to('agents')}>AI agent platforms</a></li><li><a href={to('approach')}>Approach</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href={to('work')}>Pipeline projects</a></li><li><a href={to('agents')}>AI agent platforms</a></li></ul></div>
         <div class="span-2 footer__col"><h3>About</h3><ul><li><a href={to('experience')}>Experience</a></li><li><a href={to('brief')}>Send a message</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Writing</h3><ul><li><a href="/blog">Blog</a></li></ul></div>
       </div>

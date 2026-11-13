@@ -1,0 +1,125 @@
+---
+// A second, separately dealt look at the landing page (noindex, out of the sitemap): the same sections,
+// its own hero, palette, type, effect and moments.
+//   deal: hero collage, colours from the Dracula editor theme through start.mjs brand (its #282a36 ground,
+//   #44475a panels and #f8f8f2 text, and one accent, its green #50fa7b, the colour of a passed run; its purple
+//   and pink stay out: the skill bans violet), type funnel, radius sharp, lit ground sky, effect fluted-glass in the
+//   hero art (the one [data-visual]); moments: pinned-chapters in #releases (shared with the home page) and
+//   counter-rolls in #approach. The second dealt moment, line-carries-colour, is left out: a third moment
+//   would pass the two a page allows.
+import Kit from '../layouts/Kit.astro';
+import Sections from '../components/Sections.astro';
+
+const look = {
+  fonts: 'https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..700&family=Funnel+Sans:wght@400..600&family=DM+Mono:wght@400;500&display=swap',
+  ground: 'sky',
+  themeColor: '#282a36',
+  root: `:root {
+  --p-bg: #282a36; --p-surface: #44475a; --p-ink: #f8f8f2; --p-muted: #babbbb;
+  --p-accent: #50fa7b; --p-accent-ink: #282a36; --p-action: #50fa7b; --p-action-ink: #282a36;
+  --p-inv-bg: #f8f8f2; --p-inv-surface: #e8e8e4; --p-inv-ink: #282a36; --p-inv-muted: #64656d;
+  --p-inv-accent: #282a36; --p-inv-accent-ink: #f8f8f2; --p-inv-action: #282a36; --p-inv-action-ink: #f8f8f2;
+  --font-display: "Funnel Display", system-ui, sans-serif;
+  --font-text: "Funnel Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --ly-scale: 0.98;
+}`,
+};
+
+// the runs in the window: workflow, commit, status, its tone
+const runs = [
+  ['TF', 1, 'terraform-plan', 'Add VPC endpoints for prod', 'Queued'],
+  ['MV', 3, 'java-maven', 'Bump Spring Boot to 3.4', 'Queued'],
+  ['NX', 4, 'monorepo-ci', 'Version billing 1.9.0', 'Queued'],
+  ['HL', 2, 'deploy-staging', 'Promote worker 1.8.1', 'Needs approval'],
+  ['TF', 1, 'terraform-apply', 'Rotate KMS key alias', 'Passed'],
+  ['AR', 5, 'argocd-sync', 'portal 5.0.4 to prod', 'Passed'],
+];
+const arrow = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>';
+---
+
+<Kit home look={look} noindex title="Nathan Tran: CI/CD and release engineering (another look)">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/assets/ui/window/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/pipeline-board/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/checklist/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/terminal-run/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/stat/fragment.css">
+    <link rel="stylesheet" href="/assets/ui/chat/fragment.css">
+    <link rel="stylesheet" href="/assets/diagrams/diagram.css">
+    <script is:inline>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+    <link rel="modulepreload" href="/assets/moments/moments.js">
+    <link rel="modulepreload" href="/assets/moments/lib.js">
+    <link rel="modulepreload" href="/assets/moments/pinned-chapters/moment.js">
+    <link rel="modulepreload" href="/assets/moments/counter-rolls/moment.js">
+    <style is:inline>
+      /* page CSS inside the hero art: the window keeps its cut margin, the result card sits 32px in from
+         the frame's lower left, 300 wide, over the window */
+      .hero__art .ui-win__main { padding-right: var(--ly-cut-room); }
+      /* the pause disc sits on the light glass: its focus ring takes the dark ink there */
+      .hero__art > button:is(.ui-pause, .loop-pause):focus-visible { outline-color: var(--p-inv-ink); }
+      .hero__art > .ly-piece--note { left: var(--s-6); bottom: var(--s-6); width: min(300px, calc(100% - 2 * var(--s-6)));
+        display: grid; gap: var(--s-2); padding: var(--s-4); border-radius: var(--r-md);
+        background: var(--frag, var(--surface)); color: var(--ink); border: 1px solid var(--line); }
+      .pc-card__row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+      .pc-card__row b { font-weight: 500; }
+      .pc-card__line { display: flex; gap: var(--s-2); font-size: var(--t-small); }
+      .pc-card__line i { font-style: normal; color: var(--accent); }
+    </style>
+  </Fragment>
+
+  <section class="hero hero--collage" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <h1 id="hero-h">CI/CD and releases for enterprise teams</h1>
+        <p class="hero__lead">I’m Nathan Tran, a platform engineer in Ho Chi Minh City. I build GitHub Actions and Terraform pipelines and run the releases they ship, on AWS, Azure and Google Cloud.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#brief">Send a brief<Fragment set:html={arrow} /></a><a class="btn btn--secondary" href="#work">See the pipelines</a></div>
+        <p class="hero__proof">Pipelines on GitHub Actions, GitLab CI and Jenkins.</p>
+      </div>
+      <div class="hero__art span-6 start-7" data-fx="fluted-glass" data-fx-seed="11" data-visual role="img" aria-label="A list of GitHub Actions runs moving from queued to passed, and a release card going live after approval and three security gates">
+        <div class="ly-piece ly-piece--main" aria-hidden="true">
+          <div class="ui ui-panel ui-win" data-ui="window" data-open="Queued" data-work="Running" data-done="Passed" data-ui-still>
+            <div class="ui-win__bar">
+              <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ui-win__crumb">Actions <i>/</i> <b>All runs</b></span>
+            </div>
+            <div class="ui-win__body">
+              <nav class="ui-win__side" aria-hidden="true">
+                <span class="ui-win__nav is-on">All runs<em>128</em></span>
+                <span class="ui-win__nav">Queued<em>3</em></span>
+                <span class="ui-win__nav">Waiting<em>1</em></span>
+                <span class="ui-win__nav">Failed</span>
+                <span class="ui-win__label">Workflows</span>
+                <span class="ui-win__nav"><span class="ui-win__hash">#</span>terraform</span>
+                <span class="ui-win__nav"><span class="ui-win__hash">#</span>deploy</span>
+              </nav>
+              <div class="ui-win__main">
+                <div class="ui-win__cols" aria-hidden="true"><span>Workflow</span><span>Commit</span><span>Status</span></div>
+                <ul class="ui-win__rows">
+                  {runs.map(([av, tone, wf, msg, st]) => (
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone={tone}>{av}</span><span class="ui-win__who">{wf}</span><span class="ui-win__sub">{msg}</span><span class={`ui-win__st${st === 'Passed' ? ' is-done' : st === 'Needs approval' ? ' is-you' : ''}`} data-st>{st}</span></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ly-piece ly-piece--note" aria-hidden="true" data-ly-steps="700">
+          <div class="pc-card__row"><b>Release 2026.11</b><span class="ui-chip" data-step data-step-at="4">Live</span></div>
+          <div class="pc-card__line" data-step><i>✓</i><span>CAB approved on Tuesday</span></div>
+          <div class="pc-card__line" data-step><i>✓</i><span>3 security gates passed</span></div>
+          <div class="pc-card__line" data-step><i>✓</i><span>Promoted to prod at 16:02</span></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <Sections variant="figures" />
+
+  <Fragment slot="scripts">
+    <script type="module" is:inline src="/assets/diagrams/mount.js"></script>
+  </Fragment>
+</Kit>
