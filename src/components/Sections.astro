@@ -248,10 +248,10 @@ const lanes = JSON.stringify({
           <li><a class="rows__name link" href="/projects/credential-issuer">Credential issuer for agent tools</a><p>Short-lived AWS and GitLab credentials for one user, issued outside the model after eight checks.</p></li>
         </ul>
       </div>
-      <div class="panel span-6 start-7" role="img" aria-label="A cost agent declines to show billing figures to a user without billing access">
+      <div class="panel span-6 start-7" role="img" aria-label="An ops agent declines to show billing figures to a user without billing access, then lists the merge requests waiting on that user with a short-lived read-only GitLab token issued for them">
         <div class="stage stage--fade-b"><div class="at-rise to-edge fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:48px;--ay-sm:24px" data-ui-loop>
           <div class="ui ui-panel ui-chat" data-ui="chat">
-            <div class="ui-head"><span class="ui-agent" aria-hidden="true"></span><div class="ui-title">Cost agent</div><span class="ui-chat__online">Online</span><span class="ui-spacer"></span></div>
+            <div class="ui-head"><span class="ui-agent" aria-hidden="true"></span><div class="ui-title">Ops agent</div><span class="ui-chat__online">Online</span><span class="ui-spacer"></span></div>
             <div class="ui-chat__body">
               <div class="ui-chat__day">Today, 9:41</div>
               <div class="ui-msg ui-msg--me" data-chat-q><span class="ui-msg__text">What did the payments account spend last week?</span></div>
@@ -260,6 +260,14 @@ const lanes = JSON.stringify({
                 <span class="ui-msg__col">
                   <span class="ui-chat__answer">I can’t show that: your sign-in has <b>no billing role</b>. Ask a billing viewer, or request the role.</span>
                   <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Checked at the tool gateway</span></span>
+                </span>
+              </div>
+              <div class="ui-msg ui-msg--me"><span class="ui-msg__text">Then which merge requests wait on my review?</span></div>
+              <div class="ui-msg ui-msg--bot">
+                <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
+                <span class="ui-msg__col">
+                  <span class="ui-chat__answer">Two wait on you in payments-api. <b>Bump Spring Boot to 3.4</b> and <b>Rotate the KMS key alias</b>.</span>
+                  <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="6.5" rx="1"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>Read-only GitLab token, yours</span><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M8 2.5v5.5l3.5 2"/><circle cx="8" cy="8" r="5.5"/></svg>Issued outside the model</span></span>
                 </span>
               </div>
             </div>
