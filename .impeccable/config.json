@@ -32,6 +32,24 @@
         "value": "geist mono",
         "createdAt": "2026-11-13T14:14:51.799Z",
         "reason": "user asked for the tech remake; taste-skill start.mjs dealt the geist pairing for a software page; DESIGN.md still records the old standards-manual design"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "funnel display",
+        "createdAt": "2026-11-13T14:39:37.343Z",
+        "reason": "user asked for another landing view at /taste; taste-skill start.mjs dealt the funnel pairing; DESIGN.md still records the old standards-manual design"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "funnel sans",
+        "createdAt": "2026-11-13T14:39:37.365Z",
+        "reason": "user asked for another landing view at /taste; taste-skill start.mjs dealt the funnel pairing; DESIGN.md still records the old standards-manual design"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "dm mono",
+        "createdAt": "2026-11-13T14:39:37.388Z",
+        "reason": "user asked for another landing view at /taste; taste-skill start.mjs dealt the funnel pairing; DESIGN.md still records the old standards-manual design"
       }
     ]
   }

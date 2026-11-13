@@ -34,12 +34,12 @@ const year = new Date().getFullYear();
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href={canonicalURL}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#161c1a">
+<meta name="theme-color" content="#282a36">
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..700&family=Funnel+Sans:wght@400..600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/system.css">
 <link rel="stylesheet" href="/assets/ui/cards.css">
 <link rel="stylesheet" href="/assets/motion/motion.css">
@@ -50,16 +50,17 @@ const year = new Date().getFullYear();
 <link rel="stylesheet" href="/assets/ui/code/fragment.css">
 <style is:inline>
 :root {
-  --p-bg: #161c1a; --p-surface: #1f2725; --p-ink: #e3e2da; --p-muted: #8e948d;
-  --p-accent: #9fc7b8; --p-accent-ink: #161c1a; --p-action: #9fc7b8; --p-action-ink: #161c1a;
-  --p-inv-bg: #e3e2da; --p-inv-surface: #d3d2cb; --p-inv-ink: #161c1a; --p-inv-muted: #555a55;
-  --p-inv-accent: #161c1a; --p-inv-accent-ink: #e3e2da; --p-inv-action: #161c1a; --p-inv-action-ink: #e3e2da;
-  --font-display: "Geist", system-ui, sans-serif;
-  --font-text: "Geist", system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --display-weight: 500;
-  --display-tracking: -0.035em;
-  --display-tracking-xl: -0.045em;
+  --p-bg: #282a36; --p-surface: #44475a; --p-ink: #f8f8f2; --p-muted: #babbbb;
+  --p-accent: #50fa7b; --p-accent-ink: #282a36; --p-action: #50fa7b; --p-action-ink: #282a36;
+  --p-inv-bg: #f8f8f2; --p-inv-surface: #e8e8e4; --p-inv-ink: #282a36; --p-inv-muted: #64656d;
+  --p-inv-accent: #282a36; --p-inv-accent-ink: #f8f8f2; --p-inv-action: #282a36; --p-inv-action-ink: #f8f8f2;
+  --font-display: "Funnel Display", system-ui, sans-serif;
+  --font-text: "Funnel Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --ly-scale: 0.98;
 }
 /* under 360px the name, the main button and the menu need the mark's room in the bar */
 @media (max-width: 359px) { .nav__bar .nav__logo .mark { display: none; } }
@@ -71,12 +72,13 @@ const year = new Date().getFullYear();
 </head>
 <body>
 <!-- type: software (a platform engineer whose subject is developer tooling and AI agent platforms)
-     deal: hero triptych, nav nav-mega (re-dealt: nav-split is not on the software list), close close-word head row
-     without the name, footer footer-dark, rhythm surface-pairs (#experience), buttons arrow, mark stack,
-     palette green-black-bone, type geist, radius sharp, lit ground sky
-     effect: painterly-landscape behind the hero collage (the one [data-visual])
-     moments: pinned-chapters in #releases (the release walks through three steps), word-highlight in #approach
-     (the one statement about monorepo pipelines); loops: one per card group (#work, #agents) -->
+     deal: hero collage, nav nav-mega, close close-word head row without the name, footer footer-dark,
+     rhythm surface-pairs (#experience), buttons arrow, mark stack, type funnel, radius sharp, lit ground sky;
+     colours from the Dracula editor theme through start.mjs brand (#282a36 ground, #44475a panels, #f8f8f2
+     text, one accent: its green #50fa7b; its purple and pink stay out, the skill bans violet)
+     effect: fluted-glass behind the hero art (the one [data-visual])
+     moments: pinned-chapters in #releases, counter-rolls on the figures in #experience;
+     loops: one per card group (#work, #agents) -->
 <header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Skip to content</a>
@@ -99,6 +101,7 @@ const year = new Date().getFullYear();
               <p class="t-label">AI agents</p>
               <a href="/projects/governed-ai-agent-platform">Governed agent platform<span>Amazon EKS, 18 MCP tools</span></a>
               <a href="/projects/agent-platform-blueprint">Agent platform blueprint<span>Coding, user and ops agents</span></a>
+              <a href="/projects/credential-issuer">Credential issuer<span>Per-user AWS and GitLab access</span></a>
             </div>
             <a class="menu-card span-3 start-10" href="/projects/governed-ai-agent-platform">
               <div class="panel"><div class="stage stage--fade-br"><div class="at-corner" style="--ax:24px;--ay:24px" data-ui-still>
@@ -145,7 +148,7 @@ const year = new Date().getFullYear();
           <p class="footer__lede">Platform engineering and release management for teams on AWS, Azure and Google Cloud.</p>
         </div>
         <div class="span-2 footer__col"><h3>Services</h3><ul><li><a href={to('services')}>What I build</a></li><li><a href={to('releases')}>Release steps</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href={to('work')}>Pipeline projects</a></li><li><a href={to('agents')}>AI agent platforms</a></li><li><a href={to('approach')}>Approach</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href={to('work')}>Pipeline projects</a></li><li><a href={to('agents')}>AI agent platforms</a></li></ul></div>
         <div class="span-2 footer__col"><h3>About</h3><ul><li><a href={to('experience')}>Experience</a></li><li><a href={to('brief')}>Send a message</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Writing</h3><ul><li><a href="/blog">Blog</a></li></ul></div>
       </div>

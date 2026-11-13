@@ -1,0 +1,343 @@
+---
+// Every section under the hero of the landing page.
+
+// tool marks are local files written by icons.mjs into public/assets/icons
+const tools = [
+  ['github-actions', 'GitHub Actions'], ['gitlab', 'GitLab CI'], ['jenkins', 'Jenkins'], ['terraform', 'Terraform'],
+  ['aws', 'AWS'], ['azure', 'Azure'], ['google-cloud', 'Google Cloud'], ['kubernetes', 'Kubernetes'],
+  ['helm', 'Helm'], ['argo', 'Argo CD'], ['docker', 'Docker'], ['grafana', 'Grafana'],
+];
+
+const services = [
+  ['CI/CD pipeline design', 'GitHub Actions, GitLab CI or Jenkins, from one monorepo to dozens of services.'],
+  ['Release management', 'Release plans, CAB approval, environment promotion and rollback.'],
+  ['Infrastructure as code', 'Terraform modules, state, multi-account layouts and drift checks.'],
+  ['Cloud landing zones', 'AWS Control Tower accounts, guardrails, networking and cost dashboards.'],
+  ['Platform engineering', 'Pipeline blueprints that teams reuse and pin to a version.'],
+];
+
+const certs = [
+  ['aws', 'AWS Certified Solutions Architect', 'Professional'],
+  ['aws', 'AWS Certified DevOps Engineer', 'Professional'],
+  ['aws', 'AWS Certified Developer', 'Associate'],
+  ['google-cloud', 'Google Cloud Professional Cloud Developer', 'Professional'],
+  ['google-cloud', 'Google Cloud Professional Cloud Architect', 'Professional'],
+  ['mongodb', 'MongoDB Associate Developer', 'Associate'],
+];
+
+const tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg>';
+
+const lanes = JSON.stringify({
+  layout: 'lanes',
+  alt: 'A push to main is checked for changed components, and each changed one is built and versioned on its own.',
+  curve: 'curve',
+  input: { label: 'Push', icon: 'github' },
+  core: { label: 'Find changes', icon: 'github-actions' },
+  lanes: [
+    { label: 'api 3.2.0', icon: 'dotnet', done: true },
+    { label: 'worker 1.8.1', icon: 'dotnet', done: true },
+    { label: 'portal 5.0.4', icon: 'dotnet', done: true },
+  ],
+});
+---
+
+<style is:inline>
+  /* page CSS for the shared sections: only inside visuals, and one --p-h per card group */
+  #work .panel { --p-h: 320px; }
+  /* the tools: real marks over their names, four across inside the frame */
+  .tools { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); padding: var(--s-7) 0; align-content: center; height: 100%; }
+  .tools > div { display: grid; justify-items: center; gap: var(--s-3); text-align: center; }
+  .figures { margin-top: var(--s-7); row-gap: var(--s-5); }
+  .brief-frame { --p-h: 320px; margin-top: var(--s-7); }
+  #agents .panel { --p-h: 540px; }
+  /* sections planned again for the upright tablet */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #services { --h: 2; }
+    .tools { min-height: 560px; }
+    main > #releases[data-moment]:not(.is-live) { height: calc(2 * 100svh); }
+    #work .panel { --p-h: 240px; }
+    #releases:not(.is-live) .mo-pc__visual--lit { padding: var(--s-4); }
+  }
+  /* the phone: shorter panels, the card lines left to the project pages */
+  @media (max-width: 639px) {
+    #work .panel { --p-h: 180px; }
+    /* captions sit under the tiles on the lit panel here, so they take its ink */
+    #work .dg-node--tile .dg-cap { color: var(--ground-ink); }
+    /* the checklist panel fills the first phone screen of the form section */
+    #brief .span-5 { display: flex; flex-direction: column; }
+    #brief .brief-frame { flex: 1 1 auto; --p-h: auto; }
+    #work .card > p { display: none; }
+    #agents .panel { --p-h: 100%; }
+    main > #releases[data-moment]:not(.is-live) { height: calc(2 * 100lvh); }
+    .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: var(--s-5); gap: var(--s-5) var(--s-3); }
+  }
+</style>
+  <section class="section" id="services" style="--hm: 2" aria-labelledby="services-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="services-h">Pipelines, clouds and releases</h2>
+          <p>Consulting, contract work or a full-time role, for teams on AWS, Azure or Google Cloud.</p>
+        </div>
+        <ul class="rows">
+          {services.map(([name, line]) => (
+            <li><span class="rows__name">{name}</span><p>{line}</p></li>
+          ))}
+        </ul>
+      </div>
+      <div class="frame span-6 start-7" role="img" aria-label="The tools Nathan works with">
+        <div class="tools">
+          {tools.map(([id, name]) => (
+            <div><span class="ic-tile ic-tile--56"><img loading="lazy" decoding="async" class="ic ic-40" data-icon={id} src={`/assets/icons/${id}.svg`} alt="" width="40" height="40"></span><span class="t-label">{name}</span></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="releases" style="--h: 2" data-moment="pinned-chapters" aria-labelledby="releases-h">
+    <div class="wrap mo-pc__grid">
+      <div class="mo-pc__text">
+        <h2 id="releases-h">How a release goes out</h2>
+        <ol class="mo-pc__steps">
+          <li class="mo-pc__step">
+            <h3>Plan and approve the release</h3>
+            <p>Each release has a scope, a tested rollback and a CAB slot before anything merges to main.</p>
+            <figure class="mo-pc__visual mo-pc__visual--lit" role="img" aria-label="A release checklist with three of five items done">
+              <div class="ui ui-panel ui-checks" data-ui="checklist" data-ui-still>
+                <div class="ui-checks__head"><div class="ui-title">Release 2026.11 checklist</div><span class="ui-spacer"></span><div class="ui-meta" data-checks-count>3 of 5</div></div>
+                <div class="ui-checks__bar"><i data-checks-bar style="--k:0.6"></i></div>
+                <ul class="ui-checks__list">
+                  <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">Scope frozen, 14 merge requests</span></li>
+                  <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">Rollback tested on staging</span></li>
+                  <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">CAB approval on Tuesday</span></li>
+                  <li class="ui-check"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">Deploy window booked</span></li>
+                  <li class="ui-check"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">Owner on call for 24 hours</span></li>
+                </ul>
+              </div>
+            </figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Pass 3 security gates</h3>
+            <p>Checkov reads the Terraform, Trivy the images and OPA the house rules. One failed gate stops the run.</p>
+            <figure class="mo-pc__visual mo-pc__visual--lit" role="img" aria-label="A terminal run of three security gates, all passed">
+              <div class="ui ui-panel ui-term" data-ui="terminal-run" data-ui-still>
+                <div class="ui-term__head"><span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ui-term__title">platform/api</span><span class="ui-meta">bash</span><span class="ui-spacer"></span><span class="ui-chip ui-chip--plain ui-term__branch">release/2026.11</span></div>
+                <div class="ui-term__screen" data-term-screen><div class="ui-term__track" data-term-track>
+                  <div class="ui-term__ln ui-term__cmd"><span class="ui-term__cwd">~/<span class="ui-term__up">platform/</span>api</span><span class="ui-term__sig">$</span><span class="ui-term__typed" data-term-cmd>make gates</span></div>
+                  <div class="ui-term__ln ui-term__meter" data-term-out data-term-meter><span class="ui-term__bar" style="--p:1"><i></i></span><span class="ui-term__count" data-term-count>3 of 3 gates</span></div>
+                  <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">checkov terraform/</span><span class="ui-term__n">212 checks</span><span class="ui-term__t">6.1s</span></div>
+                  <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">trivy image api:3.2.0</span><span class="ui-term__n">0 critical</span><span class="ui-term__t">14.8s</span></div>
+                  <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">opa eval policies/</span><span class="ui-term__n">18 rules</span><span class="ui-term__t">0.9s</span></div>
+                  <div class="ui-term__ln ui-term__gap" data-term-out aria-hidden="true"></div>
+                  <div class="ui-term__ln ui-term__done" data-term-out data-term-done><span class="ui-term__ok" set:html={tick} /><b>Gates passed</b><span class="ui-term__dim">in 21.8s</span></div>
+                  <div class="ui-term__ln ui-term__cmd" data-term-next><span class="ui-term__cwd">~/<span class="ui-term__up">platform/</span>api</span><span class="ui-term__sig">$</span><span class="ui-term__typed"></span></div>
+                </div></div>
+              </div>
+            </figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Deploy the release, then watch it</h3>
+            <p>Argo CD syncs each component at its own version. A failed health check rolls that component back.</p>
+            <figure class="mo-pc__visual mo-pc__visual--lit" role="img" aria-label="A GitOps file pinning each component to its own version">
+              <div class="ui ui-panel ui-code" data-ui="code" data-ui-still>
+                <div class="ui-code__tabs"><span class="ui-code__tab is-on"><i class="ui-code__lang">YML</i>prod/versions.yaml</span><span class="ui-spacer"></span><span class="ui-chip ui-chip--plain ui-code__chip" data-code-chip>1 bump</span></div>
+                <pre class="ui-code__pre"><code><span class="ui-code__ln" data-n="1"><span class="k">components:</span></span>
+<span class="ui-code__ln" data-n="2">  <span class="f">api:</span>     <span class="n">3.2.0</span></span>
+<span class="ui-code__ln is-mark" data-n="3">  <span class="f">worker:</span>  <span class="n">1.8.1</span></span>
+<span class="ui-code__ln" data-n="4">  <span class="f">portal:</span>  <span class="n">5.0.4</span></span>
+<span class="ui-code__ln" data-n="5"><span class="k">rollback:</span></span>
+<span class="ui-code__ln" data-n="6" data-note="A failed health check rolls that component back">  <span class="f">on:</span> health_check_failed</span>
+<span class="ui-code__ln" data-n="7" data-note="The last 3 good versions stay ready to sync">  <span class="f">keep:</span> <span class="n">3</span></span></code></pre>
+                <div class="ui-code__hint" data-code-hint><span class="ui-dot"></span><span data-code-text>worker 1.8.0 to 1.8.1, synced by Argo CD</span></div>
+              </div>
+            </figure>
+          </li>
+        </ol>
+      </div>
+      <div class="mo-pc__visuals frame"></div>
+    </div>
+  </section>
+
+  <section class="section g2" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="work-h">Platform engineering projects</h2>
+        </div>
+        <div class="grid">
+          <article class="card card--row card--open span-6">
+            <h3><a class="link" href="/projects/bdo-crm-pipeline">Builds what changed on GitHub Actions</a></h3>
+            <p>Dozens of .NET projects in one repository: matrix builds, a version per component and GitOps state per environment.</p>
+            <div class="panel"><div class="dg" data-diagram={lanes} data-dg-still></div></div>
+          </article>
+          <article class="card card--row card--open span-6">
+            <h3><a class="link" href="/projects/terraform-blueprint">Runs Terraform on three clouds</a></h3>
+            <p>Validate, plan, scan and apply as reusable workflows, signed in with OIDC on AWS, Azure and Google Cloud.</p>
+            <div class="panel"><div class="stage"><div class="at-rise fit" style="--fit-max:460px;--ax:max(24px, 50% - 230px);--ay:40px" data-ui-still>
+              <div class="ui ui-panel ui-code" data-ui="code">
+                <div class="ui-code__tabs"><span class="ui-code__tab is-on"><i class="ui-code__lang">YML</i>plan.yml</span><span class="ui-spacer"></span><span class="ui-chip ui-chip--plain ui-code__chip" data-code-chip>OIDC</span></div>
+                <pre class="ui-code__pre"><code><span class="ui-code__ln" data-n="1"><span class="k">permissions:</span></span>
+<span class="ui-code__ln is-mark" data-n="2">  <span class="f">id-token:</span> write</span>
+<span class="ui-code__ln" data-n="3">  <span class="f">contents:</span> read</span>
+<span class="ui-code__ln" data-n="4"><span class="k">jobs:</span></span>
+<span class="ui-code__ln" data-n="5">  <span class="f">plan:</span></span>
+<span class="ui-code__ln" data-n="6" data-note="Teams pin the shared workflow to v2">    <span class="f">uses:</span> tf/plan.yml@v2</span>
+<span class="ui-code__ln" data-n="7" data-note="One input picks AWS, Azure or Google Cloud">    <span class="f">with:</span> {'{'} <span class="f">cloud:</span> azure {'}'}</span></code></pre>
+                <div class="ui-code__hint" data-code-hint><span class="ui-dot"></span><span data-code-text>Short-lived token, no stored cloud keys</span></div>
+              </div>
+            </div></div></div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-6">
+          <h3><a class="link" href="/projects/java-maven-pipeline">Ships Java services to Kubernetes</a></h3>
+          <p>Maven builds with cached dependencies, SonarQube gates on each pull request and Trivy scans before every push.</p>
+          <div class="panel"><div class="stage"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:36px" data-ui-loop>
+            <div class="ui ui-panel ui-pipe" data-ui="pipeline-board">
+              <div class="ui-pipe__head">
+                <span class="ui-pipe__repo">payments/ledger</span><i class="ui-pipe__slash">/</i><code class="ui-pipe__ref">main</code>
+                <span class="ui-pipe__run">#1093</span>
+                <span class="ui-spacer"></span>
+                <span class="ui-chip ui-chip--ink ui-chip--live ui-pipe__chip" data-pipe-chip data-done="Passed">Running</span>
+              </div>
+              <ol class="ui-pipe__steps">
+                <li class="ui-pipe__step is-done" data-step="build"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img loading="lazy" decoding="async" data-icon="java" src="/assets/icons/java.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Build</span></span><code class="ui-pipe__cmd">mvn verify</code><span class="ui-pipe__time" data-time>2m 12s</span><span class="ui-pipe__bar"><i></i></span></li>
+                <li class="ui-pipe__step is-done" data-step="quality"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img loading="lazy" decoding="async" data-icon="sonarqube" src="/assets/icons/sonarqube.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Quality</span></span><code class="ui-pipe__cmd">sonar gate</code><span class="ui-pipe__time" data-time>41s</span><span class="ui-pipe__bar"><i></i></span></li>
+                <li class="ui-pipe__step is-run" data-step="image" style="--k:0.6"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img loading="lazy" decoding="async" data-icon="docker" src="/assets/icons/docker.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Image</span></span><code class="ui-pipe__cmd">docker build</code><span class="ui-pipe__time" data-time="58s">34s</span><span class="ui-pipe__bar"><i></i></span></li>
+                <li class="ui-pipe__step" data-step="deploy"><span class="ui-pipe__ico" set:html={tick} /><span class="ui-pipe__name"><span class="ui-pipe__tool" aria-hidden="true"><img loading="lazy" decoding="async" data-icon="helm" src="/assets/icons/helm.svg" alt="" width="20" height="20"></span><span class="ui-pipe__nm">Deploy</span></span><code class="ui-pipe__cmd">helm upgrade</code><span class="ui-pipe__time" data-time="37s">Queued</span><span class="ui-pipe__bar"><i></i></span></li>
+              </ol>
+            </div>
+          </div></div></div>
+        </article>
+        <article class="card card--row card--open span-6">
+          <h3><a class="link" href="/projects/aws-landing-zone">Sets up AWS landing zones with Terraform</a></h3>
+          <p>Control Tower with organisational units, guardrails, one identity centre and FinOps dashboards per account.</p>
+          <div class="panel"><div class="stage stage--fade-b"><div class="at-corner to-edge" style="--ax:32px;--ay:40px" data-ui-still>
+            <div class="ui ui-panel ui-stat" data-ui="stat" data-from="18420" data-to="16380" data-prefix="$">
+              <div class="ui-stat__head">
+                <div class="ui-stat__top"><span class="ui-stat__label">Spend, shared-services account</span><span class="ui-stat__range">Last 14 days</span></div>
+                <div class="ui-stat__line"><span class="ui-stat__num" data-stat-num>$16,380</span><span class="ui-chip ui-chip--plain ui-stat__delta">11% lower</span><span class="ui-stat__sub">after rightsizing</span></div>
+              </div>
+              <div class="ui-stat__chart">
+                <svg class="ui-stat__svg" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="ui-stat__grid" d="M0 30.5H400M0 60.5H400M0 90.5H400"/>
+                  <path class="ui-stat__cover" fill-rule="evenodd" d=""/>
+                  <g class="ui-stat__bars"><rect rx="3" x="0.00" y="20" width="21.14" height="100"/><rect rx="3" x="29.14" y="24" width="21.14" height="96"/><rect rx="3" x="58.29" y="18" width="21.14" height="102"/><rect rx="3" x="87.43" y="22" width="21.14" height="98"/><rect rx="3" x="116.57" y="26" width="21.14" height="94"/><rect rx="3" x="145.71" y="21" width="21.14" height="99"/><rect rx="3" x="174.86" y="30" width="21.14" height="90"/><rect rx="3" x="204.00" y="36" width="21.14" height="84"/><rect rx="3" x="233.14" y="34" width="21.14" height="86"/><rect rx="3" x="262.29" y="38" width="21.14" height="82"/><rect rx="3" x="291.43" y="35" width="21.14" height="85"/><rect rx="3" x="320.57" y="40" width="21.14" height="80"/><rect rx="3" x="349.71" y="37" width="21.14" height="83"/><rect rx="3" x="378.86" y="41" width="21.14" height="79"/></g>
+                </svg>
+                <div class="ui-stat__axis" aria-hidden="true"><span>Oct 28</span><span>Nov 4</span><span>Today</span></div>
+              </div>
+            </div>
+          </div></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section g2m" id="agents" aria-labelledby="agents-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="agents-h">AI agent platforms on Kubernetes</h2>
+          <p>Agents, tools and model calls run behind gateways that check identity outside the model, with the same gates I use for releases.</p>
+        </div>
+        <ul class="rows">
+          <li><a class="rows__name link" href="/projects/governed-ai-agent-platform">Governed AI agent platform</a><p>Designed for an enterprise team on Amazon EKS: 18 MCP tool servers behind one gateway, models through LiteLLM. The team built it.</p></li>
+          <li><a class="rows__name link" href="/projects/agent-platform-blueprint">Agent platform blueprint</a><p>Coding, user-facing and operations agents that never hold more access than a person. A reference design, not yet built.</p></li>
+          <li><a class="rows__name link" href="/projects/credential-issuer">Credential issuer for agent tools</a><p>Short-lived AWS and GitLab credentials for one user, issued outside the model after eight checks.</p></li>
+        </ul>
+      </div>
+      <div class="panel span-6 start-7" role="img" aria-label="A cost agent declines to show billing figures to a user without billing access">
+        <div class="stage stage--fade-b"><div class="at-rise to-edge fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:48px;--ay-sm:24px" data-ui-loop>
+          <div class="ui ui-panel ui-chat" data-ui="chat">
+            <div class="ui-head"><span class="ui-agent" aria-hidden="true"></span><div class="ui-title">Cost agent</div><span class="ui-chat__online">Online</span><span class="ui-spacer"></span></div>
+            <div class="ui-chat__body">
+              <div class="ui-chat__day">Today, 9:41</div>
+              <div class="ui-msg ui-msg--me" data-chat-q><span class="ui-msg__text">What did the payments account spend last week?</span></div>
+              <div class="ui-msg ui-msg--bot" data-chat-a>
+                <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
+                <span class="ui-msg__col">
+                  <span class="ui-chat__answer">I can’t show that: your sign-in has <b>no billing role</b>. Ask a billing viewer, or request the role.</span>
+                  <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Checked at the tool gateway</span></span>
+                </span>
+              </div>
+            </div>
+            <div class="ui-chat__input"><span class="ui-chat__ph">Write a message</span><span class="ui-chat__send" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3.5M3.8 7.5 8 3.3l4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" style="--hm: 2" id="experience" aria-labelledby="experience-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="experience-h">Engineering roles and certifications</h2>
+          <p>Four years at FPT Software, then Datum Consulting, both in Ho Chi Minh City.</p>
+        </div>
+        <ul class="rows">
+          <li><span class="rows__name">Datum Consulting</span><p>Senior platform engineer from October 2024, and release manager for its banking clients from 2025.</p><span class="rows__value">2024 to now</span></li>
+          <li><span class="rows__name">FPT Software</span><p>DevOps and SRE: Terraform on AWS, an Azure IoT platform, Jenkins and on-call incidents.</p><span class="rows__value">2020 to 2024</span></li>
+        </ul>
+      </div>
+      <div class="frame span-6 start-7" role="img" aria-label="Six cloud and database certifications">
+        <div class="ic-list">
+          {certs.map(([id, name, level]) => (
+            <div class="ic-row"><span class="ic-tile ic-tile--40"><img loading="lazy" decoding="async" class="ic ic-40" data-icon={id} src={`/assets/icons/${id}.svg`} alt="" width="40" height="40"></span><div class="ic-row__main"><span class="ic-row__title">{name}</span><span class="ic-row__meta">{level}</span></div></div>
+          ))}
+        </div>
+      </div>
+        <div class="grid span-12 figures" data-moment="counter-rolls">
+          <div class="span-3"><p class="t-stat">35</p><p class="t-small muted">CI/CD pipelines built since 2020</p></div>
+          <div class="span-3"><p class="t-stat">5</p><p class="t-small muted">AWS and Google Cloud certifications</p></div>
+          <div class="span-3"><p class="t-stat">3</p><p class="t-small muted">clouds: AWS, Azure and Google Cloud</p></div>
+          <div class="span-3"><p class="t-stat">18</p><p class="t-small muted">MCP tool servers behind one gateway</p></div>
+        </div>
+    </div>
+  </section>
+
+  <section class="section g2m" id="brief" aria-labelledby="brief-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="brief-h">Send a platform project or a role</h2>
+          <p>Say what you run today and where releases get stuck. I work from Ho Chi Minh City, UTC+7.</p>
+        </div>
+        <div class="panel brief-frame" role="img" aria-label="A project brief checklist: what you run, where releases stall, clouds and team size, and when to start">
+          <div class="stage"><div class="at-rise fit" style="--fit-max:360px;--ax:max(24px, 50% - 180px);--ay:40px;--ay-sm:24px" data-ui-still>
+            <div class="ui ui-panel ui-checks" data-ui="checklist">
+              <div class="ui-checks__head"><div class="ui-title">Project brief</div><span class="ui-spacer"></span><div class="ui-meta" data-checks-count>4 of 4</div></div>
+              <div class="ui-checks__bar"><i data-checks-bar style="--k:1"></i></div>
+              <ul class="ui-checks__list">
+                <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">What you run today</span></li>
+                <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">Where releases stall</span></li>
+                <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">Clouds and team size</span></li>
+                <li class="ui-check is-done"><span class="ui-check__box" set:html={tick} /><span class="ui-check__label">When you want to start</span></li>
+              </ul>
+            </div>
+          </div></div>
+        </div>
+      </div>
+      <form class="form span-6 start-7" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-endpoint="/" data-sent="Your message is with Nathan. The reply comes to the email address above." novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="field"><label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+          <p class="field__error" id="f-name-err" hidden>Write your name.</p></div>
+        <div class="field"><label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+          <p class="field__error" id="f-email-err" hidden>Write an email address with an @, like name@example.com.</p></div>
+        <div class="field field--full"><label for="f-kind">Kind of work</label>
+          <select id="f-kind" name="subject">
+            <option>Consulting</option><option>Contract</option><option>Full-time role</option><option>Something else</option>
+          </select></div>
+        <div class="field field--full"><label for="f-msg">Message</label>
+          <textarea id="f-msg" name="message" rows="6" required aria-describedby="f-msg-err"></textarea>
+          <p class="field__error" id="f-msg-err" hidden>Write a line or two about the work.</p></div>
+        <div class="btn-row"><button class="btn btn--primary" type="submit">Send a brief</button></div>
+        <p class="form__status" role="status" data-form-status></p>
+      </form>
+    </div>
+  </section>
