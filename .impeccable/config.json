@@ -20,6 +20,18 @@
         "value": "libre franklin",
         "createdAt": "2026-11-12T03:01:51.453Z",
         "reason": "user chose the taste-skill rebuild (PR #1) over the standards-manual design that DESIGN.md still records; pairing dealt by start.mjs"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geist",
+        "createdAt": "2026-11-13T14:14:51.775Z",
+        "reason": "user asked for the tech remake; taste-skill start.mjs dealt the geist pairing for a software page; DESIGN.md still records the old standards-manual design"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geist mono",
+        "createdAt": "2026-11-13T14:14:51.799Z",
+        "reason": "user asked for the tech remake; taste-skill start.mjs dealt the geist pairing for a software page; DESIGN.md still records the old standards-manual design"
       }
     ]
   }
