@@ -30,9 +30,8 @@ function words(el) {
 }
 
 export default function init(root) {
-  // the last answer in the thread is the one written again; earlier turns stay still
-  const answer = [...root.querySelectorAll('.ui-chat__answer')].pop();
-  const srcs = answer?.parentElement.querySelector('.ui-chat__srcs');
+  const answer = root.querySelector('.ui-chat__answer');
+  const srcs = root.querySelector('.ui-chat__srcs');
   const all = answer ? words(answer) : [];
   if (!all.length) return null;
   // the last sentence (a word ending . ! or ? before the last word starts it), at most 12 words;
